@@ -1,0 +1,228 @@
+import type { Rule } from 'eslint';
+import type { TSESTree } from '@typescript-eslint/utils';
+
+import PluginJS from '@eslint/js';
+import PluginTS from 'typescript-eslint';
+import PluginReact from 'eslint-plugin-react';
+import PluginSonar from 'eslint-plugin-sonarjs';
+import PluginUnicorn from 'eslint-plugin-unicorn';
+import PluginStylistic from '@stylistic/eslint-plugin';
+
+import { defineConfig, globalIgnores } from 'eslint/config';
+
+// @ts-expect-error Dirname
+// eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
+const DirectoyName = __dirname as string;
+
+export default defineConfig([
+
+    PluginJS.configs.all,
+    PluginTS.configs.all,
+    PluginUnicorn.configs.all,
+    PluginStylistic.configs.all,
+    PluginReact.configs.flat.all,
+    PluginSonar.configs.recommended,
+    PluginReact.configs.flat['jsx-runtime'],
+
+    globalIgnores([ 'dist', 'src/assets', 'src-tauri', 'node_modules' ]),
+
+    {
+        languageOptions:
+        {
+            parserOptions:
+            {
+                project: true,
+                sourceType: 'module',
+                tsconfigRootDir: DirectoyName
+            }
+        },
+        plugins:
+        {
+            custom:
+            {
+                rules:
+                {
+                    'no-predefined-tailwindcss':
+                    {
+                        meta:
+                        {
+                            type: 'problem',
+                            docs:
+                            {
+                                description: 'Disallow predefined TailwindCSS numeric values.'
+                            },
+                            messages:
+                            {
+                                predefined: 'Avoid predefined.'
+                            },
+                            schema:
+                            [
+                                //
+                            ]
+                        },
+                        create(context): Rule.RuleListener
+                        {
+                            const sourceCode = context.sourceCode;
+
+                            return {
+                                JSXAttribute(node: TSESTree.JSXAttribute)
+                                {
+                                    if (node.name.name !== 'className' || !node.value)
+                                    {
+                                        return;
+                                    }
+
+                                    if (node.value.type !== 'Literal' || typeof node.value.value !== 'string')
+                                    {
+                                        return;
+                                    }
+
+                                    if (node.value.value.length < 3 || !node.value.value.includes('-'))
+                                    {
+                                        return;
+                                    }
+
+                                    const Result = node.value.value.split(' ');
+
+                                    for (let I = 0; I < Result.length; I++)
+                                    {
+                                        if (!(/-\d/).test(Result[I]))
+                                        {
+                                            continue;
+                                        }
+
+                                        const ID = node.value.value.indexOf(Result[I]);
+
+                                        if (ID === -1 || Result[I].includes('flex-') || Result[I].includes('z-') || Result[I].includes('bg-') || Result[I].includes('from-') || Result[I].includes('to-') || Result[I].includes('calc('))
+                                        {
+                                            continue;
+                                        }
+
+                                        const Begin = node.value.range[0] + 1 + ID;
+
+                                        context.report({ node: node.value, loc: { start: sourceCode.getLocFromIndex(Begin), end: sourceCode.getLocFromIndex(Begin + Result[I].length) }, messageId: 'predefined' });
+                                    }
+                                }
+                            };
+                        }
+                    } as Rule.RuleModule
+                }
+            }
+        },
+        rules:
+        {
+            'custom/no-predefined-tailwindcss': 'error',
+
+            'new-cap': 'off',
+            'id-length': 'off',
+            'sort-keys': 'off',
+            'func-style': 'off',
+            'no-ternary': 'off',
+            'no-continue': 'off',
+            'no-console': 'warn',
+            'sort-imports': 'off',
+            'default-case': 'off',
+            'no-undefined': 'off',
+            'no-script-url': 'off',
+            'max-statements': 'off',
+            'no-warning-comments': 'off',
+            'capitalized-comments': 'off',
+            'max-lines-per-function': 'off',
+            'require-unicode-regexp': 'off',
+
+            'one-var': [ 'error', 'never' ],
+
+            '@typescript-eslint/no-magic-numbers': 'off',
+            '@typescript-eslint/naming-convention': 'off',
+            '@typescript-eslint/prefer-destructuring': 'off',
+            '@typescript-eslint/explicit-function-return-type': 'off',
+            '@typescript-eslint/explicit-module-boundary-types': 'off',
+            '@typescript-eslint/prefer-readonly-parameter-types': 'off',
+
+            'sonarjs/no-commented-code': 'off',
+
+            'unicorn/better-regex': 'off',
+            'unicorn/no-keyword-prefix': 'off',
+            'unicorn/prevent-abbreviations': 'off',
+            'unicorn/prefer-add-event-listener': 'off',
+
+            'react/jsx-max-depth': 'off',
+            'react/hook-use-state': 'off',
+            'react/jsx-no-literals': 'off',
+            'react/forbid-component-props': 'off',
+            'react/jsx-filename-extension': 'off',
+
+            'react/jsx-curly-spacing': [ 'error', { when: 'always' } ],
+            'react/jsx-closing-bracket-location': [ 'error', 'after-props' ],
+
+            '@stylistic/lines-around-comment': 'off',
+            '@stylistic/multiline-comment-style': 'off',
+
+            '@stylistic/padded-blocks': [ 'error', 'never' ],
+            '@stylistic/quotes': [ 'error', 'single' ],
+            '@stylistic/brace-style': [ 'error', 'allman' ],
+            '@stylistic/linebreak-style': [ 'error', 'unix' ],
+            '@stylistic/quote-props': [ 'error', 'as-needed' ],
+            '@stylistic/object-curly-spacing': [ 'error', 'always' ],
+            '@stylistic/array-bracket-spacing': [ 'error', 'always' ],
+            '@stylistic/template-curly-spacing': [ 'error', 'always' ],
+            '@stylistic/array-element-newline': [ 'error', 'consistent' ],
+            '@stylistic/array-bracket-newline': [ 'error', 'consistent' ],
+            '@stylistic/multiline-ternary': [ 'error', 'always-multiline' ],
+            '@stylistic/function-call-argument-newline': [ 'error', 'consistent' ],
+            '@stylistic/object-property-newline': [ 'error', { allowAllPropertiesOnSameLine: true } ],
+            '@stylistic/space-before-function-paren': [ 'error', { anonymous: 'never', named: 'never', asyncArrow: 'never', catch: 'always' } ]
+
+            /*
+            'max-depth': 'off',
+            'max-lines': 'off',
+            'no-plusplus': 'off',
+            'getter-return': 'off',
+            'no-inline-comments': 'off',
+            'class-methods-use-this': 'off',
+            'compat/compat': 'off',
+            'n/no-missing-import': 'off',
+            'n/no-unpublished-import': 'off',
+            'n/no-unsupported-features/node-builtins': 'off',
+            'import/no-unresolved': 'off',
+            'sonarjs/no-uniq-key': 'off',
+            'sonarjs/pseudo-random': 'off',
+            'sonarjs/no-hardcoded-ip': 'off',
+            'sonarjs/no-nested-functions': 'off',
+            'sonarjs/cognitive-complexity': 'off',
+            'sonarjs/no-nested-conditional': 'off',
+            'sonarjs/prefer-read-only-props': 'off',
+            'sonarjs/no-clear-text-protocols': 'off',
+            'unicorn/no-for-loop': 'off',
+            'unicorn/catch-error-name': 'off',
+            'unicorn/no-nested-ternary': 'off',
+            'unicorn/empty-brace-spaces': 'off',
+            'unicorn/no-useless-undefined': 'off',
+            'unicorn/prefer-query-selector': 'off',
+            'unicorn/prefer-string-replace-all': 'off',
+            'unicorn/filename-case': [ 'error', { case: 'camelCase' } ],
+            'react/jsx-indent': 'off',
+            'react/jsx-no-bind': 'off',
+            'react/no-multi-comp': 'off',
+            'react/no-array-index-key': 'off',
+            'react/jsx-wrap-multilines': 'off',
+            'react/jsx-no-leaked-render': 'off',
+            'react/prefer-read-only-props': 'off',
+            'react/function-component-definition': 'off',
+            'react/jsx-curly-brace-presence': [ 'error', { props: 'always', children: 'never' } ],
+            '@typescript-eslint/max-params': 'off',
+            '@typescript-eslint/ban-ts-comment': 'off',
+            '@typescript-eslint/no-floating-promises': 'off',
+            '@typescript-eslint/switch-exhaustiveness-check': 'off',
+            '@typescript-eslint/no-confusing-void-expression': 'off',
+            '@stylistic/spaced-comment': 'off',
+            '@stylistic/linebreak-style': 'off',
+            '@stylistic/operator-linebreak': 'off',
+            '@stylistic/comma-dangle': [ 'error', 'never' ],
+            '@stylistic/quote-props': [ 'error', 'as-needed' ],
+            '@stylistic/function-paren-newline': [ 'error', 'consistent' ],
+            '@stylistic/nonblock-statement-body-position': [ 'error', 'below' ],
+            */
+        }
+    }
+]);

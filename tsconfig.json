@@ -1,0 +1,52 @@
+{
+    "compilerOptions":
+    {
+        // Core
+        "jsx": "react-jsx",
+        "target": "ESNext",
+        "module": "ESNext",
+        "jsxImportSource": "react",
+        "moduleResolution": "Bundler",
+        "lib":
+        [
+            "DOM",
+            "DOM.Iterable",
+            "ESNext"
+        ],
+
+        // Type Safety
+        "strict": true,
+        "alwaysStrict": true,
+        "noImplicitOverride": true,
+
+        // Linting
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "forceConsistentCasingInFileNames": true,
+
+        // Compatibility
+        "skipLibCheck": true,
+        "esModuleInterop": true,
+        "resolveJsonModule": true,
+        "useDefineForClassFields": true,
+        "allowSyntheticDefaultImports": true,
+
+        // Misc
+        "noEmit": true,
+        "allowJs": false,
+        "isolatedModules": true,
+        "allowImportingTsExtensions": true
+    },
+    "include":
+    [
+        "src",
+        "vite.config.ts",
+        "eslint.config.ts"
+    ],
+    "exclude":
+    [
+        "dist",
+        "src-tauri",
+        "node_modules"
+    ]
+}

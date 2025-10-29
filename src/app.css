@@ -1,0 +1,36 @@
+@import "tailwindcss";
+@import "flag-icons/css/flag-icons.min.css";
+
+@theme
+{
+    --color-primary1: #06b6d4;
+    --color-primary2: #0891b2;
+    --color-primary3: #0e7490;
+
+    --color-secondary: #3b82f6;
+    --color-tertiary: #6366f1;
+
+    --color-content: #FFFFFF;
+    --color-border: #AAAAAA;
+    --color-outline: #AAAAAA;
+    --color-box: #E0E0E0;
+}
+
+*
+{
+    user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+}
+
+html, body
+{
+    line-height: 1;
+    font-family: monospace;
+    background: transparent !important;
+}
+
+.bg-pattern-28
+{
+    background-image: url('assets/pattern-28.svg');
+}

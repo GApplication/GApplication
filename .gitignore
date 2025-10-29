@@ -1,0 +1,8 @@
+node_modules/
+target/
+Build/
+
+src-tauri/gen/schemas
+src-tauri/target
+
+src-tauri/Cargo.lock
