@@ -60,7 +60,7 @@ export default defineConfig([
                                 //
                             ]
                         },
-                        create(context): Rule.RuleListener
+                        create(context)
                         {
                             const sourceCode = context.sourceCode;
 
@@ -72,6 +72,7 @@ export default defineConfig([
                                         return;
                                     }
 
+                                    // eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison
                                     if (node.value.type !== 'Literal' || typeof node.value.value !== 'string')
                                     {
                                         return;
@@ -84,23 +85,23 @@ export default defineConfig([
 
                                     const Result = node.value.value.split(' ');
 
-                                    for (let I = 0; I < Result.length; I++)
+                                    for (const R of Result)
                                     {
-                                        if (!(/-\d/).test(Result[I]))
+                                        if (!(/-\d/).test(R))
                                         {
                                             continue;
                                         }
 
-                                        const ID = node.value.value.indexOf(Result[I]);
+                                        const ID = node.value.value.indexOf(R);
 
-                                        if (ID === -1 || Result[I].includes('flex-') || Result[I].includes('z-') || Result[I].includes('bg-') || Result[I].includes('from-') || Result[I].includes('to-') || Result[I].includes('calc('))
+                                        if (ID === -1 || R.includes('flex-') || R.includes('z-') || R.includes('bg-') || R.includes('from-') || R.includes('to-') || R.includes('calc('))
                                         {
                                             continue;
                                         }
 
                                         const Begin = node.value.range[0] + 1 + ID;
 
-                                        context.report({ node: node.value, loc: { start: sourceCode.getLocFromIndex(Begin), end: sourceCode.getLocFromIndex(Begin + Result[I].length) }, messageId: 'predefined' });
+                                        context.report({ node: node.value, loc: { start: sourceCode.getLocFromIndex(Begin), end: sourceCode.getLocFromIndex(Begin + R.length) }, messageId: 'predefined' });
                                     }
                                 }
                             };
@@ -111,8 +112,7 @@ export default defineConfig([
         },
         rules:
         {
-            'custom/no-predefined-tailwindcss': 'error',
-
+            'no-void': 'off',
             'new-cap': 'off',
             'id-length': 'off',
             'sort-keys': 'off',
@@ -120,6 +120,7 @@ export default defineConfig([
             'no-ternary': 'off',
             'no-continue': 'off',
             'no-console': 'warn',
+            'guard-for-in': 'off',
             'sort-imports': 'off',
             'default-case': 'off',
             'no-undefined': 'off',
@@ -129,23 +130,25 @@ export default defineConfig([
             'capitalized-comments': 'off',
             'max-lines-per-function': 'off',
             'require-unicode-regexp': 'off',
+            'prefer-named-capture-group': 'off',
 
             'one-var': [ 'error', 'never' ],
 
-            '@typescript-eslint/no-magic-numbers': 'off',
-            '@typescript-eslint/naming-convention': 'off',
-            '@typescript-eslint/prefer-destructuring': 'off',
-            '@typescript-eslint/explicit-function-return-type': 'off',
-            '@typescript-eslint/explicit-module-boundary-types': 'off',
-            '@typescript-eslint/prefer-readonly-parameter-types': 'off',
+            'custom/no-predefined-tailwindcss': 'error',
 
+            'sonarjs/fixme-tag': 'off',
+            'sonarjs/slow-regex': 'off',
             'sonarjs/no-commented-code': 'off',
+            'sonarjs/prefer-regexp-exec': 'off',
 
             'unicorn/better-regex': 'off',
             'unicorn/no-keyword-prefix': 'off',
+            'unicorn/no-typeof-undefined': 'off',
             'unicorn/prevent-abbreviations': 'off',
             'unicorn/prefer-add-event-listener': 'off',
+            'unicorn/no-await-expression-member': 'off',
 
+            'react/jsx-no-bind': 'off',
             'react/jsx-max-depth': 'off',
             'react/hook-use-state': 'off',
             'react/jsx-no-literals': 'off',
@@ -154,6 +157,16 @@ export default defineConfig([
 
             'react/jsx-curly-spacing': [ 'error', { when: 'always' } ],
             'react/jsx-closing-bracket-location': [ 'error', 'after-props' ],
+
+            '@typescript-eslint/no-magic-numbers': 'off',
+            '@typescript-eslint/naming-convention': 'off',
+            '@typescript-eslint/prefer-regexp-exec': 'off',
+            '@typescript-eslint/prefer-destructuring': 'off',
+            '@typescript-eslint/prefer-optional-chain': 'off',
+            '@typescript-eslint/no-confusing-void-expression': 'off',
+            '@typescript-eslint/explicit-function-return-type': 'off',
+            '@typescript-eslint/explicit-module-boundary-types': 'off',
+            '@typescript-eslint/prefer-readonly-parameter-types': 'off',
 
             '@stylistic/lines-around-comment': 'off',
             '@stylistic/multiline-comment-style': 'off',
@@ -202,7 +215,6 @@ export default defineConfig([
             'unicorn/prefer-string-replace-all': 'off',
             'unicorn/filename-case': [ 'error', { case: 'camelCase' } ],
             'react/jsx-indent': 'off',
-            'react/jsx-no-bind': 'off',
             'react/no-multi-comp': 'off',
             'react/no-array-index-key': 'off',
             'react/jsx-wrap-multilines': 'off',
@@ -214,7 +226,6 @@ export default defineConfig([
             '@typescript-eslint/ban-ts-comment': 'off',
             '@typescript-eslint/no-floating-promises': 'off',
             '@typescript-eslint/switch-exhaustiveness-check': 'off',
-            '@typescript-eslint/no-confusing-void-expression': 'off',
             '@stylistic/spaced-comment': 'off',
             '@stylistic/linebreak-style': 'off',
             '@stylistic/operator-linebreak': 'off',

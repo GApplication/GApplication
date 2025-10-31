@@ -7,6 +7,8 @@ import SplashPage from './page/splash';
 
 import AccountService from './service/account';
 
+import Language from './utility/language';
+
 import './app.css';
 
 function App()
@@ -45,5 +47,9 @@ const AppDOM = document.querySelector('#App');
 
 if (AppDOM)
 {
+    // FixMe: Get Language
+
+    await Language.SetLang('us');
+
     createRoot(AppDOM).render(<App />);
 }

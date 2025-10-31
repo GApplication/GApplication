@@ -1,3 +1,5 @@
+import type { LanguageType } from '../utility/language';
+
 import { useState } from 'react';
 import { TfiWorld } from 'react-icons/tfi';
 import { BsTwitterX } from 'react-icons/bs';
@@ -5,9 +7,18 @@ import { LuInstagram } from 'react-icons/lu';
 import { FaTelegramPlane } from 'react-icons/fa';
 import { FaLock, FaChevronDown, FaDiscord } from 'react-icons/fa6';
 
+import { T } from '../utility/language';
+
+const OnOpenSocial = (App: 'instagram' | 'x' | 'telegram' | 'discord' | 'website') =>
+{
+    // Handle Opening App For Each Platform.
+
+    console.log('OnOpenSocial', App);
+};
+
 export default function SplashPage()
 {
-    const [ Language, SetLanguage ] = useState('us');
+    const [ Language, SetLanguage ] = useState<LanguageType>('us');
 
     return (
         <div className="flex w-svw h-svh justify-center bg-linear-to-tl from-cyan-500/50 to-blue-500/50">
@@ -20,7 +31,9 @@ export default function SplashPage()
 
                 <div className="text-[24px] font-bold p-[8px] rounded-[8px] border border-border/50">
 
-                    Welcome to GApp
+                    {
+                        T('Splash.Header')
+                    }
 
                 </div>
 
@@ -28,17 +41,23 @@ export default function SplashPage()
 
                     <div className="w-fit px-[8px] py-[6px] rounded-[8px] border border-border/50">
 
-                        Language
+                        {
+                            T('Splash.Language')
+                        }
 
                     </div>
 
-                    <div className="flex h-[48px] cursor-pointer items-center gap-[8px] px-[16px] rounded-[8px] border border-border/50 hover:bg-border/10 transition">
+                    <div
+                        className="flex h-[48px] cursor-pointer items-center gap-[8px] px-[16px] rounded-[8px] border border-border/50 hover:bg-border/10 transition focus:outline outline-outline"
+                        tabIndex={ 1 }>
 
                         <div className={ `fi fi-${ Language } size-[24px]` } />
 
                         <div className="flex-1 text-[14px]">
 
-                            English
+                            {
+                                T('Common.English')
+                            }
 
                         </div>
 
@@ -52,23 +71,30 @@ export default function SplashPage()
 
                     <div className="w-fit px-[8px] py-[6px] rounded-[8px] border border-border/50">
 
-                        Inviation Code
+                        {
+                            T('Splash.InviationCode')
+                        }
 
                     </div>
 
                     <input
                         className="flex h-[48px] text-center px-[8px] rounded-[8px] border border-border/50 outline-outline focus:bg-border/10 transition"
                         maxLength={ 32 }
-                        placeholder="Inviation Code"
+                        placeholder={ T('Splash.InviationCode') }
+                        tabIndex={ 2 }
                         type="text" />
 
                 </div>
 
-                <div className="flex justify-center m-[8px] h-[48px] w-[160px] rounded-[8px] bg-primary1 border border-border/50 hover:bg-primary2 active:bg-primary3 transition">
+                <div
+                    className="flex justify-center m-[8px] h-[48px] w-[160px] rounded-[8px] bg-primary1 border border-border/50 hover:bg-primary2 active:bg-primary3 transition focus:outline outline-outline"
+                    tabIndex={ 3 }>
 
                     <div className="flex flex-1 justify-center items-center text-[16px] font-semibold text-white cursor-pointer">
 
-                        Continue
+                        {
+                            T('Splash.Continue')
+                        }
 
                     </div>
 
@@ -88,31 +114,46 @@ export default function SplashPage()
 
                 <div className="flex flex-wrap justify-evenly mt-[16px] gap-[16px]">
 
-                    <div className="bg-box hover:bg-primary1 flex justify-center items-center size-[40px] rounded-[8px] cursor-pointer group transition active:bg-primary3">
+                    <div
+                        className="bg-box hover:bg-primary1 flex justify-center items-center size-[40px] rounded-[8px] cursor-pointer group transition active:bg-primary3 focus:outline outline-outline"
+                        onClick={ () => OnOpenSocial('instagram') }
+                        tabIndex={ 4 }>
 
                         <LuInstagram className="size-[24px] group-hover:text-white transition" />
 
                     </div>
 
-                    <div className="bg-box hover:bg-primary1 flex justify-center items-center size-[40px] rounded-[8px] cursor-pointer group transition active:bg-primary3">
+                    <div
+                        className="bg-box hover:bg-primary1 flex justify-center items-center size-[40px] rounded-[8px] cursor-pointer group transition active:bg-primary3 focus:outline outline-outline"
+                        onClick={ () => OnOpenSocial('x') }
+                        tabIndex={ 5 }>
 
                         <BsTwitterX className="size-[24px] group-hover:text-white transition" />
 
                     </div>
 
-                    <div className="bg-box hover:bg-primary1 flex justify-center items-center size-[40px] rounded-[8px] cursor-pointer group transition active:bg-primary3">
+                    <div
+                        className="bg-box hover:bg-primary1 flex justify-center items-center size-[40px] rounded-[8px] cursor-pointer group transition active:bg-primary3 focus:outline outline-outline"
+                        onClick={ () => OnOpenSocial('telegram') }
+                        tabIndex={ 6 }>
 
                         <FaTelegramPlane className="size-[24px] group-hover:text-white transition" />
 
                     </div>
 
-                    <div className="bg-box hover:bg-primary1 flex justify-center items-center size-[40px] rounded-[8px] cursor-pointer group transition active:bg-primary3">
+                    <div
+                        className="bg-box hover:bg-primary1 flex justify-center items-center size-[40px] rounded-[8px] cursor-pointer group transition active:bg-primary3 focus:outline outline-outline"
+                        onClick={ () => OnOpenSocial('discord') }
+                        tabIndex={ 7 }>
 
                         <FaDiscord className="size-[24px] group-hover:text-white transition" />
 
                     </div>
 
-                    <div className="bg-box hover:bg-primary1 flex justify-center items-center size-[40px] rounded-[8px] cursor-pointer group transition active:bg-primary3">
+                    <div
+                        className="bg-box hover:bg-primary1 flex justify-center items-center size-[40px] rounded-[8px] cursor-pointer group transition active:bg-primary3 focus:outline outline-outline"
+                        onClick={ () => OnOpenSocial('website') }
+                        tabIndex={ 8 }>
 
                         <TfiWorld className="size-[24px] group-hover:text-white transition" />
 

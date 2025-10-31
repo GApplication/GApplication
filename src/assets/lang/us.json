@@ -1,0 +1,14 @@
+{
+    "Splash":
+    {
+        "Header": "Welcome To GApp",
+        "Language": "Language",
+        "InviationCode": "Inviation Code",
+        "Continue": "Continue",
+    },
+
+    "Common":
+    {
+        "English": "English"
+    }
+}
