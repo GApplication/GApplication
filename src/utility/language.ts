@@ -1,4 +1,6 @@
-export type LanguageType = 'us' | 'fa';
+import Storage from './storage';
+
+export type LanguageType = 'us' | 'fa' | 'ar';
 
 let LanguageMap: Record<string, Record<string, never>> = {};
 
@@ -21,12 +23,35 @@ const ResolveKey = (K: string): string | undefined =>
 
 const SetLang = async(Lang: LanguageType) =>
 {
-    localStorage.setItem('Language', Lang);
+    Storage.SetValue('APP_LANGUAGE', Lang);
 
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
     LanguageMap = (await import(`../assets/lang/${ Lang }.json`)).default;
 };
 
+const Initialize = async() =>
+{
+    let Lang: LanguageType = 'us';
+
+    switch (Storage.GetValue('APP_LANGUAGE') ?? '')
+    {
+        case 'ar':
+        {
+            Lang = 'ar';
+
+            break;
+        }
+        case 'fa':
+        {
+            Lang = 'fa';
+
+            break;
+        }
+    }
+
+    await SetLang(Lang);
+};
+
 export const T = (Name: string): string => ResolveKey(Name) ?? `[${ Name }]`;
 
-export default { SetLang, T };
+export default { Initialize, SetLang, T };

@@ -1,3 +1,5 @@
+type StorageKey = 'APP_LANGUAGE';
+
 declare module '*.css'
 {
     const Value: string;

@@ -20,6 +20,11 @@ export default function SplashPage()
 {
     const [ Language, SetLanguage ] = useState<LanguageType>('us');
 
+    const OnClickInviation = () =>
+    {
+        console.log('OnClickInviation');
+    };
+
     return (
         <div className="flex w-svw h-svh justify-center bg-linear-to-tl from-cyan-500/50 to-blue-500/50">
 
@@ -90,7 +95,9 @@ export default function SplashPage()
                     className="flex justify-center m-[8px] h-[48px] w-[160px] rounded-[8px] bg-primary1 border border-border/50 hover:bg-primary2 active:bg-primary3 transition focus:outline outline-outline"
                     tabIndex={ 3 }>
 
-                    <div className="flex flex-1 justify-center items-center text-[16px] font-semibold text-white cursor-pointer">
+                    <div
+                        className="flex flex-1 justify-center items-center text-[16px] font-semibold text-white cursor-pointer"
+                        onClick={ OnClickInviation }>
 
                         {
                             T('Splash.Continue')
@@ -106,7 +113,9 @@ export default function SplashPage()
 
                     <div className="bg-box rounded-[8px] p-[8px] z-2 text-black">
 
-                        Connect with us
+                        {
+                            T('Splash.ContactWithUs')
+                        }
 
                     </div>
 

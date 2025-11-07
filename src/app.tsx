@@ -47,9 +47,7 @@ const AppDOM = document.querySelector('#App');
 
 if (AppDOM)
 {
-    // FixMe: Get Language
-
-    await Language.SetLang('us');
+    await Language.Initialize();
 
     createRoot(AppDOM).render(<App />);
 }
