@@ -1,9 +1,6 @@
-interface APIResponse { Name: string }
-interface SignResponse { Name: string }
-
 const API_URL = 'https://google.com/';
 
-const API = (URL: string, Method: 'GET' | 'POST', CallBack: APIResponse) =>
+const API = (URL: string, Method: 'GET' | 'POST', Body: string | undefined, CallBack: APIResponse) =>
 {
     const Request = new XMLHttpRequest();
 
@@ -17,6 +14,7 @@ const API = (URL: string, Method: 'GET' | 'POST', CallBack: APIResponse) =>
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             const Response = Request.response ?? undefined;
 
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
             CallBack(Response as never);
 
             return;
@@ -27,14 +25,26 @@ const API = (URL: string, Method: 'GET' | 'POST', CallBack: APIResponse) =>
 
     Request.open(Method, `${ API_URL }${ URL }`);
 
-    Request.send();
-};
+    if (Body === undefined)
+    {
+        Request.send();
 
+        return;
+    }
+
+    Request.setRequestHeader('Content-Type', 'application/json');
+
+    Request.send(Body);
+};
 
 export default
 {
-    Sign: (AccessCode: string, CallBack: SignResponse) =>
+    Install: (Agent: string, CallBack: InstallResponse) =>
     {
-        API(`Account/Sign/${ AccessCode }`, 'POST', CallBack);
+        API('client/new', 'POST', Agent, CallBack);
+    },
+    Invite: (InviteCode: string, CallBack: InviteResponse) =>
+    {
+        API('client/invite', 'POST', JSON.stringify({ invitation: InviteCode }), CallBack);
     }
 };

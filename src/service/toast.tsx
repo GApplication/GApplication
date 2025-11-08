@@ -1,32 +1,13 @@
-import { useEffect, useState, type JSX } from 'react';
+import { useEffect, useState, cloneElement, type JSX } from 'react';
 
 import EventMap from '../utility/event';
 
-function ToastItem({ ID, Delay, Component }: { ID: number; Delay: number; Component: JSX.Element })
-{
-    useEffect(() =>
-    {
-        const T = setTimeout(() => EventMap.Emit('ToastRemove', ID), Delay);
-
-        return () =>
-        {
-            clearTimeout(T);
-        };
-    }, [ ]);
-
-    return Component;
-}
-
 export const Toast = (Component: JSX.Element, Option: { ID?: number; Delay?: number } = {}) =>
 {
+    const ID = Option.ID ?? Date.now();
     const Delay = Option.Delay ?? 5000;
-    const ID = Option.ID ?? Date.now() / 1000;
 
-    EventMap.Emit('ToastAdd', <ToastItem
-        Component={ Component }
-        Delay={ Delay }
-        ID={ ID }
-        key={ ID } />);
+    EventMap.Emit('ToastAdd', cloneElement(Component, { ID, Delay, key: ID }));
 };
 
 export default function ToastContainer()
@@ -55,7 +36,7 @@ export default function ToastContainer()
         };
     }, [ ]);
 
-    return <div className='w-screen h-screen absolute z-30 top-[0px] pointer-events-none'>
+    return <div className='flex flex-col items-center w-screen h-screen absolute z-30 top-[0px] pointer-events-none overflow-hidden'>
 
         {
             ToastMap

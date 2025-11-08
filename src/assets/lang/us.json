@@ -5,11 +5,15 @@
         "Language": "Language",
         "InviationCode": "Inviation Code",
         "Continue": "Continue",
-        "ContactWithUs": "Contact With Us"
+        "ContactWithUs": "Contact With Us",
+
+        "ErrorInviationCode": "Inviation code is invalid"
     },
 
     "Common":
     {
-        "English": "English"
+        "English": "English",
+
+        "ErrorInternet": "Check your internet connection"
     }
 }

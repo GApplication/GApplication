@@ -1,4 +1,4 @@
-// Event.ts
+// Event
 interface EventMap
 {
     ToastAdd: [Component: JSX.Element];
@@ -7,10 +7,16 @@ interface EventMap
 
 type EventCall<T extends keyof EventMap> = (...Args: EventMap[T]) => void;
 
-// Storage.ts
-type StorageKey = 'APP_LANGUAGE';
+// API
+type InstallResponse = (Response?: { Result: number }) => void;
+type InviteResponse = (Response?: { Result: number }) => void;
 
-// Language.ts
+type APIResponse = InstallResponse | InviteResponse;
+
+// Storage
+type StorageKey = 'APP_LANGUAGE' | 'APP_INSTALL';
+
+// Language
 type LanguageType = 'us' | 'fa' | 'ar';
 
 // General

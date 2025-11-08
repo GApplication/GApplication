@@ -1,3 +1,5 @@
+import * as OS from '@tauri-apps/plugin-os';
+
 import { useEffect, useState } from 'react';
 import { TfiWorld } from 'react-icons/tfi';
 import { BsTwitterX } from 'react-icons/bs';
@@ -6,8 +8,12 @@ import { FaTelegramPlane } from 'react-icons/fa';
 import { FaLock, FaChevronDown, FaDiscord } from 'react-icons/fa6';
 
 import LoadingComponent from '../components/loading';
+import WarningComponent from '../components/toast/warning';
 
 import { Toast } from '../service/toast';
+
+import API from '../utility/api';
+import Account from '../utility/account';
 
 import { T } from '../utility/language';
 
@@ -21,7 +27,7 @@ const OnOpenSocial = (App: 'instagram' | 'x' | 'telegram' | 'discord' | 'website
 export default function SplashPage()
 {
     const [ Loading, SetLoading ] = useState(false);
-
+    const [ InviteCode, SetInviteCode ] = useState('');
     const [ Language, SetLanguage ] = useState<LanguageType>('us');
 
     const OnClickInviation = () =>
@@ -31,19 +37,56 @@ export default function SplashPage()
             return;
         }
 
-        // SetLoading(true);
-        // Notify
-        // API
+        if (InviteCode.length < 5)
+        {
+            Toast(<WarningComponent Message={ T('Splash.ErrorInviationCode') } />);
 
-        console.log('OnClickInviation');
+            return;
+        }
 
-        Toast(<div>Hellloaaaaaaaaaaaa</div>);
+        SetLoading(true);
+
+        API.Invite(InviteCode, (Response) =>
+        {
+            SetLoading(false);
+
+            Toast(<WarningComponent Message={ `InviteCode: ${ InviteCode }`} />);
+        });
     };
 
     useEffect(() =>
     {
-        // Is First Login ? Send New Device
+        if (Account.IsNewInstall())
+        {
+            const AsyncCall = async() =>
+            {
+                const Agent =
+                {
+                    Arch: OS.arch(),
+                    Family: OS.family(),
+                    Hostname: await OS.hostname(),
+                    Locale: await OS.locale(),
+                    Platform: OS.platform(),
+                    Type: OS.type(),
+                    Version: OS.version()
+                };
 
+                API.Install(JSON.stringify(Agent), (Response) =>
+                {
+                    if (Response === undefined)
+                    {
+                        return;
+                    }
+
+                    if (Response.Result === 0)
+                    {
+                        Account.SetInstallTime();
+                    }
+                });
+            };
+
+            AsyncCall();
+        }
     }, [ ]);
 
     return (
@@ -107,32 +150,33 @@ export default function SplashPage()
                         className="flex h-[48px] text-center px-[8px] rounded-[8px] border border-border/50 outline-outline focus:bg-border/10 transition"
                         maxLength={ 32 }
                         placeholder={ T('Splash.InviationCode') }
+                        onChange={ (e) => SetInviteCode(e.target.value) }
                         tabIndex={ 2 }
+                        value={ InviteCode }
                         type="text" />
 
                 </div>
 
-                <div
-                    className="flex justify-center m-[8px] h-[48px] w-[160px] rounded-[8px] bg-primary1 border border-border/50 hover:bg-primary2 active:bg-primary3 transition focus:outline outline-outline"
-                    tabIndex={ 3 }>
+                <div className="flex justify-center m-[8px] h-[48px] w-[160px] rounded-[8px] bg-primary1 hover:bg-primary2 active:bg-primary3 transition">
 
-                    <div
-                        className={ `flex flex-1 justify-center items-center text-[16px] font-semibold text-white ${ !Loading && 'cursor-pointer' }` }
-                        onClick={ OnClickInviation }>
+                    <button
+                        className={ `flex flex-1 justify-center items-center rounded-[8px] text-[16px] font-semibold text-white ${ !Loading && 'cursor-pointer' } focus:outline outline-outline` }
+                        onClick={ OnClickInviation }
+                        tabIndex={ 3 }>
 
                         {
                             Loading ? <LoadingComponent /> : T('Splash.Continue')
                         }
 
-                    </div>
+                    </button>
 
                 </div>
 
                 <div className="flex w-full relative justify-center h-[30px]">
 
-                    <div className="absolute h-[1px] w-[calc(100%-32px)] bg-box top-[15px] left-[16px]" />
+                    <div className="absolute h-[1px] w-[calc(100%-32px)] bg-box/50 top-[15px] left-[16px]" />
 
-                    <div className="bg-box rounded-[8px] p-[8px] z-2 text-black">
+                    <div className="bg-box/25 rounded-[8px] p-[8px] z-2 text-black">
 
                         {
                             T('Splash.ContactWithUs')
@@ -144,50 +188,50 @@ export default function SplashPage()
 
                 <div className="flex flex-wrap justify-evenly mt-[16px] gap-[16px]">
 
-                    <div
-                        className="bg-box hover:bg-primary1 flex justify-center items-center size-[40px] rounded-[8px] cursor-pointer group transition active:bg-primary3 focus:outline outline-outline"
+                    <button
+                        className="bg-box/35 hover:bg-primary1 flex justify-center items-center size-[40px] rounded-[8px] cursor-pointer group transition focus:outline outline-outline"
                         onClick={ () => OnOpenSocial('instagram') }
                         tabIndex={ 4 }>
 
                         <LuInstagram className="size-[24px] group-hover:text-white transition" />
 
-                    </div>
+                    </button>
 
-                    <div
-                        className="bg-box hover:bg-primary1 flex justify-center items-center size-[40px] rounded-[8px] cursor-pointer group transition active:bg-primary3 focus:outline outline-outline"
+                    <button
+                        className="bg-box/35 hover:bg-primary1 flex justify-center items-center size-[40px] rounded-[8px] cursor-pointer group transition focus:outline outline-outline"
                         onClick={ () => OnOpenSocial('x') }
                         tabIndex={ 5 }>
 
                         <BsTwitterX className="size-[24px] group-hover:text-white transition" />
 
-                    </div>
+                    </button>
 
-                    <div
-                        className="bg-box hover:bg-primary1 flex justify-center items-center size-[40px] rounded-[8px] cursor-pointer group transition active:bg-primary3 focus:outline outline-outline"
+                    <button
+                        className="bg-box/35 hover:bg-primary1 flex justify-center items-center size-[40px] rounded-[8px] cursor-pointer group transition focus:outline outline-outline"
                         onClick={ () => OnOpenSocial('telegram') }
                         tabIndex={ 6 }>
 
                         <FaTelegramPlane className="size-[24px] group-hover:text-white transition" />
 
-                    </div>
+                    </button>
 
-                    <div
-                        className="bg-box hover:bg-primary1 flex justify-center items-center size-[40px] rounded-[8px] cursor-pointer group transition active:bg-primary3 focus:outline outline-outline"
+                    <button
+                        className="bg-box/35 hover:bg-primary1 flex justify-center items-center size-[40px] rounded-[8px] cursor-pointer group transition focus:outline outline-outline"
                         onClick={ () => OnOpenSocial('discord') }
                         tabIndex={ 7 }>
 
                         <FaDiscord className="size-[24px] group-hover:text-white transition" />
 
-                    </div>
+                    </button>
 
-                    <div
-                        className="bg-box hover:bg-primary1 flex justify-center items-center size-[40px] rounded-[8px] cursor-pointer group transition active:bg-primary3 focus:outline outline-outline"
+                    <button
+                        className="bg-box/35 hover:bg-primary1 flex justify-center items-center size-[40px] rounded-[8px] cursor-pointer group transition focus:outline outline-outline"
                         onClick={ () => OnOpenSocial('website') }
                         tabIndex={ 8 }>
 
                         <TfiWorld className="size-[24px] group-hover:text-white transition" />
 
-                    </div>
+                    </button>
 
                 </div>
 

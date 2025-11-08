@@ -94,7 +94,7 @@ export default defineConfig([
 
                                         const ID = node.value.value.indexOf(R);
 
-                                        if (ID === -1 || R.includes('flex-') || R.includes('z-') || R.includes('bg-') || R.includes('from-') || R.includes('to-') || R.includes('calc('))
+                                        if (ID === -1 || R.includes('flex-') || R.includes('z-') || R.includes('bg-') || R.includes('border-') || R.includes('text-') || R.includes('from-') || R.includes('to-') || R.includes('calc('))
                                         {
                                             continue;
                                         }
@@ -140,6 +140,7 @@ export default defineConfig([
 
             'sonarjs/fixme-tag': 'off',
             'sonarjs/slow-regex': 'off',
+            'sonarjs/no-uniq-key': 'off',
             'sonarjs/no-commented-code': 'off',
             'sonarjs/prefer-regexp-exec': 'off',
             'sonarjs/no-nested-functions': 'off',
@@ -157,6 +158,7 @@ export default defineConfig([
             'react/jsx-max-depth': 'off',
             'react/hook-use-state': 'off',
             'react/jsx-no-literals': 'off',
+            'react/button-has-type': 'off',
             'react/jsx-indent-props': 'off',
             'react/jsx-wrap-multilines': 'off',
             'react/require-default-props': 'off',
@@ -167,6 +169,7 @@ export default defineConfig([
             'react/jsx-curly-spacing': [ 'error', { when: 'always' } ],
             'react/jsx-closing-bracket-location': [ 'error', 'after-props' ],
 
+            '@typescript-eslint/max-params': 'off',
             '@typescript-eslint/no-magic-numbers': 'off',
             '@typescript-eslint/naming-convention': 'off',
             '@typescript-eslint/prefer-regexp-exec': 'off',
