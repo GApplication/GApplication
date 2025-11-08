@@ -1,7 +1,5 @@
 import Storage from './storage';
 
-export type LanguageType = 'us' | 'fa' | 'ar';
-
 let LanguageMap: Record<string, Record<string, never>> = {};
 
 const ResolveKey = (K: string): string | undefined =>

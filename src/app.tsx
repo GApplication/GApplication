@@ -1,12 +1,11 @@
-import type { JSX } from 'react/jsx-runtime';
-
 import { createRoot } from 'react-dom/client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, type JSX } from 'react';
 
 import SplashPage from './page/splash';
 
-import AccountService from './service/account';
+import ToastService from './service/toast';
 
+import Account from './utility/account';
 import Language from './utility/language';
 
 import './app.css';
@@ -17,7 +16,7 @@ function App()
 
     useEffect(() =>
     {
-        if (AccountService.IsLogged())
+        if (Account.IsLogged())
         {
             return;
         }
@@ -25,7 +24,13 @@ function App()
         SetPage(<SplashPage />);
     }, [ ]);
 
-    return Page;
+    return <>
+        {
+            Page
+        }
+
+        <ToastService />
+    </>;
 }
 
 document.addEventListener('keydown', (Ev) =>

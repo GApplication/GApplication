@@ -1,11 +1,13 @@
-import type { LanguageType } from '../utility/language';
-
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { TfiWorld } from 'react-icons/tfi';
 import { BsTwitterX } from 'react-icons/bs';
 import { LuInstagram } from 'react-icons/lu';
 import { FaTelegramPlane } from 'react-icons/fa';
 import { FaLock, FaChevronDown, FaDiscord } from 'react-icons/fa6';
+
+import LoadingComponent from '../components/loading';
+
+import { Toast } from '../service/toast';
 
 import { T } from '../utility/language';
 
@@ -18,15 +20,34 @@ const OnOpenSocial = (App: 'instagram' | 'x' | 'telegram' | 'discord' | 'website
 
 export default function SplashPage()
 {
+    const [ Loading, SetLoading ] = useState(false);
+
     const [ Language, SetLanguage ] = useState<LanguageType>('us');
 
     const OnClickInviation = () =>
     {
+        if (Loading)
+        {
+            return;
+        }
+
+        // SetLoading(true);
+        // Notify
+        // API
+
         console.log('OnClickInviation');
+
+        Toast(<div>Hellloaaaaaaaaaaaa</div>);
     };
 
+    useEffect(() =>
+    {
+        // Is First Login ? Send New Device
+
+    }, [ ]);
+
     return (
-        <div className="flex w-svw h-svh justify-center bg-linear-to-tl from-cyan-500/50 to-blue-500/50">
+        <div className="flex w-screen h-screen justify-center bg-linear-to-tl from-cyan-500/50 to-blue-500/50">
 
             <div className="bg-pattern-28 size-full absolute" />
 
@@ -96,11 +117,11 @@ export default function SplashPage()
                     tabIndex={ 3 }>
 
                     <div
-                        className="flex flex-1 justify-center items-center text-[16px] font-semibold text-white cursor-pointer"
+                        className={ `flex flex-1 justify-center items-center text-[16px] font-semibold text-white ${ !Loading && 'cursor-pointer' }` }
                         onClick={ OnClickInviation }>
 
                         {
-                            T('Splash.Continue')
+                            Loading ? <LoadingComponent /> : T('Splash.Continue')
                         }
 
                     </div>
