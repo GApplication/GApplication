@@ -3,6 +3,7 @@ import { useState, useEffect, type JSX } from 'react';
 
 import SplashPage from './page/splash';
 
+import ModalService from './service/modal';
 import ToastService from './service/toast';
 
 import Account from './utility/account';
@@ -28,6 +29,8 @@ function App()
         {
             Page
         }
+
+        <ModalService />
 
         <ToastService />
     </>;

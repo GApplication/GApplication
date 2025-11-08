@@ -56,7 +56,17 @@
                         "os:allow-version",
                         "os:allow-family",
                         "os:allow-locale",
-                        "os:allow-arch"
+                        "os:allow-arch",
+
+                        {
+                            "identifier": "opener:allow-open-url",
+                            "allow":
+                            [
+                                {
+                                    "url": "https://*"
+                                }
+                            ]
+                        }
                     ]
                 }
             ]

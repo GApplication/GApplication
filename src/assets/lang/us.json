@@ -7,13 +7,19 @@
         "Continue": "Continue",
         "ContactWithUs": "Contact With Us",
 
-        "ErrorInviationCode": "Inviation code is invalid"
+        "Error":
+        {
+            "InviationCode": "Inviation code is invalid"
+        }
     },
 
     "Common":
     {
-        "English": "English",
+        "English": "English"
+    },
 
-        "ErrorInternet": "Check your internet connection"
+    "Error":
+    {
+        "Internet": "Check your internet connection"
     }
 }

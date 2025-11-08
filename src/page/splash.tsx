@@ -5,6 +5,7 @@ import { TfiWorld } from 'react-icons/tfi';
 import { BsTwitterX } from 'react-icons/bs';
 import { LuInstagram } from 'react-icons/lu';
 import { FaTelegramPlane } from 'react-icons/fa';
+import { openUrl } from '@tauri-apps/plugin-opener';
 import { FaLock, FaChevronDown, FaDiscord } from 'react-icons/fa6';
 
 import LoadingComponent from '../components/loading';
@@ -13,15 +14,46 @@ import WarningComponent from '../components/toast/warning';
 import { Toast } from '../service/toast';
 
 import API from '../utility/api';
+import Config from '../utility/config';
 import Account from '../utility/account';
 
 import { T } from '../utility/language';
 
-const OnOpenSocial = (App: 'instagram' | 'x' | 'telegram' | 'discord' | 'website') =>
+const OnOpenSocial = async(App: 'instagram' | 'x' | 'telegram' | 'discord' | 'website') =>
 {
-    // Handle Opening App For Each Platform.
+    switch (App)
+    {
+        case 'instagram':
+        {
+            await openUrl(Config.Social.Instagram);
 
-    console.log('OnOpenSocial', App);
+            break;
+        }
+        case 'x':
+        {
+            await openUrl(Config.Social.X);
+
+            break;
+        }
+        case 'telegram':
+        {
+            await openUrl(Config.Social.Telegram);
+
+            break;
+        }
+        case 'discord':
+        {
+            await openUrl(Config.Social.Discord);
+
+            break;
+        }
+        case 'website':
+        {
+            await openUrl(Config.Social.Website);
+
+            break;
+        }
+    }
 };
 
 export default function SplashPage()
@@ -29,6 +61,11 @@ export default function SplashPage()
     const [ Loading, SetLoading ] = useState(false);
     const [ InviteCode, SetInviteCode ] = useState('');
     const [ Language, SetLanguage ] = useState<LanguageType>('us');
+
+    const OnClickLanguage = () =>
+    {
+        console.log('OnClickLanguage');
+    };
 
     const OnClickInviation = () =>
     {
@@ -39,7 +76,7 @@ export default function SplashPage()
 
         if (InviteCode.length < 5)
         {
-            Toast(<WarningComponent Message={ T('Splash.ErrorInviationCode') } />);
+            Toast(<WarningComponent Message={ T('Splash.Error.InviationCode') } />);
 
             return;
         }
@@ -50,7 +87,14 @@ export default function SplashPage()
         {
             SetLoading(false);
 
-            Toast(<WarningComponent Message={ `InviteCode: ${ InviteCode }`} />);
+            if (Response === undefined)
+            {
+                Toast(<WarningComponent Message={ T('Error.Internet') } />);
+
+                return;
+            }
+
+            console.log('Go To Next Page');
         });
     };
 
@@ -85,7 +129,7 @@ export default function SplashPage()
                 });
             };
 
-            AsyncCall();
+            void AsyncCall();
         }
     }, [ ]);
 
@@ -116,8 +160,9 @@ export default function SplashPage()
 
                     </div>
 
-                    <div
+                    <button
                         className="flex h-[48px] cursor-pointer items-center gap-[8px] px-[16px] rounded-[8px] border border-border/50 hover:bg-border/10 transition focus:outline outline-outline"
+                        onClick={ OnClickLanguage }
                         tabIndex={ 1 }>
 
                         <div className={ `fi fi-${ Language } size-[24px]` } />
@@ -132,7 +177,7 @@ export default function SplashPage()
 
                         <FaChevronDown className="size-[16px]" />
 
-                    </div>
+                    </button>
 
                 </div>
 
@@ -149,11 +194,11 @@ export default function SplashPage()
                     <input
                         className="flex h-[48px] text-center px-[8px] rounded-[8px] border border-border/50 outline-outline focus:bg-border/10 transition"
                         maxLength={ 32 }
-                        placeholder={ T('Splash.InviationCode') }
                         onChange={ (e) => SetInviteCode(e.target.value) }
+                        placeholder={ T('Splash.InviationCode') }
                         tabIndex={ 2 }
-                        value={ InviteCode }
-                        type="text" />
+                        type="text"
+                        value={ InviteCode } />
 
                 </div>
 
@@ -190,7 +235,7 @@ export default function SplashPage()
 
                     <button
                         className="bg-box/35 hover:bg-primary1 flex justify-center items-center size-[40px] rounded-[8px] cursor-pointer group transition focus:outline outline-outline"
-                        onClick={ () => OnOpenSocial('instagram') }
+                        onClick={ () => void OnOpenSocial('instagram') }
                         tabIndex={ 4 }>
 
                         <LuInstagram className="size-[24px] group-hover:text-white transition" />
@@ -199,7 +244,7 @@ export default function SplashPage()
 
                     <button
                         className="bg-box/35 hover:bg-primary1 flex justify-center items-center size-[40px] rounded-[8px] cursor-pointer group transition focus:outline outline-outline"
-                        onClick={ () => OnOpenSocial('x') }
+                        onClick={ () => void OnOpenSocial('x') }
                         tabIndex={ 5 }>
 
                         <BsTwitterX className="size-[24px] group-hover:text-white transition" />
@@ -208,7 +253,7 @@ export default function SplashPage()
 
                     <button
                         className="bg-box/35 hover:bg-primary1 flex justify-center items-center size-[40px] rounded-[8px] cursor-pointer group transition focus:outline outline-outline"
-                        onClick={ () => OnOpenSocial('telegram') }
+                        onClick={ () => void OnOpenSocial('telegram') }
                         tabIndex={ 6 }>
 
                         <FaTelegramPlane className="size-[24px] group-hover:text-white transition" />
@@ -217,7 +262,7 @@ export default function SplashPage()
 
                     <button
                         className="bg-box/35 hover:bg-primary1 flex justify-center items-center size-[40px] rounded-[8px] cursor-pointer group transition focus:outline outline-outline"
-                        onClick={ () => OnOpenSocial('discord') }
+                        onClick={ () => void OnOpenSocial('discord') }
                         tabIndex={ 7 }>
 
                         <FaDiscord className="size-[24px] group-hover:text-white transition" />
@@ -226,7 +271,7 @@ export default function SplashPage()
 
                     <button
                         className="bg-box/35 hover:bg-primary1 flex justify-center items-center size-[40px] rounded-[8px] cursor-pointer group transition focus:outline outline-outline"
-                        onClick={ () => OnOpenSocial('website') }
+                        onClick={ () => void OnOpenSocial('website') }
                         tabIndex={ 8 }>
 
                         <TfiWorld className="size-[24px] group-hover:text-white transition" />

@@ -1,19 +1,18 @@
 import { useEffect } from 'react';
-
 import { MdClose, MdErrorOutline } from 'react-icons/md';
 
-import EventMap from '../../utility/event';
+import { ToastClose } from '../../service/toast';
 
 export default function Warning({ ID, Delay, Message }: { readonly ID?: number; readonly Delay?: number; readonly Message: string })
 {
     const OnClickClose = () =>
     {
-        EventMap.Emit('ToastRemove', ID ?? 0);
+        ToastClose(ID ?? 0);
     };
 
     useEffect(() =>
     {
-        const T = setTimeout(() => EventMap.Emit('ToastRemove', ID ?? 0), Delay);
+        const T = setTimeout(() => OnClickClose(), Delay);
 
         return () =>
         {
@@ -21,7 +20,7 @@ export default function Warning({ ID, Delay, Message }: { readonly ID?: number; 
         };
     }, [ ]);
 
-    return <div className="flex w-[344px] h-[58px] mt-[16px] rounded-[8px] items-center gap-[8px] p-[8px] bg-yellow-50 border border-box pointer-events-auto">
+    return <div className="flex w-[328px] h-[58px] mt-[16px] rounded-[8px] items-center gap-[8px] p-[8px] bg-yellow-50 border border-yellow-300 pointer-events-auto">
 
         <MdErrorOutline className="min-w-[24px] min-h-[24px] text-yellow-500" />
 

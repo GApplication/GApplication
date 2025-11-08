@@ -3,6 +3,9 @@ interface EventMap
 {
     ToastAdd: [Component: JSX.Element];
     ToastRemove: [ID: number];
+
+    ModalAdd: [Component: JSX.Element];
+    ModalRemove: [ID: number];
 }
 
 type EventCall<T extends keyof EventMap> = (...Args: EventMap[T]) => void;

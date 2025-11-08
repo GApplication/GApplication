@@ -1,4 +1,4 @@
-const API_URL = 'https://google.com/';
+import Config from './config';
 
 const API = (URL: string, Method: 'GET' | 'POST', Body: string | undefined, CallBack: APIResponse) =>
 {
@@ -23,7 +23,7 @@ const API = (URL: string, Method: 'GET' | 'POST', Body: string | undefined, Call
         CallBack();
     };
 
-    Request.open(Method, `${ API_URL }${ URL }`);
+    Request.open(Method, `${ Config.App.API }${ URL }`);
 
     if (Body === undefined)
     {

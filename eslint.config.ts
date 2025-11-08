@@ -183,9 +183,9 @@ export default defineConfig([
             '@stylistic/lines-around-comment': 'off',
             '@stylistic/multiline-comment-style': 'off',
 
-            '@stylistic/padded-blocks': [ 'error', 'never' ],
             '@stylistic/quotes': [ 'error', 'single' ],
             '@stylistic/brace-style': [ 'error', 'allman' ],
+            '@stylistic/padded-blocks': [ 'error', 'never' ],
             '@stylistic/linebreak-style': [ 'error', 'unix' ],
             '@stylistic/quote-props': [ 'error', 'as-needed' ],
             '@stylistic/object-curly-spacing': [ 'error', 'always' ],
@@ -196,6 +196,7 @@ export default defineConfig([
             '@stylistic/multiline-ternary': [ 'error', 'always-multiline' ],
             '@stylistic/function-call-argument-newline': [ 'error', 'consistent' ],
             '@stylistic/object-property-newline': [ 'error', { allowAllPropertiesOnSameLine: true } ],
+            '@stylistic/indent': [ "error", 4, { "SwitchCase": 1, "ObjectExpression": 1, "assignmentOperator": 0 } ],
             '@stylistic/space-before-function-paren': [ 'error', { anonymous: 'never', named: 'never', asyncArrow: 'never', catch: 'always' } ]
 
             /*

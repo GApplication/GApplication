@@ -2,20 +2,19 @@ import { useEffect, useState, cloneElement, type JSX } from 'react';
 
 import EventMap from '../utility/event';
 
-export const Toast = (Component: JSX.Element, Option: { ID?: number; Delay?: number } = {}) =>
+export const Modal = (Component: JSX.Element, Option: { ID?: number } = {}) =>
 {
     const ID = Option.ID ?? Date.now();
-    const Delay = Option.Delay ?? 5000;
 
-    EventMap.Emit('ToastAdd', cloneElement(Component, { ID, Delay, key: ID }));
+    EventMap.Emit('ModalAdd', cloneElement(Component, { ID, key: ID }));
 };
 
-export const ToastClose = (ID: number) =>
+export const ModalClose = (ID: number) =>
 {
-    EventMap.Emit('ToastRemove', ID);
+    EventMap.Emit('ModalRemove', ID);
 };
 
-export default function ToastContainer()
+export default function ModalContainer()
 {
     const [ ToastMap, SetToastMap ] = useState<JSX.Element[]>([ ]);
 
@@ -31,17 +30,17 @@ export default function ToastContainer()
             SetToastMap((Previous) => Previous.filter((I) => I.key !== `${ ID }`));
         };
 
-        EventMap.On('ToastAdd', ToastAdd);
-        EventMap.On('ToastRemove', ToastRemove);
+        EventMap.On('ModalAdd', ToastAdd);
+        EventMap.On('ModalRemove', ToastRemove);
 
         return () =>
         {
-            EventMap.Off('ToastAdd', ToastAdd);
-            EventMap.Off('ToastRemove', ToastRemove);
+            EventMap.Off('ModalAdd', ToastAdd);
+            EventMap.Off('ModalRemove', ToastRemove);
         };
     }, [ ]);
 
-    return <div className='flex flex-col items-center w-screen h-screen absolute z-30 top-[0px] pointer-events-none overflow-hidden'>
+    return <div className='flex flex-col items-center w-screen h-screen absolute z-20 top-[0px] pointer-events-none overflow-hidden'>
 
         {
             ToastMap
