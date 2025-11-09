@@ -9,9 +9,12 @@ import { openUrl } from '@tauri-apps/plugin-opener';
 import { FaLock, FaChevronDown, FaDiscord } from 'react-icons/fa6';
 
 import LoadingComponent from '../components/loading';
+import LanguageModal from '../components/modal/language';
+import WindowBarComponent from '../components/windowBar';
 import WarningComponent from '../components/toast/warning';
 
 import { Toast } from '../service/toast';
+import { Modal } from '../service/modal';
 
 import API from '../utility/api';
 import Config from '../utility/config';
@@ -64,7 +67,7 @@ export default function SplashPage()
 
     const OnClickLanguage = () =>
     {
-        console.log('OnClickLanguage');
+        Modal(<LanguageModal Message='Hello Language' />);
     };
 
     const OnClickInviation = () =>
@@ -102,7 +105,7 @@ export default function SplashPage()
     {
         if (Account.IsNewInstall())
         {
-            const AsyncCall = async() =>
+            const AsyncTask = async() =>
             {
                 const Agent =
                 {
@@ -129,20 +132,20 @@ export default function SplashPage()
                 });
             };
 
-            void AsyncCall();
+            void AsyncTask();
         }
     }, [ ]);
 
     return (
-        <div className="flex w-screen h-screen justify-center bg-linear-to-tl from-cyan-500/50 to-blue-500/50">
+        <div className='w-screen h-screen justify-center bg-linear-to-tl from-cyan-500/50 to-blue-500/50'>
 
-            <div className="bg-pattern-28 size-full absolute" />
+            <WindowBarComponent />
 
-            <div className="flex w-[360px] flex-col items-center gap-[16px] z-1 bg-content">
+            <div className={ `flex w-[360px] flex-col items-center gap-[16px] z-1 bg-content h-full ${ OS.platform() === 'windows' && 'pt-[40px]' }` }>
 
-                <FaLock className="size-[160px] mt-[32px] p-[8px] rounded-[8px] border border-border/50" />
+                <FaLock className='size-[160px] mt-[32px] p-[8px] rounded-[8px] border border-border/50' />
 
-                <div className="text-[24px] font-bold p-[8px] rounded-[8px] border border-border/50">
+                <div className='text-[24px] font-bold p-[8px] rounded-[8px] border border-border/50'>
 
                     {
                         T('Splash.Header')
@@ -150,9 +153,9 @@ export default function SplashPage()
 
                 </div>
 
-                <div className="flex flex-col w-full gap-[8px] px-[16px]">
+                <div className='flex flex-col w-full gap-[8px] px-[16px]'>
 
-                    <div className="w-fit px-[8px] py-[6px] rounded-[8px] border border-border/50">
+                    <div className='w-fit px-[8px] py-[6px] rounded-[8px] border border-border/50'>
 
                         {
                             T('Splash.Language')
@@ -161,13 +164,13 @@ export default function SplashPage()
                     </div>
 
                     <button
-                        className="flex h-[48px] cursor-pointer items-center gap-[8px] px-[16px] rounded-[8px] border border-border/50 hover:bg-border/10 transition focus:outline outline-outline"
+                        className='flex h-[48px] cursor-pointer items-center gap-[8px] px-[16px] rounded-[8px] border border-border/50 hover:bg-border/10 transition focus:outline outline-outline'
                         onClick={ OnClickLanguage }
                         tabIndex={ 1 }>
 
                         <div className={ `fi fi-${ Language } size-[24px]` } />
 
-                        <div className="flex-1 text-[14px]">
+                        <div className='flex-1 text-[14px]'>
 
                             {
                                 T('Common.English')
@@ -175,15 +178,15 @@ export default function SplashPage()
 
                         </div>
 
-                        <FaChevronDown className="size-[16px]" />
+                        <FaChevronDown className='size-[16px]' />
 
                     </button>
 
                 </div>
 
-                <div className="flex flex-col w-full gap-[8px] px-[16px]">
+                <div className='flex flex-col w-full gap-[8px] px-[16px]'>
 
-                    <div className="w-fit px-[8px] py-[6px] rounded-[8px] border border-border/50">
+                    <div className='w-fit px-[8px] py-[6px] rounded-[8px] border border-border/50'>
 
                         {
                             T('Splash.InviationCode')
@@ -192,17 +195,17 @@ export default function SplashPage()
                     </div>
 
                     <input
-                        className="flex h-[48px] text-center px-[8px] rounded-[8px] border border-border/50 outline-outline focus:bg-border/10 transition"
+                        className='flex h-[48px] text-center px-[8px] rounded-[8px] border border-border/50 outline-outline focus:bg-border/10 transition'
                         maxLength={ 32 }
                         onChange={ (e) => SetInviteCode(e.target.value) }
                         placeholder={ T('Splash.InviationCode') }
                         tabIndex={ 2 }
-                        type="text"
+                        type='text'
                         value={ InviteCode } />
 
                 </div>
 
-                <div className="flex justify-center m-[8px] h-[48px] w-[160px] rounded-[8px] bg-primary1 hover:bg-primary2 active:bg-primary3 transition">
+                <div className='flex justify-center m-[8px] h-[48px] w-[160px] rounded-[8px] bg-primary1 hover:bg-primary2 active:bg-primary3 transition'>
 
                     <button
                         className={ `flex flex-1 justify-center items-center rounded-[8px] text-[16px] font-semibold text-white ${ !Loading && 'cursor-pointer' } focus:outline outline-outline` }
@@ -217,11 +220,11 @@ export default function SplashPage()
 
                 </div>
 
-                <div className="flex w-full relative justify-center h-[30px]">
+                <div className='flex w-full relative justify-center h-[30px]'>
 
-                    <div className="absolute h-[1px] w-[calc(100%-32px)] bg-box/50 top-[15px] left-[16px]" />
+                    <div className='absolute h-[1px] w-[calc(100%-32px)] bg-box/50 top-[15px] left-[16px]' />
 
-                    <div className="bg-box/25 rounded-[8px] p-[8px] z-2 text-black">
+                    <div className='bg-box/25 rounded-[8px] p-[8px] z-2 text-black'>
 
                         {
                             T('Splash.ContactWithUs')
@@ -231,50 +234,50 @@ export default function SplashPage()
 
                 </div>
 
-                <div className="flex flex-wrap justify-evenly mt-[16px] gap-[16px]">
+                <div className='flex flex-wrap justify-evenly mt-[16px] gap-[16px]'>
 
                     <button
-                        className="bg-box/35 hover:bg-primary1 flex justify-center items-center size-[40px] rounded-[8px] cursor-pointer group transition focus:outline outline-outline"
+                        className='bg-box/35 hover:bg-primary1 flex justify-center items-center size-[40px] rounded-[8px] cursor-pointer group transition focus:outline outline-outline'
                         onClick={ () => void OnOpenSocial('instagram') }
                         tabIndex={ 4 }>
 
-                        <LuInstagram className="size-[24px] group-hover:text-white transition" />
+                        <LuInstagram className='size-[24px] group-hover:text-white transition' />
 
                     </button>
 
                     <button
-                        className="bg-box/35 hover:bg-primary1 flex justify-center items-center size-[40px] rounded-[8px] cursor-pointer group transition focus:outline outline-outline"
+                        className='bg-box/35 hover:bg-primary1 flex justify-center items-center size-[40px] rounded-[8px] cursor-pointer group transition focus:outline outline-outline'
                         onClick={ () => void OnOpenSocial('x') }
                         tabIndex={ 5 }>
 
-                        <BsTwitterX className="size-[24px] group-hover:text-white transition" />
+                        <BsTwitterX className='size-[24px] group-hover:text-white transition' />
 
                     </button>
 
                     <button
-                        className="bg-box/35 hover:bg-primary1 flex justify-center items-center size-[40px] rounded-[8px] cursor-pointer group transition focus:outline outline-outline"
+                        className='bg-box/35 hover:bg-primary1 flex justify-center items-center size-[40px] rounded-[8px] cursor-pointer group transition focus:outline outline-outline'
                         onClick={ () => void OnOpenSocial('telegram') }
                         tabIndex={ 6 }>
 
-                        <FaTelegramPlane className="size-[24px] group-hover:text-white transition" />
+                        <FaTelegramPlane className='size-[24px] group-hover:text-white transition' />
 
                     </button>
 
                     <button
-                        className="bg-box/35 hover:bg-primary1 flex justify-center items-center size-[40px] rounded-[8px] cursor-pointer group transition focus:outline outline-outline"
+                        className='bg-box/35 hover:bg-primary1 flex justify-center items-center size-[40px] rounded-[8px] cursor-pointer group transition focus:outline outline-outline'
                         onClick={ () => void OnOpenSocial('discord') }
                         tabIndex={ 7 }>
 
-                        <FaDiscord className="size-[24px] group-hover:text-white transition" />
+                        <FaDiscord className='size-[24px] group-hover:text-white transition' />
 
                     </button>
 
                     <button
-                        className="bg-box/35 hover:bg-primary1 flex justify-center items-center size-[40px] rounded-[8px] cursor-pointer group transition focus:outline outline-outline"
+                        className='bg-box/35 hover:bg-primary1 flex justify-center items-center size-[40px] rounded-[8px] cursor-pointer group transition focus:outline outline-outline'
                         onClick={ () => void OnOpenSocial('website') }
                         tabIndex={ 8 }>
 
-                        <TfiWorld className="size-[24px] group-hover:text-white transition" />
+                        <TfiWorld className='size-[24px] group-hover:text-white transition' />
 
                     </button>
 

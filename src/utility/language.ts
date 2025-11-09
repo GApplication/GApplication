@@ -25,6 +25,15 @@ const SetLang = async(Lang: LanguageType) =>
 
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
     LanguageMap = (await import(`../assets/lang/${ Lang }.json`)).default;
+
+    let Dir = 'ltr';
+
+    if (Lang === 'fa' || Lang === 'ar')
+    {
+        Dir = 'rtl';
+    }
+
+    document.documentElement.dir = Dir;
 };
 
 const Initialize = async() =>

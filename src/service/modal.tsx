@@ -16,34 +16,34 @@ export const ModalClose = (ID: number) =>
 
 export default function ModalContainer()
 {
-    const [ ToastMap, SetToastMap ] = useState<JSX.Element[]>([ ]);
+    const [ ModalMap, SetModalMap ] = useState<JSX.Element[]>([ ]);
 
     useEffect(() =>
     {
-        const ToastAdd = (Component: JSX.Element) =>
+        const ModalAdd = (Component: JSX.Element) =>
         {
-            SetToastMap((Previous) => [ ...Previous, Component ]);
+            SetModalMap((Previous) => [ ...Previous, Component ]);
         };
 
-        const ToastRemove = (ID: number) =>
+        const ModalRemove = (ID: number) =>
         {
-            SetToastMap((Previous) => Previous.filter((I) => I.key !== `${ ID }`));
+            SetModalMap((Previous) => Previous.filter((I) => I.key !== `${ ID }`));
         };
 
-        EventMap.On('ModalAdd', ToastAdd);
-        EventMap.On('ModalRemove', ToastRemove);
+        EventMap.On('ModalAdd', ModalAdd);
+        EventMap.On('ModalRemove', ModalRemove);
 
         return () =>
         {
-            EventMap.Off('ModalAdd', ToastAdd);
-            EventMap.Off('ModalRemove', ToastRemove);
+            EventMap.Off('ModalAdd', ModalAdd);
+            EventMap.Off('ModalRemove', ModalRemove);
         };
     }, [ ]);
 
     return <div className='flex flex-col items-center w-screen h-screen absolute z-20 top-[0px] pointer-events-none overflow-hidden'>
 
         {
-            ToastMap
+            ModalMap
         }
 
     </div>;

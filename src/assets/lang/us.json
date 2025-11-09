@@ -1,4 +1,15 @@
 {
+    "App":
+    {
+        "Name": "GApp"
+    },
+
+    "Tray":
+    {
+        "Open": "Open GApp",
+        "Quit": "Quit GApp"
+    },
+
     "Splash":
     {
         "Header": "Welcome To GApp",

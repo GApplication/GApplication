@@ -1,5 +1,10 @@
+import { Menu } from '@tauri-apps/api/menu';
 import { createRoot } from 'react-dom/client';
+import { TrayIcon } from '@tauri-apps/api/tray';
+import { platform } from '@tauri-apps/plugin-os';
 import { useState, useEffect, type JSX } from 'react';
+import { defaultWindowIcon } from '@tauri-apps/api/app';
+import { getCurrentWindow } from '@tauri-apps/api/window';
 
 import SplashPage from './page/splash';
 
@@ -7,7 +12,8 @@ import ModalService from './service/modal';
 import ToastService from './service/toast';
 
 import Account from './utility/account';
-import Language from './utility/language';
+
+import Language, { T } from './utility/language';
 
 import './app.css';
 
@@ -17,12 +23,51 @@ function App()
 
     useEffect(() =>
     {
-        if (Account.IsLogged())
+        if (platform() === 'windows')
         {
-            return;
+            const AsyncTask = async() =>
+            {
+                const AppIcon = await defaultWindowIcon();
+
+                if (AppIcon)
+                {
+                    const AppTrayMenu = await Menu.new({
+                        items:
+                        [
+                            {
+                                id: 'open',
+                                text: T('Tray.Open'),
+                                action: () =>
+                                {
+                                    void getCurrentWindow().show();
+                                }
+                            },
+                            {
+                                id: 'quit',
+                                text: T('Tray.Quit'),
+                                action: () =>
+                                {
+                                    void getCurrentWindow().close();
+                                }
+                            }
+                        ]
+                    });
+
+                    await TrayIcon.new({ menu: AppTrayMenu, icon: AppIcon });
+                }
+            };
+
+            void AsyncTask();
         }
 
-        SetPage(<SplashPage />);
+        if (Account.IsLogged())
+        {
+            // SetPage(<HomePage />);
+        }
+        else
+        {
+            SetPage(<SplashPage />);
+        }
     }, [ ]);
 
     return <>

@@ -27,13 +27,19 @@ export default defineConfig([
     globalIgnores([ 'dist', 'src/assets', 'src-tauri', 'node_modules' ]),
 
     {
+        settings:
+        {
+            react:
+            {
+                version: 'detect'
+            }
+        },
         languageOptions:
         {
             parserOptions:
             {
-                project: true,
                 sourceType: 'module',
-                tsconfigRootDir: DirectoyName
+                project: './tsconfig.json'
             }
         },
         plugins:
@@ -94,7 +100,7 @@ export default defineConfig([
 
                                         const ID = node.value.value.indexOf(R);
 
-                                        if (ID === -1 || R.includes('flex-') || R.includes('z-') || R.includes('bg-') || R.includes('border-') || R.includes('text-') || R.includes('from-') || R.includes('to-') || R.includes('calc('))
+                                        if (ID === -1 || R.includes('duration-') || R.includes('flex-') || R.includes('z-') || R.includes('bg-') || R.includes('border-') || R.includes('text-') || R.includes('from-') || R.includes('to-') || R.includes('calc('))
                                         {
                                             continue;
                                         }
@@ -112,6 +118,8 @@ export default defineConfig([
         },
         rules:
         {
+            'custom/no-predefined-tailwindcss': 'error',
+
             'no-void': 'off',
             'new-cap': 'off',
             'id-length': 'off',
@@ -135,8 +143,6 @@ export default defineConfig([
             'prefer-named-capture-group': 'off',
 
             'one-var': [ 'error', 'never' ],
-
-            'custom/no-predefined-tailwindcss': 'error',
 
             'sonarjs/fixme-tag': 'off',
             'sonarjs/slow-regex': 'off',
@@ -188,6 +194,7 @@ export default defineConfig([
             '@stylistic/padded-blocks': [ 'error', 'never' ],
             '@stylistic/linebreak-style': [ 'error', 'unix' ],
             '@stylistic/quote-props': [ 'error', 'as-needed' ],
+            '@stylistic/jsx-quotes': [ "error", "prefer-single" ],
             '@stylistic/object-curly-spacing': [ 'error', 'always' ],
             '@stylistic/array-bracket-spacing': [ 'error', 'always' ],
             '@stylistic/template-curly-spacing': [ 'error', 'always' ],
@@ -200,49 +207,7 @@ export default defineConfig([
             '@stylistic/space-before-function-paren': [ 'error', { anonymous: 'never', named: 'never', asyncArrow: 'never', catch: 'always' } ]
 
             /*
-            'max-depth': 'off',
-            'max-lines': 'off',
-            'no-plusplus': 'off',
-            'getter-return': 'off',
-            'no-inline-comments': 'off',
-            'class-methods-use-this': 'off',
-            'compat/compat': 'off',
-            'n/no-missing-import': 'off',
-            'n/no-unpublished-import': 'off',
-            'n/no-unsupported-features/node-builtins': 'off',
-            'import/no-unresolved': 'off',
-            'sonarjs/no-uniq-key': 'off',
-            'sonarjs/pseudo-random': 'off',
-            'sonarjs/no-hardcoded-ip': 'off',
-            'sonarjs/no-nested-functions': 'off',
-            'sonarjs/cognitive-complexity': 'off',
-            'sonarjs/no-nested-conditional': 'off',
-            'sonarjs/prefer-read-only-props': 'off',
-            'sonarjs/no-clear-text-protocols': 'off',
-            'unicorn/no-for-loop': 'off',
-            'unicorn/catch-error-name': 'off',
-            'unicorn/no-nested-ternary': 'off',
-            'unicorn/empty-brace-spaces': 'off',
-            'unicorn/no-useless-undefined': 'off',
-            'unicorn/prefer-query-selector': 'off',
-            'unicorn/prefer-string-replace-all': 'off',
-            'unicorn/filename-case': [ 'error', { case: 'camelCase' } ],
-            'react/jsx-indent': 'off',
-            'react/no-multi-comp': 'off',
-            'react/no-array-index-key': 'off',
-            'react/jsx-no-leaked-render': 'off',
-            'react/prefer-read-only-props': 'off',
-            'react/function-component-definition': 'off',
             'react/jsx-curly-brace-presence': [ 'error', { props: 'always', children: 'never' } ],
-            '@typescript-eslint/max-params': 'off',
-            '@typescript-eslint/ban-ts-comment': 'off',
-            '@typescript-eslint/no-floating-promises': 'off',
-            '@typescript-eslint/switch-exhaustiveness-check': 'off',
-            '@stylistic/spaced-comment': 'off',
-            '@stylistic/linebreak-style': 'off',
-            '@stylistic/operator-linebreak': 'off',
-            '@stylistic/comma-dangle': [ 'error', 'never' ],
-            '@stylistic/quote-props': [ 'error', 'as-needed' ],
             '@stylistic/function-paren-newline': [ 'error', 'consistent' ],
             '@stylistic/nonblock-statement-body-position': [ 'error', 'below' ],
             */
