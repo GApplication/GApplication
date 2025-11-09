@@ -8,13 +8,20 @@ import PluginSonar from 'eslint-plugin-sonarjs';
 import PluginUnicorn from 'eslint-plugin-unicorn';
 import PluginStylistic from '@stylistic/eslint-plugin';
 
-import { defineConfig, globalIgnores } from 'eslint/config';
-
-// @ts-expect-error Dirname
-// eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
-const DirectoyName = __dirname as string;
+import { defineConfig } from 'eslint/config';
 
 export default defineConfig([
+
+    {
+        ignores:
+        [
+            'dist',
+            'build',
+            'src-tauri',
+            'src/assets',
+            'node_modules'
+        ]
+    },
 
     PluginJS.configs.all,
     PluginTS.configs.all,
@@ -24,22 +31,14 @@ export default defineConfig([
     PluginSonar.configs.recommended,
     PluginReact.configs.flat['jsx-runtime'],
 
-    globalIgnores([ 'dist', 'src/assets', 'src-tauri', 'node_modules' ]),
-
     {
-        settings:
-        {
-            react:
-            {
-                version: 'detect'
-            }
-        },
         languageOptions:
         {
             parserOptions:
             {
-                sourceType: 'module',
-                project: './tsconfig.json'
+                projectService: true,
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                tsconfigRootDir: import.meta.dirname
             }
         },
         plugins:
@@ -148,6 +147,7 @@ export default defineConfig([
             'sonarjs/fixme-tag': 'off',
             'sonarjs/slow-regex': 'off',
             'sonarjs/no-uniq-key': 'off',
+            'sonarjs/no-small-switch': 'off',
             'sonarjs/no-commented-code': 'off',
             'sonarjs/prefer-regexp-exec': 'off',
             'sonarjs/no-nested-functions': 'off',
@@ -156,12 +156,13 @@ export default defineConfig([
             'unicorn/no-keyword-prefix': 'off',
             'unicorn/prefer-global-this': 'off',
             'unicorn/no-typeof-undefined': 'off',
+            'unicorn/no-useless-undefined': 'off',
             'unicorn/prevent-abbreviations': 'off',
             'unicorn/prefer-string-replace-all': 'off',
             'unicorn/prefer-add-event-listener': 'off',
             'unicorn/no-await-expression-member': 'off',
 
-            'unicorn/filename-case': [ 'error', { "case": "camelCase" } ],
+            'unicorn/filename-case': [ 'error', { case: 'camelCase' } ],
 
             'react/jsx-indent': 'off',
             'react/jsx-no-bind': 'off',
@@ -198,7 +199,7 @@ export default defineConfig([
             '@stylistic/padded-blocks': [ 'error', 'never' ],
             '@stylistic/linebreak-style': [ 'error', 'unix' ],
             '@stylistic/quote-props': [ 'error', 'as-needed' ],
-            '@stylistic/jsx-quotes': [ "error", "prefer-single" ],
+            '@stylistic/jsx-quotes': [ 'error', 'prefer-single' ],
             '@stylistic/object-curly-spacing': [ 'error', 'always' ],
             '@stylistic/array-bracket-spacing': [ 'error', 'always' ],
             '@stylistic/template-curly-spacing': [ 'error', 'always' ],
@@ -207,14 +208,8 @@ export default defineConfig([
             '@stylistic/multiline-ternary': [ 'error', 'always-multiline' ],
             '@stylistic/function-call-argument-newline': [ 'error', 'consistent' ],
             '@stylistic/object-property-newline': [ 'error', { allowAllPropertiesOnSameLine: true } ],
-            '@stylistic/indent': [ "error", 4, { "SwitchCase": 1, "ObjectExpression": 1, "assignmentOperator": 0 } ],
+            '@stylistic/indent': [ 'error', 4, { SwitchCase: 1, ObjectExpression: 1, assignmentOperator: 0 } ],
             '@stylistic/space-before-function-paren': [ 'error', { anonymous: 'never', named: 'never', asyncArrow: 'never', catch: 'always' } ]
-
-            /*
-            'react/jsx-curly-brace-presence': [ 'error', { props: 'always', children: 'never' } ],
-            '@stylistic/function-paren-newline': [ 'error', 'consistent' ],
-            '@stylistic/nonblock-statement-body-position': [ 'error', 'below' ],
-            */
         }
     }
 ]);

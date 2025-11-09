@@ -12,42 +12,6 @@ const Language: { Code: LanguageType; Country: string } [] =
     {
         Code: 'fa',
         Country: 'ir'
-    },
-    {
-        Code: 'hi',
-        Country: 'in'
-    },
-    {
-        Code: 'es',
-        Country: 'es'
-    },
-    {
-        Code: 'fr',
-        Country: 'fr'
-    },
-    {
-        Code: 'de',
-        Country: 'de'
-    },
-    {
-        Code: 'ru',
-        Country: 'ru'
-    },
-    {
-        Code: 'zh',
-        Country: 'cn'
-    },
-    {
-        Code: 'ja',
-        Country: 'jp'
-    },
-    {
-        Code: 'ko',
-        Country: 'kr'
-    },
-    {
-        Code: 'ar',
-        Country: 'sa'
     }
 ];
 
@@ -79,7 +43,7 @@ const SetLang = async(Lang: LanguageType) =>
 
     let Dir = 'ltr';
 
-    if (Lang === 'fa' || Lang === 'ar')
+    if (Lang === 'fa')
     {
         Dir = 'rtl';
     }
@@ -108,60 +72,6 @@ const Initialize = async() =>
         case 'fa':
         {
             Lang = 'fa';
-
-            break;
-        }
-        case 'hi':
-        {
-            Lang = 'hi';
-
-            break;
-        }
-        case 'es':
-        {
-            Lang = 'es';
-
-            break;
-        }
-        case 'fr':
-        {
-            Lang = 'fr';
-
-            break;
-        }
-        case 'de':
-        {
-            Lang = 'de';
-
-            break;
-        }
-        case 'ru':
-        {
-            Lang = 'ru';
-
-            break;
-        }
-        case 'zh':
-        {
-            Lang = 'zh';
-
-            break;
-        }
-        case 'ja':
-        {
-            Lang = 'ja';
-
-            break;
-        }
-        case 'ko':
-        {
-            Lang = 'ko';
-
-            break;
-        }
-        case 'ar':
-        {
-            Lang = 'ar';
 
             break;
         }

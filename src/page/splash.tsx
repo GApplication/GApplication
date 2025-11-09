@@ -10,7 +10,7 @@ import { FaLock, FaChevronDown, FaDiscord } from 'react-icons/fa6';
 
 import LoadingComponent from '../components/loading';
 import LanguageModal from '../components/modal/language';
-import WindowBarComponent from '../components/windowBar';
+import WindowBarComponent from '../components/windowbar';
 import WarningComponent from '../components/toast/warning';
 
 import { Toast } from '../service/toast';
@@ -61,9 +61,10 @@ const OnOpenSocial = async(App: 'instagram' | 'x' | 'telegram' | 'discord' | 'we
 
 export default function SplashPage()
 {
+    const Language = LanguageUtility.GetLang();
+
     const [ Loading, SetLoading ] = useState(false);
     const [ InviteCode, SetInviteCode ] = useState('');
-    const [ Language, SetLanguage ] = useState(LanguageUtility.GetLang());
 
     const OnClickLanguage = () =>
     {

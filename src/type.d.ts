@@ -20,7 +20,7 @@ type APIResponse = InstallResponse | InviteResponse;
 type StorageKey = 'APP_LANGUAGE' | 'APP_INSTALL';
 
 // Language
-type LanguageType = 'en' | 'es' | 'fr' | 'de' | 'ru' | 'zh' | 'ja' | 'ko' | 'ar' | 'fa' | 'hi';
+type LanguageType = 'en' | 'fa';
 
 // General
 declare module '*.css'

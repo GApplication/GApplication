@@ -1,7 +1,7 @@
+import { platform } from '@tauri-apps/plugin-os';
 import { useEffect, useState, cloneElement, type JSX } from 'react';
 
 import EventMap from '../utility/event';
-import { platform } from '@tauri-apps/plugin-os';
 
 export const Toast = (Component: JSX.Element, Option: { ID?: number; Delay?: number } = {}) =>
 {
@@ -41,6 +41,11 @@ export default function ToastContainer()
             EventMap.Off('ToastRemove', ToastRemove);
         };
     }, [ ]);
+
+    if (ToastMap.length === 0)
+    {
+        return undefined;
+    }
 
     return <div
         className='flex flex-col items-center w-screen h-screen absolute z-30 top-[0px] pointer-events-none overflow-hidden'

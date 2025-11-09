@@ -40,6 +40,11 @@ export default function ModalContainer()
         };
     }, [ ]);
 
+    if (ModalMap.length === 0)
+    {
+        return undefined;
+    }
+
     return <div className='flex flex-col items-center w-screen h-screen absolute z-20 top-[0px] pointer-events-none overflow-hidden'>
 
         {
