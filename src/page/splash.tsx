@@ -20,7 +20,7 @@ import API from '../utility/api';
 import Config from '../utility/config';
 import Account from '../utility/account';
 
-import { T } from '../utility/language';
+import LanguageUtility, { T } from '../utility/language';
 
 const OnOpenSocial = async(App: 'instagram' | 'x' | 'telegram' | 'discord' | 'website') =>
 {
@@ -63,11 +63,11 @@ export default function SplashPage()
 {
     const [ Loading, SetLoading ] = useState(false);
     const [ InviteCode, SetInviteCode ] = useState('');
-    const [ Language, SetLanguage ] = useState<LanguageType>('us');
+    const [ Language, SetLanguage ] = useState(LanguageUtility.GetLang());
 
     const OnClickLanguage = () =>
     {
-        Modal(<LanguageModal Message='Hello Language' />);
+        Modal(<LanguageModal />);
     };
 
     const OnClickInviation = () =>
@@ -168,12 +168,12 @@ export default function SplashPage()
                         onClick={ OnClickLanguage }
                         tabIndex={ 1 }>
 
-                        <div className={ `fi fi-${ Language } size-[24px]` } />
+                        <div className={ `fi fi-${ Language.Country } size-[24px]` } />
 
-                        <div className='flex-1 text-[14px]'>
+                        <div className='flex flex-1 text-[14px]'>
 
                             {
-                                T('Common.English')
+                                T(`Language.${ Language.Code }`)
                             }
 
                         </div>

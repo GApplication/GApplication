@@ -135,6 +135,7 @@ export default defineConfig([
             'no-script-url': 'off',
             'max-statements': 'off',
             'arrow-body-style': 'off',
+            'no-inline-comments': 'off',
             'no-warning-comments': 'off',
             'no-duplicate-imports': 'off',
             'capitalized-comments': 'off',
@@ -153,11 +154,14 @@ export default defineConfig([
 
             'unicorn/better-regex': 'off',
             'unicorn/no-keyword-prefix': 'off',
+            'unicorn/prefer-global-this': 'off',
             'unicorn/no-typeof-undefined': 'off',
             'unicorn/prevent-abbreviations': 'off',
             'unicorn/prefer-string-replace-all': 'off',
             'unicorn/prefer-add-event-listener': 'off',
             'unicorn/no-await-expression-member': 'off',
+
+            'unicorn/filename-case': [ 'error', { "case": "camelCase" } ],
 
             'react/jsx-indent': 'off',
             'react/jsx-no-bind': 'off',

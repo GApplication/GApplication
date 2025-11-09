@@ -1,0 +1,47 @@
+{
+    "App":
+    {
+        "Name": "GApp"
+    },
+
+    "Tray":
+    {
+        "Open": "Open GApp",
+        "Quit": "Quit GApp"
+    },
+
+    "Splash":
+    {
+        "Header": "Welcome To GApp",
+        "Language": "Language",
+        "InviationCode": "Inviation Code",
+        "Continue": "Continue",
+        "ContactWithUs": "Contact With Us",
+
+        "Error":
+        {
+            "InviationCode": "Inviation code is invalid"
+        }
+    },
+
+    "Modal":
+    {
+        "Language": "Choose Language"
+    },
+
+    "Language":
+    {
+        "en": "انگلیش",
+        "fa": "فارسی"
+    },
+
+    "Common":
+    {
+        "English": "English"
+    },
+
+    "Error":
+    {
+        "Internet": "Check your internet connection"
+    }
+}
