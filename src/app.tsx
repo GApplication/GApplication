@@ -6,18 +6,20 @@ import { useState, useEffect, type JSX } from 'react';
 import { defaultWindowIcon } from '@tauri-apps/api/app';
 import { getCurrentWindow } from '@tauri-apps/api/window';
 
-import SplashPage from './page/splash';
+import InvitePage from './page/invite';
 
 import ModalService from './service/modal';
 import ToastService from './service/toast';
 
+import EventMap from './utility/event';
 import Account from './utility/account';
+import Context from './utility/context';
 
 import Language, { T } from './utility/language';
 
 import './app.css';
 
-function App()
+function Application()
 {
     const [ Page, SetPage ] = useState<JSX.Element>();
 
@@ -66,11 +68,24 @@ function App()
         }
         else
         {
-            SetPage(<SplashPage />);
+            Context.SetPage(<InvitePage />);
         }
+
+        const AppPageHandler = (Component: JSX.Element) =>
+        {
+            SetPage(Component);
+        };
+
+        EventMap.On('AppPage', AppPageHandler);
+
+        return () =>
+        {
+            EventMap.Off('AppPage', AppPageHandler);
+        };
     }, [ ]);
 
     return <>
+
         {
             Page
         }
@@ -78,6 +93,7 @@ function App()
         <ModalService />
 
         <ToastService />
+
     </>;
 }
 
@@ -102,5 +118,5 @@ if (AppDOM)
 {
     await Language.Initialize();
 
-    createRoot(AppDOM).render(<App />);
+    createRoot(AppDOM).render(<Application />);
 }

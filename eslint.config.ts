@@ -1,6 +1,7 @@
 import type { Rule } from 'eslint';
 import type { TSESTree } from '@typescript-eslint/utils';
 
+import Globals from 'globals';
 import PluginJS from '@eslint/js';
 import PluginTS from 'typescript-eslint';
 import PluginReact from 'eslint-plugin-react';
@@ -39,6 +40,10 @@ export default defineConfig([
                 projectService: true,
                 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
                 tsconfigRootDir: import.meta.dirname
+            },
+            globals:
+            {
+                ...Globals.browser
             }
         },
         plugins:
@@ -121,6 +126,7 @@ export default defineConfig([
 
             'no-void': 'off',
             'new-cap': 'off',
+            'max-lines': 'off',
             'id-length': 'off',
             'sort-keys': 'off',
             'func-style': 'off',

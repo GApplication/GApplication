@@ -1,12 +1,14 @@
 import * as OS from '@tauri-apps/plugin-os';
 
-import { useEffect, useState } from 'react';
 import { TfiWorld } from 'react-icons/tfi';
+import { useEffect, useState } from 'react';
 import { BsTwitterX } from 'react-icons/bs';
 import { LuInstagram } from 'react-icons/lu';
 import { FaTelegramPlane } from 'react-icons/fa';
 import { openUrl } from '@tauri-apps/plugin-opener';
 import { FaLock, FaChevronDown, FaDiscord } from 'react-icons/fa6';
+
+import LoginPage from './login';
 
 import LoadingComponent from '../components/loading';
 import LanguageModal from '../components/modal/language';
@@ -18,6 +20,7 @@ import { Modal } from '../service/modal';
 
 import API from '../utility/api';
 import Config from '../utility/config';
+import AppUtility from '../utility/context';
 import Account from '../utility/account';
 
 import LanguageUtility, { T } from '../utility/language';
@@ -59,7 +62,7 @@ const OnOpenSocial = async(App: 'instagram' | 'x' | 'telegram' | 'discord' | 'we
     }
 };
 
-export default function SplashPage()
+export default function InvitePage()
 {
     const Language = LanguageUtility.GetLang();
 
@@ -75,6 +78,13 @@ export default function SplashPage()
     {
         if (Loading)
         {
+            return;
+        }
+
+        if (InviteCode === 'AAA')
+        {
+            AppUtility.SetPage(<LoginPage />);
+
             return;
         }
 

@@ -46,6 +46,7 @@
     "exclude":
     [
         "dist",
+        "build",
         "src-tauri",
         "node_modules"
     ]

@@ -1,6 +1,8 @@
 // Event
 interface EventMap
 {
+    AppPage: [Component: JSX.Element];
+
     ToastAdd: [Component: JSX.Element];
     ToastRemove: [ID: number];
 
