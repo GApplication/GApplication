@@ -36,7 +36,7 @@ const SetLang = async(Lang: LanguageType) =>
 {
     LangCurrent = Lang;
 
-    Storage.SetValue('APP_LANGUAGE', Lang);
+    Storage.SetValue('APP.LANGUAGE', Lang);
 
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
     LanguageMap = (await import(`../assets/lang/${ Lang }.json`)).default;
@@ -67,7 +67,7 @@ const Initialize = async() =>
 {
     let Lang: LanguageType = 'en';
 
-    switch (Storage.GetValue('APP_LANGUAGE') ?? '')
+    switch (Storage.GetValue('APP.LANGUAGE') ?? '')
     {
         case 'fa':
         {

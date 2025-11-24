@@ -6,12 +6,12 @@ export const Modal = (Component: JSX.Element, Option: { ID?: number } = {}) =>
 {
     const ID = Option.ID ?? Date.now();
 
-    EventMap.Emit('ModalAdd', cloneElement(Component, { ID, key: ID }));
+    EventMap.Emit('Modal.Add', cloneElement(Component, { ID, key: ID }));
 };
 
 export const ModalClose = (ID: number) =>
 {
-    EventMap.Emit('ModalRemove', ID);
+    EventMap.Emit('Modal.Remove', ID);
 };
 
 export default function ModalContainer()
@@ -30,13 +30,13 @@ export default function ModalContainer()
             SetModalMap((Previous) => Previous.filter((I) => I.key !== `${ ID }`));
         };
 
-        EventMap.On('ModalAdd', ModalAdd);
-        EventMap.On('ModalRemove', ModalRemove);
+        EventMap.On('Modal.Add', ModalAdd);
+        EventMap.On('Modal.Remove', ModalRemove);
 
         return () =>
         {
-            EventMap.Off('ModalAdd', ModalAdd);
-            EventMap.Off('ModalRemove', ModalRemove);
+            EventMap.Off('Modal.Add', ModalAdd);
+            EventMap.Off('Modal.Remove', ModalRemove);
         };
     }, [ ]);
 

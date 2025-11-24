@@ -1,6 +1,6 @@
 import { MdClose } from 'react-icons/md';
 
-import { ModalClose } from '../../service/modal';
+import { ModalClose } from '../../layout/modal';
 
 import LanguageUtility, { T } from '../../utility/language';
 import { motion } from 'motion/react';

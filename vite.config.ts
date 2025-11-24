@@ -6,7 +6,7 @@ import TailwindCSS from '@tailwindcss/vite';
 
 import { defineConfig } from 'vite';
 
-// @ts-expect-error Env
+// @ts-expect-error Tauri
 const TauriHost = process.env.TAURI_DEV_HOST ?? false;
 
 export default defineConfig(() => ({
@@ -22,10 +22,10 @@ export default defineConfig(() => ({
 
     server:
     {
-        host: TauriHost,
         port: 1420,
-        hmr: typeof TauriHost === 'boolean' ? undefined : { port: 1421, protocol: 'ws', host: TauriHost },
+        host: TauriHost,
         strictPort: true,
+        hmr: typeof TauriHost === 'boolean' ? undefined : { port: 1421, protocol: 'ws', host: TauriHost },
         watch:
         {
             ignored:

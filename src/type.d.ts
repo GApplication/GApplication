@@ -1,13 +1,13 @@
 // Event
 interface EventMap
 {
-    AppPage: [Component: JSX.Element];
+    'App.Page': [Component: JSX.Element];
 
-    ToastAdd: [Component: JSX.Element];
-    ToastRemove: [ID: number];
+    'Toast.Add': [Component: JSX.Element];
+    'Toast.Remove': [ID: number];
 
-    ModalAdd: [Component: JSX.Element];
-    ModalRemove: [ID: number];
+    'Modal.Add': [Component: JSX.Element];
+    'Modal.Remove': [ID: number];
 }
 
 type EventCall<T extends keyof EventMap> = (...Args: EventMap[T]) => void;
@@ -19,7 +19,7 @@ type InviteResponse = (Response?: { Result: number }) => void;
 type APIResponse = InstallResponse | InviteResponse;
 
 // Storage
-type StorageKey = 'APP_LANGUAGE' | 'APP_INSTALL';
+type StorageKey = 'APP.LANGUAGE' | 'APP.INSTALL';
 
 // Language
 type LanguageType = 'en' | 'fa';

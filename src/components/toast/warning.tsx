@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { MdClose, MdErrorOutline } from 'react-icons/md';
 
-import { ToastClose } from '../../service/toast';
+import { ToastClose } from '../../layout/toast';
 import { motion } from 'motion/react';
 
 export default function Warning({ ID, Delay, Message }: { readonly ID?: number; readonly Delay?: number; readonly Message: string })

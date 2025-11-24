@@ -13,24 +13,12 @@ import { defineConfig } from 'eslint/config';
 
 export default defineConfig([
 
-    {
-        ignores:
-        [
-            'dist',
-            'build',
-            'src-tauri',
-            'src/assets',
-            'node_modules'
-        ]
-    },
-
     PluginJS.configs.all,
     PluginTS.configs.all,
     PluginUnicorn.configs.all,
     PluginStylistic.configs.all,
     PluginReact.configs.flat.all,
     PluginSonar.configs.recommended,
-    PluginReact.configs.flat['jsx-runtime'],
 
     {
         languageOptions:
@@ -177,6 +165,7 @@ export default defineConfig([
             'react/jsx-no-literals': 'off',
             'react/button-has-type': 'off',
             'react/jsx-indent-props': 'off',
+            'react/react-in-jsx-scope': 'off',
             'react/jsx-wrap-multilines': 'off',
             'react/require-default-props': 'off',
             'react/forbid-component-props': 'off',

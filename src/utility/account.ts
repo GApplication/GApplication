@@ -7,12 +7,12 @@ const IsLogged = () =>
 
 const IsNewInstall = () =>
 {
-    return Storage.GetValue('APP_INSTALL') === null;
+    return Storage.GetValue('APP.INSTALL') === null;
 };
 
 const SetInstallTime = () =>
 {
-    Storage.SetValue('APP_INSTALL', `${ Date.now() / 1000 }`);
+    Storage.SetValue('APP.INSTALL', `${ Date.now() / 1000 }`);
 };
 
 export default { IsLogged, IsNewInstall, SetInstallTime };

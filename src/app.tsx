@@ -1,15 +1,18 @@
+import type { JSX } from 'react';
+
 import { Menu } from '@tauri-apps/api/menu';
+import { useState, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
 import { TrayIcon } from '@tauri-apps/api/tray';
 import { platform } from '@tauri-apps/plugin-os';
-import { useState, useEffect, type JSX } from 'react';
 import { defaultWindowIcon } from '@tauri-apps/api/app';
 import { getCurrentWindow } from '@tauri-apps/api/window';
 
 import InvitePage from './page/invite';
+import SplashPage from './page/splash';
 
-import ModalService from './service/modal';
-import ToastService from './service/toast';
+import ModalLayout from './layout/modal';
+import ToastLayout from './layout/toast';
 
 import EventMap from './utility/event';
 import Account from './utility/account';
@@ -25,6 +28,13 @@ function Application()
 
     useEffect(() =>
     {
+        const AppPageHandler = (Component: JSX.Element) =>
+        {
+            SetPage(Component);
+        };
+
+        EventMap.On('App.Page', AppPageHandler);
+
         if (platform() === 'windows')
         {
             const AsyncTask = async() =>
@@ -64,23 +74,16 @@ function Application()
 
         if (Account.IsLogged())
         {
-            // SetPage(<HomePage />);
+            SetPage(<InvitePage />);
         }
         else
         {
-            Context.SetPage(<InvitePage />);
+            Context.SetPage(<SplashPage />);
         }
-
-        const AppPageHandler = (Component: JSX.Element) =>
-        {
-            SetPage(Component);
-        };
-
-        EventMap.On('AppPage', AppPageHandler);
 
         return () =>
         {
-            EventMap.Off('AppPage', AppPageHandler);
+            EventMap.Off('App.Page', AppPageHandler);
         };
     }, [ ]);
 
@@ -90,9 +93,9 @@ function Application()
             Page
         }
 
-        <ModalService />
+        <ModalLayout />
 
-        <ToastService />
+        <ToastLayout />
 
     </>;
 }

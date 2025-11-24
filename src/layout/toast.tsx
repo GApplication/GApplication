@@ -8,12 +8,12 @@ export const Toast = (Component: JSX.Element, Option: { ID?: number; Delay?: num
     const ID = Option.ID ?? Date.now();
     const Delay = Option.Delay ?? 5000;
 
-    EventMap.Emit('ToastAdd', cloneElement(Component, { ID, Delay, key: ID }));
+    EventMap.Emit('Toast.Add', cloneElement(Component, { ID, Delay, key: ID }));
 };
 
 export const ToastClose = (ID: number) =>
 {
-    EventMap.Emit('ToastRemove', ID);
+    EventMap.Emit('Toast.Remove', ID);
 };
 
 export default function ToastContainer()
@@ -32,13 +32,13 @@ export default function ToastContainer()
             SetToastMap((Previous) => Previous.filter((I) => I.key !== `${ ID }`));
         };
 
-        EventMap.On('ToastAdd', ToastAdd);
-        EventMap.On('ToastRemove', ToastRemove);
+        EventMap.On('Toast.Add', ToastAdd);
+        EventMap.On('Toast.Remove', ToastRemove);
 
         return () =>
         {
-            EventMap.Off('ToastAdd', ToastAdd);
-            EventMap.Off('ToastRemove', ToastRemove);
+            EventMap.Off('Toast.Add', ToastAdd);
+            EventMap.Off('Toast.Remove', ToastRemove);
         };
     }, [ ]);
 

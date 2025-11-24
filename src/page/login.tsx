@@ -14,8 +14,8 @@ import LanguageModal from '../components/modal/language';
 import WindowBarComponent from '../components/windowbar';
 import WarningComponent from '../components/toast/warning';
 
-import { Toast } from '../service/toast';
-import { Modal } from '../service/modal';
+import { Toast } from '../layout/toast';
+import { Modal } from '../layout/modal';
 
 import API from '../utility/api';
 import Config from '../utility/config';

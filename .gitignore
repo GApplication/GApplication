@@ -1,6 +1,7 @@
 node_modules/
 target/
 Build/
+dist/
 
 src-tauri/gen/schemas
 src-tauri/target
