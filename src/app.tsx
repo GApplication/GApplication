@@ -1,20 +1,20 @@
-import type { JSX } from 'react';
+import type { MenuOptions } from '@tauri-apps/api/menu';
 
+import { useEffect } from 'react';
 import { Menu } from '@tauri-apps/api/menu';
-import { useState, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
 import { TrayIcon } from '@tauri-apps/api/tray';
 import { platform } from '@tauri-apps/plugin-os';
 import { defaultWindowIcon } from '@tauri-apps/api/app';
 import { getCurrentWindow } from '@tauri-apps/api/window';
 
-import InvitePage from './page/invite';
+import HomePage from './page/home';
 import SplashPage from './page/splash';
 
+import PageLayout from './layout/page';
 import ModalLayout from './layout/modal';
 import ToastLayout from './layout/toast';
 
-import EventMap from './utility/event';
 import Account from './utility/account';
 import Context from './utility/context';
 
@@ -24,17 +24,8 @@ import './app.css';
 
 function Application()
 {
-    const [ Page, SetPage ] = useState<JSX.Element>();
-
     useEffect(() =>
     {
-        const AppPageHandler = (Component: JSX.Element) =>
-        {
-            SetPage(Component);
-        };
-
-        EventMap.On('App.Page', AppPageHandler);
-
         if (platform() === 'windows')
         {
             const AsyncTask = async() =>
@@ -43,7 +34,8 @@ function Application()
 
                 if (AppIcon)
                 {
-                    const AppTrayMenu = await Menu.new({
+                    const TryMenu: MenuOptions =
+                    {
                         items:
                         [
                             {
@@ -63,7 +55,9 @@ function Application()
                                 }
                             }
                         ]
-                    });
+                    };
+
+                    const AppTrayMenu = await Menu.new(TryMenu);
 
                     await TrayIcon.new({ menu: AppTrayMenu, icon: AppIcon });
                 }
@@ -74,24 +68,17 @@ function Application()
 
         if (Account.IsLogged())
         {
-            SetPage(<InvitePage />);
+            Context.AddPage(<HomePage />);
         }
         else
         {
-            Context.SetPage(<SplashPage />);
+            Context.AddPage(<SplashPage />);
         }
-
-        return () =>
-        {
-            EventMap.Off('App.Page', AppPageHandler);
-        };
     }, [ ]);
 
     return <>
 
-        {
-            Page
-        }
+        <PageLayout />
 
         <ModalLayout />
 

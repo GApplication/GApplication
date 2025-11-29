@@ -1,13 +1,11 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-
 import React from '@vitejs/plugin-react';
 import TailwindCSS from '@tailwindcss/vite';
 
 import { defineConfig } from 'vite';
 
-// @ts-expect-error Tauri
-const TauriHost = process.env.TAURI_DEV_HOST ?? false;
+// @ts-expect-error Tauri Host
+// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+const TauriHost = (process.env.TAURI_DEV_HOST ?? false) as boolean | string;
 
 export default defineConfig(() => ({
 
@@ -25,7 +23,6 @@ export default defineConfig(() => ({
         port: 1420,
         host: TauriHost,
         strictPort: true,
-        hmr: typeof TauriHost === 'boolean' ? undefined : { port: 1421, protocol: 'ws', host: TauriHost },
         watch:
         {
             ignored:

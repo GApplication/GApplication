@@ -14,7 +14,6 @@ const API = (URL: string, Method: 'GET' | 'POST', Body: string | undefined, Call
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             const Response = Request.response ?? undefined;
 
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
             CallBack(Response as never);
 
             return;

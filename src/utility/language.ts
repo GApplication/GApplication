@@ -38,7 +38,7 @@ const SetLang = async(Lang: LanguageType) =>
 
     Storage.SetValue('APP.LANGUAGE', Lang);
 
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, unicorn/no-await-expression-member, @typescript-eslint/no-unsafe-member-access
     LanguageMap = (await import(`../assets/lang/${ Lang }.json`)).default;
 
     let Dir = 'ltr';

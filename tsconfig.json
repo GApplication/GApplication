@@ -18,6 +18,9 @@
         "strict": true,
         "alwaysStrict": true,
         "noImplicitOverride": true,
+        "exactOptionalPropertyTypes": true,
+        "noFallthroughCasesInSwitch": true,
+        "noPropertyAccessFromIndexSignature": true,
 
         // Linting
         "noUnusedLocals": true,
@@ -34,6 +37,7 @@
         // Misc
         "noEmit": true,
         "allowJs": false,
+        "incremental": true,
         "isolatedModules": true,
         "allowImportingTsExtensions": true
     },

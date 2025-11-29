@@ -10,9 +10,9 @@ import { FaLock, FaChevronDown, FaDiscord } from 'react-icons/fa6';
 
 import LoginPage from './login';
 
-import LoadingComponent from '../components/loading';
+import LoadingComponent from '../components/shared/loading';
 import LanguageModal from '../components/modal/language';
-import WindowBarComponent from '../components/windowbar';
+import WindowBarComponent from '../components/shared/windowBar';
 import WarningComponent from '../components/toast/warning';
 
 import { Toast } from '../layout/toast';

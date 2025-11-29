@@ -18,8 +18,9 @@
                 "title": "GApp",
                 "decorations": false,
                 "maximizable": false,
+                "alwaysOnTop": true,
                 "fullscreen": false,
-                "resizable": false,
+                "resizable": true,
                 "center": true,
                 "height": 710,
                 "width": 360
