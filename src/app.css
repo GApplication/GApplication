@@ -3,17 +3,9 @@
 
 @theme
 {
-    --color-primary1: #06b6d4;
-    --color-primary2: #0891b2;
-    --color-primary3: #0e7490;
-
-    --color-secondary: #3b82f6;
-    --color-tertiary: #6366f1;
-
-    --color-content: #FFFFFF;
-    --color-outline: #AAAAAA;
-    --color-border: #AAAAAA;
-    --color-box: #E0E0E0;
+    --color-window-bar-bg: rgba(240, 240, 240, 1);
+    --color-window-bar-btn: rgba(220, 220, 220, 1);
+    --color-window-bar-text: rgba(30, 30, 30, 1);
 }
 
 @font-face
