@@ -80,6 +80,16 @@ const Initialize = async() =>
     await SetLang(Lang);
 };
 
-export const T = (Name: string): string => ResolveKey(Name) ?? `[${ Name }]`;
+export const T = (Name: string, ...Args: (string | number)[]): string =>
+{
+    let Template = ResolveKey(Name) ?? `[${ Name }]`;
+
+    for (const Arg of Args)
+    {
+        Template = Template.replace(/%s/, Arg.toString());
+    }
+
+    return Template;
+};
 
 export default { Initialize, SetLang, GetLang, Language };

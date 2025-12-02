@@ -12,16 +12,11 @@
 
     "Splash":
     {
-        "Header": "Welcome To GApp",
         "Language": "Language",
-        "InviationCode": "Inviation Code",
-        "Continue": "Continue",
-        "ContactWithUs": "Contact With Us",
 
-        "Error":
-        {
-            "InviationCode": "Inviation code is invalid"
-        }
+        "Create": "Create New Wallet",
+        "Import": "Import Existing Wallet",
+        "Version": "Version %s"
     },
 
     "Modal":

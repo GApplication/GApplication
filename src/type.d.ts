@@ -39,6 +39,13 @@ declare module '*.png'
     export default Value;
 }
 
+declare module '*.jpg'
+{
+    const Value: string;
+
+    export default Value;
+}
+
 declare module '*.svg'
 {
     const Value: string;

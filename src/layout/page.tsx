@@ -41,7 +41,7 @@ export default function PageLayout()
     }
 
     return <div
-        className='absolute top-[0px] z-1 h-screen w-screen overflow-hidden'
+        className='absolute top-[0px] z-1 min-h-[700px] min-w-[360px] overflow-hidden'
         style={ { paddingTop: IsWindow ? '32px' : '0px' } }>
 
         <WindowBarComponent />
