@@ -88,20 +88,29 @@ export default defineConfig([
         },
         rules:
         {
+            // SonarJS
+            'sonarjs/pseudo-random': 'off',
             'sonarjs/no-small-switch': 'off',
             'sonarjs/no-nested-functions': 'off',
             'sonarjs/function-return-type': 'off',
 
-            'better-tailwindcss/enforce-consistent-line-wrapping': 'off',
-
+            // Unicorn
             'unicorn/no-typeof-undefined': 'off',
             'unicorn/prevent-abbreviations': 'off',
 
             'unicorn/filename-case': [ 'error', { case: 'camelCase' } ],
 
+            // React
             'react/jsx-curly-spacing': [ 'error', { when: 'always' } ],
             'react/jsx-closing-bracket-location': [ 'error', 'after-props' ],
 
+            // TailwindCSS
+            'better-tailwindcss/enforce-consistent-line-wrapping': 'off',
+
+            // TypeScript
+            '@typescript-eslint/no-unused-vars': 'off', // Handled by TypeScript Compiler
+
+            // Stylistic
             '@stylistic/jsx-curly-spacing': 'off',
             '@stylistic/operator-linebreak': 'off',
             '@stylistic/jsx-wrap-multilines': 'off',
@@ -126,6 +135,7 @@ export default defineConfig([
             '@stylistic/space-before-function-paren': [ 'error', { anonymous: 'never', named: 'never', asyncArrow: 'never', catch: 'always' } ]
         }
     }
+]);
 
 /*
 import type { Rule } from 'eslint';
@@ -215,4 +225,3 @@ import type { TSESTree } from '@typescript-eslint/utils';
         }
     } as Rule.RuleModule
 */
-]);

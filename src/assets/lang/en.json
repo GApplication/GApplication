@@ -16,7 +16,16 @@
 
         "Create": "Create New Wallet",
         "Import": "Import Existing Wallet",
-        "Version": "Version %s"
+        "Version": "Version %s",
+
+        "Slide1Header": "Global Application 1",
+        "Slide1Text": "This is the first slide of the global application introduction.",
+
+        "Slide2Header": "Global Application 2",
+        "Slide2Text": "This is the second slide of the global application introduction.",
+
+        "Slide3Header": "Global Application 3",
+        "Slide3Text": "This is the third slide of the global application introduction."
     },
 
     "Modal":

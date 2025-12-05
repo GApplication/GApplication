@@ -3,11 +3,15 @@
 
 @theme
 {
-    --color-base-100: oklch(100% 0 0);
-    --color-base-100-text: oklch(0% 0 0);
-    --color-base-100-border: oklch(90% 0 0);
+    --color-content: oklch(100% 0 0);
+    --color-content-text: oklch(0% 0 0);
+    --color-content-hover: oklch(98% 0 0);
+    --color-content-border: oklch(90% 0 0);
 
     --color-primary: oklch(75% 0.15 230);
+    --color-primary-text: oklch(75% 0.15 230);
+    --color-primary-hover: oklch(65% 0.15 230);
+    --color-primary-border: oklch(65% 0.20 230);
 }
 
 @font-face
@@ -41,4 +45,9 @@ html, body
     font-size: 13px;
     font-family: monospace, IranSans;
     background: transparent !important;
+}
+
+.swiper-wrapper
+{
+    height: auto;
 }

@@ -25,6 +25,13 @@ type StorageKey = 'APP.LANGUAGE' | 'APP.INSTALL';
 type LanguageType = 'en' | 'fa';
 
 // General
+declare module 'swiper/css'
+{
+    const Value: string;
+
+    export default Value;
+}
+
 declare module '*.css'
 {
     const Value: string;

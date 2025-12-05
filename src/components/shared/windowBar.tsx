@@ -29,10 +29,10 @@ export default function WindowBar(): JSX.Element | undefined
     }
 
     return (
-        <div className='absolute top-[0px] z-4 flex h-[32px] w-full items-center bg-base-100 shadow-sm'>
+        <div className='absolute top-[0px] z-4 flex h-[32px] w-full items-center border-b border-content-border bg-content'>
 
             <div
-                className='m-[8px] flex h-full flex-1 cursor-pointer items-center text-[14px] font-semibold'
+                className='m-[8px] flex h-full flex-1 cursor-pointer items-center text-[14px] font-semibold text-content-text/50'
                 onDoubleClick={ OnClickMaximize }
                 data-tauri-drag-region>
 
@@ -45,18 +45,18 @@ export default function WindowBar(): JSX.Element | undefined
             <div className='m-[8px] flex gap-[4px]'>
 
                 <div
-                    className='flex size-[24px] cursor-pointer items-center justify-center rounded-[4px] duration-200 hover:bg-base-100-border/50'
+                    className='flex size-[24px] cursor-pointer items-center justify-center rounded-[4px] duration-200 hover:bg-content-hover'
                     onClick={ OnClickMinimize }>
 
-                    <FaMinus className='size-[16px] text-base-100-text/25' />
+                    <FaMinus className='size-[16px] text-content-text/25' />
 
                 </div>
 
                 <div
-                    className='flex size-[24px] cursor-pointer items-center justify-center rounded-[4px] duration-200 hover:bg-base-100-border/50'
+                    className='flex size-[24px] cursor-pointer items-center justify-center rounded-[4px] duration-200 hover:bg-content-hover'
                     onClick={ OnClickClose }>
 
-                    <FaX className='size-[16px] text-base-100-text/25' />
+                    <FaX className='size-[16px] text-content-text/25' />
 
                 </div>
 
