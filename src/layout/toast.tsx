@@ -1,58 +1,49 @@
+import type { JSX } from 'react';
+
+import { useEffect, useState } from 'react';
 import { platform } from '@tauri-apps/plugin-os';
-import { useEffect, useState, cloneElement, type JSX } from 'react';
 
 import EventMap from '../utility/event';
 
-export const Toast = (Component: JSX.Element, Option: { ID?: number; Delay?: number } = {}) =>
+export default function ToastLayout()
 {
-    const ID = Option.ID ?? Date.now();
-    const Delay = Option.Delay ?? 5000;
+    const IsWindow = platform() === 'windows';
 
-    EventMap.Emit('Toast.Add', cloneElement(Component, { ID, Delay, key: ID }));
-};
-
-export const ToastClose = (ID: number) =>
-{
-    EventMap.Emit('Toast.Remove', ID);
-};
-
-export default function ToastContainer()
-{
-    const [ ToastMap, SetToastMap ] = useState<JSX.Element[]>([ ]);
+    const [ LayoutMap, SetLayoutMap ] = useState<JSX.Element[]>([ ]);
 
     useEffect(() =>
     {
-        const ToastAdd = (Component: JSX.Element) =>
+        const OpenHandler = (Component: JSX.Element) =>
         {
-            SetToastMap((Previous) => [ ...Previous, Component ]);
+            SetLayoutMap((Previous) => [ ...Previous, Component ]);
         };
 
-        const ToastRemove = (ID: number) =>
+        const CloseHandler = (ID: number) =>
         {
-            SetToastMap((Previous) => Previous.filter((I) => I.key !== `${ ID }`));
+            SetLayoutMap((Previous) => Previous.filter((I) => I.key !== `${ ID }`));
         };
 
-        EventMap.On('Toast.Add', ToastAdd);
-        EventMap.On('Toast.Remove', ToastRemove);
+        EventMap.On('Toast.Open', OpenHandler);
+        EventMap.On('Toast.Close', CloseHandler);
 
         return () =>
         {
-            EventMap.Off('Toast.Add', ToastAdd);
-            EventMap.Off('Toast.Remove', ToastRemove);
+            EventMap.Off('Toast.Open', OpenHandler);
+            EventMap.Off('Toast.Close', CloseHandler);
         };
     }, [ ]);
 
-    if (ToastMap.length === 0)
+    if (LayoutMap.length === 0)
     {
-        return undefined;
+        return;
     }
 
     return <div
-        className='flex flex-col items-center w-screen h-screen absolute z-30 top-[0px] pointer-events-none overflow-hidden'
-        style={ { paddingTop: platform() === 'windows' ? '40px' : '0px' } }>
+        className='pointer-events-none absolute top-[0px] z-3 min-h-[700px] min-w-[360px] overflow-hidden'
+        style={ { paddingTop: IsWindow ? '32px' : '0px' } }>
 
         {
-            ToastMap
+            LayoutMap
         }
 
     </div>;

@@ -1,54 +1,49 @@
-import { useEffect, useState, cloneElement, type JSX } from 'react';
+import type { JSX } from 'react';
+
+import { useEffect, useState } from 'react';
+import { platform } from '@tauri-apps/plugin-os';
 
 import EventMap from '../utility/event';
 
-export const Modal = (Component: JSX.Element, Option: { ID?: number } = {}) =>
+export default function ModalLayout()
 {
-    const ID = Option.ID ?? Date.now();
+    const IsWindow = platform() === 'windows';
 
-    EventMap.Emit('Modal.Add', cloneElement(Component, { ID, key: ID }));
-};
-
-export const ModalClose = (ID: number) =>
-{
-    EventMap.Emit('Modal.Remove', ID);
-};
-
-export default function ModalContainer()
-{
-    const [ ModalMap, SetModalMap ] = useState<JSX.Element[]>([ ]);
+    const [ LayoutMap, SetLayoutMap ] = useState<JSX.Element[]>([ ]);
 
     useEffect(() =>
     {
-        const ModalAdd = (Component: JSX.Element) =>
+        const OpenHandler = (Component: JSX.Element) =>
         {
-            SetModalMap((Previous) => [ ...Previous, Component ]);
+            SetLayoutMap((Previous) => [ ...Previous, Component ]);
         };
 
-        const ModalRemove = (ID: number) =>
+        const CloseHandler = (ID: number) =>
         {
-            SetModalMap((Previous) => Previous.filter((I) => I.key !== `${ ID }`));
+            SetLayoutMap((Previous) => Previous.filter((I) => I.key !== `${ ID }`));
         };
 
-        EventMap.On('Modal.Add', ModalAdd);
-        EventMap.On('Modal.Remove', ModalRemove);
+        EventMap.On('Modal.Open', OpenHandler);
+        EventMap.On('Modal.Close', CloseHandler);
 
         return () =>
         {
-            EventMap.Off('Modal.Add', ModalAdd);
-            EventMap.Off('Modal.Remove', ModalRemove);
+            EventMap.Off('Modal.Open', OpenHandler);
+            EventMap.Off('Modal.Close', CloseHandler);
         };
     }, [ ]);
 
-    if (ModalMap.length === 0)
+    if (LayoutMap.length === 0)
     {
-        return undefined;
+        return;
     }
 
-    return <div className='flex flex-col items-center w-screen h-screen absolute z-20 top-[0px] pointer-events-none overflow-hidden'>
+    return <div
+        className='pointer-events-none absolute top-[0px] z-2 h-full min-h-[700px] min-w-[360px] overflow-hidden'
+        style={ { paddingTop: IsWindow ? '32px' : '0px' } }>
 
         {
-            ModalMap
+            LayoutMap
         }
 
     </div>;

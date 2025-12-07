@@ -1,10 +1,31 @@
 import type { JSX } from 'react';
 
+import { cloneElement } from 'react';
+
 import EventMap from './event';
 
-const SetPage = (Component: JSX.Element) =>
+const OpenPage = (Component: JSX.Element, Option: { ID?: number } = {}) =>
 {
-    EventMap.Emit('App.Page', Component);
+    const ID = Option.ID ?? Date.now();
+
+    EventMap.Emit('Page.Open', cloneElement(Component, { ID, key: ID }));
 };
 
-export default { SetPage };
+const ClosePage = (ID: number) =>
+{
+    EventMap.Emit('Page.Close', ID);
+};
+
+const OpenModal = (Component: JSX.Element, Option: { ID?: number } = {}) =>
+{
+    const ID = Option.ID ?? Date.now();
+
+    EventMap.Emit('Modal.Open', cloneElement(Component, { ID, key: ID }));
+};
+
+const CloseModal = (ID: number) =>
+{
+    EventMap.Emit('Modal.Close', ID);
+};
+
+export default { OpenPage, ClosePage, OpenModal, CloseModal };

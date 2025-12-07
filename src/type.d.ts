@@ -1,13 +1,14 @@
 // Event
 interface EventMap
 {
-    'App.Page': [Component: JSX.Element];
+    'Page.Open': [Component: JSX.Element];
+    'Page.Close': [ID: number];
 
-    'Toast.Add': [Component: JSX.Element];
-    'Toast.Remove': [ID: number];
+    'Toast.Open': [Component: JSX.Element];
+    'Toast.Close': [ID: number];
 
-    'Modal.Add': [Component: JSX.Element];
-    'Modal.Remove': [ID: number];
+    'Modal.Open': [Component: JSX.Element];
+    'Modal.Close': [ID: number];
 }
 
 type EventCall<T extends keyof EventMap> = (...Args: EventMap[T]) => void;

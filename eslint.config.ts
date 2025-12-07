@@ -95,6 +95,7 @@ export default defineConfig([
             'sonarjs/function-return-type': 'off',
 
             // Unicorn
+            'unicorn/prefer-global-this': 'off',
             'unicorn/no-typeof-undefined': 'off',
             'unicorn/prevent-abbreviations': 'off',
 
@@ -103,6 +104,7 @@ export default defineConfig([
             // React
             'react/jsx-curly-spacing': [ 'error', { when: 'always' } ],
             'react/jsx-closing-bracket-location': [ 'error', 'after-props' ],
+            'react/jsx-sort-props': [ 'error', { noSortAlphabetically: false } ],
 
             // TailwindCSS
             'better-tailwindcss/enforce-consistent-line-wrapping': 'off',

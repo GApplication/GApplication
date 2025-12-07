@@ -3,15 +3,18 @@
 
 @theme
 {
-    --color-content: oklch(100% 0 0);
+    --color-content: oklch(98% 0 0);
     --color-content-text: oklch(0% 0 0);
-    --color-content-hover: oklch(98% 0 0);
-    --color-content-border: oklch(90% 0 0);
+    --color-content-hover: oklch(96% 0 0);
+    --color-content-border: oklch(92% 0 0);
+    --color-content-reverse: oklch(8% 0 0);
+    --color-content-outline: oklch(84% 0 0);
 
     --color-primary: oklch(75% 0.15 230);
-    --color-primary-text: oklch(75% 0.15 230);
-    --color-primary-hover: oklch(65% 0.15 230);
-    --color-primary-border: oklch(65% 0.20 230);
+    --color-primary-text: oklch(100% 0 0);
+    --color-primary-hover: oklch(73% 0.15 230);
+    --color-primary-border: oklch(70% 0.15 230);
+    --color-primary-outline: oklch(65% 0.15 230);
 }
 
 @font-face

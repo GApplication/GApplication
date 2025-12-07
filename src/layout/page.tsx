@@ -15,23 +15,23 @@ export default function PageLayout()
 
     useEffect(() =>
     {
-        const AddHandler = (Component: JSX.Element) =>
+        const OpenHandler = (Component: JSX.Element) =>
         {
             SetLayoutMap((Previous) => [ ...Previous, Component ]);
         };
 
-        const RemoveHandler = (ID: number) =>
+        const CloseHandler = (ID: number) =>
         {
             SetLayoutMap((Previous) => Previous.filter((I) => I.key !== `${ ID }`));
         };
 
-        EventMap.On('Page.Add', AddHandler);
-        EventMap.On('Page.Remove', RemoveHandler);
+        EventMap.On('Page.Open', OpenHandler);
+        EventMap.On('Page.Close', CloseHandler);
 
         return () =>
         {
-            EventMap.Off('Page.Add', AddHandler);
-            EventMap.Off('Page.Remove', RemoveHandler);
+            EventMap.Off('Page.Open', OpenHandler);
+            EventMap.Off('Page.Close', CloseHandler);
         };
     }, [ ]);
 
@@ -41,7 +41,7 @@ export default function PageLayout()
     }
 
     return <div
-        className='absolute top-[0px] z-1 min-h-[700px] min-w-[360px] overflow-hidden'
+        className='absolute top-[0px] z-1 h-full min-h-[700px] min-w-[360px] overflow-hidden'
         style={ { paddingTop: IsWindow ? '32px' : '0px' } }>
 
         <WindowBarComponent />

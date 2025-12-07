@@ -1,12 +1,12 @@
+import { useState } from 'react';
+import { motion } from 'motion/react';
 import { MdClose } from 'react-icons/md';
 
-import { ModalClose } from '../../layout/modal';
+import Context from '../../utility/context';
 
-import LanguageUtility, { T } from '../../utility/language';
-import { motion } from 'motion/react';
-import { useState } from 'react';
+import Language, { T } from '../../utility/language';
 
-export default function Language({ ID }: { readonly ID?: number })
+export default function LanguageModal({ ID }: { readonly ID: number })
 {
     const [ IsClose, SetIsClose ] = useState(false);
 
@@ -14,54 +14,161 @@ export default function Language({ ID }: { readonly ID?: number })
     {
         SetIsClose(true);
 
-        setTimeout(() => ModalClose(ID ?? 0), 260);
+        setTimeout(() =>
+        {
+            Context.CloseModal(ID);
+        }, 250);
     };
 
     const OnClickLanguage = (Lang: LanguageType) =>
     {
         OnClickClose();
 
-        void LanguageUtility.SetLang(Lang);
+        void Language.SetLang(Lang);
 
-        setTimeout(() => window.location.reload(), 260);
+        setTimeout(() =>
+        {
+            window.location.reload();
+        }, 250);
     };
 
     return <motion.div
         animate={ { opacity: IsClose ? 0 : 1 } }
-        className='flex justify-center items-center w-screen h-screen bg-black/50 pointer-events-auto'
+        className='pointer-events-auto flex h-full flex-1 items-center justify-center bg-content-reverse/50'
         exit={ { opacity: 0 } }
         initial={ { opacity: 0 } }
-        transition={ { duration: 0.25 } }>
+        transition={ { duration: 0.2 } }>
 
-        <div className='flex flex-col bg-content w-[324px] max-h-[248px] rounded-[8px]'>
+        <div className='flex h-[80%] min-h-[248px] min-w-[324px] flex-col rounded-[4px] bg-content'>
 
-            <div className='flex p-[8px] items-center'>
+            <div className='flex h-[40px] items-center gap-[16px] border-b border-content-border p-[8px]'>
 
-                <div className='flex-1 '>
-
-                    {
-                        T('Modal.Language')
-                    }
-
-                </div>
+                <input
+                    className='h-[24px] flex-1 rounded-[4px] bg-content-hover px-[8px] text-[12px] outline-content-border'
+                    placeholder='Search Language'
+                    tabIndex={ 1 } />
 
                 <MdClose
-                    className='min-w-[24px] min-h-[24px] p-[3px] cursor-pointer text-black transition rounded-[8px] hover:bg-box/50'
-                    onClick={ OnClickClose } />
+                    className='size-[24px] cursor-pointer rounded-[8px] text-content-text/25 duration-200 hover:bg-content-hover hover:text-content-text/50'
+                    onClick={ OnClickClose }
+                    tabIndex={ 2 } />
 
             </div>
 
-            <div className='border-b border-b-border/25' />
-
-            <div className='w-full min-h-[8px]' />
-
-            <div className='w-full overflow-y-auto h-full flex flex-col gap-[8px] px-[8px]'>
+            <div
+                className='my-[8px] flex flex-1 flex-col gap-[8px] overflow-y-auto px-[8px]'
+                tabIndex={ 3 }>
 
                 {
-                    LanguageUtility.Language.map((I) => <div
-                        className='flex min-h-[32px] bg-box/50 rounded-[8px] hover:bg-box cursor-pointer items-center gap-[8px] p-[8px]'
+                    Language.Language.map((I) => <div
+                        className='bg-box/50 flex min-h-[32px] cursor-pointer items-center gap-[8px] rounded-[8px] p-[8px] hover:bg-box'
                         key={ I.Code }
-                        onClick={ () => OnClickLanguage(I.Code) }>
+                        onClick={ () => { OnClickLanguage(I.Code); } }>
+
+                        <div className={ `fi fi-${ I.Country } size-[24px]` } />
+
+                        {
+                            T(`Language.${ I.Code }`)
+                        }
+
+                    </div>)
+                }
+
+                {
+                    Language.Language.map((I) => <div
+                        className='bg-box/50 flex min-h-[32px] cursor-pointer items-center gap-[8px] rounded-[8px] p-[8px] hover:bg-box'
+                        key={ I.Code }
+                        onClick={ () => { OnClickLanguage(I.Code); } }>
+
+                        <div className={ `fi fi-${ I.Country } size-[24px]` } />
+
+                        {
+                            T(`Language.${ I.Code }`)
+                        }
+
+                    </div>)
+                }
+
+                {
+                    Language.Language.map((I) => <div
+                        className='bg-box/50 flex min-h-[32px] cursor-pointer items-center gap-[8px] rounded-[8px] p-[8px] hover:bg-box'
+                        key={ I.Code }
+                        onClick={ () => { OnClickLanguage(I.Code); } }>
+
+                        <div className={ `fi fi-${ I.Country } size-[24px]` } />
+
+                        {
+                            T(`Language.${ I.Code }`)
+                        }
+
+                    </div>)
+                }
+
+                {
+                    Language.Language.map((I) => <div
+                        className='bg-box/50 flex min-h-[32px] cursor-pointer items-center gap-[8px] rounded-[8px] p-[8px] hover:bg-box'
+                        key={ I.Code }
+                        onClick={ () => { OnClickLanguage(I.Code); } }>
+
+                        <div className={ `fi fi-${ I.Country } size-[24px]` } />
+
+                        {
+                            T(`Language.${ I.Code }`)
+                        }
+
+                    </div>)
+                }
+
+                {
+                    Language.Language.map((I) => <div
+                        className='bg-box/50 flex min-h-[32px] cursor-pointer items-center gap-[8px] rounded-[8px] p-[8px] hover:bg-box'
+                        key={ I.Code }
+                        onClick={ () => { OnClickLanguage(I.Code); } }>
+
+                        <div className={ `fi fi-${ I.Country } size-[24px]` } />
+
+                        {
+                            T(`Language.${ I.Code }`)
+                        }
+
+                    </div>)
+                }
+
+                {
+                    Language.Language.map((I) => <div
+                        className='bg-box/50 flex min-h-[32px] cursor-pointer items-center gap-[8px] rounded-[8px] p-[8px] hover:bg-box'
+                        key={ I.Code }
+                        onClick={ () => { OnClickLanguage(I.Code); } }>
+
+                        <div className={ `fi fi-${ I.Country } size-[24px]` } />
+
+                        {
+                            T(`Language.${ I.Code }`)
+                        }
+
+                    </div>)
+                }
+
+                {
+                    Language.Language.map((I) => <div
+                        className='bg-box/50 flex min-h-[32px] cursor-pointer items-center gap-[8px] rounded-[8px] p-[8px] hover:bg-box'
+                        key={ I.Code }
+                        onClick={ () => { OnClickLanguage(I.Code); } }>
+
+                        <div className={ `fi fi-${ I.Country } size-[24px]` } />
+
+                        {
+                            T(`Language.${ I.Code }`)
+                        }
+
+                    </div>)
+                }
+
+                {
+                    Language.Language.map((I) => <div
+                        className='bg-box/50 flex min-h-[32px] cursor-pointer items-center gap-[8px] rounded-[8px] p-[8px] hover:bg-box'
+                        key={ I.Code }
+                        onClick={ () => { OnClickLanguage(I.Code); } }>
 
                         <div className={ `fi fi-${ I.Country } size-[24px]` } />
 
@@ -73,8 +180,6 @@ export default function Language({ ID }: { readonly ID?: number })
                 }
 
             </div>
-
-            <div className='w-full min-h-[8px]' />
 
         </div>
 

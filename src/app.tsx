@@ -68,11 +68,11 @@ function Application()
 
         if (Account.IsLogged())
         {
-            Context.AddPage(<HomePage />);
+            Context.OpenPage(<HomePage />);
         }
         else
         {
-            Context.AddPage(<SplashPage />);
+            Context.OpenPage(<SplashPage />);
         }
     }, [ ]);
 

@@ -5,33 +5,19 @@ import { GrLanguage } from 'react-icons/gr';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { PiPaintBrushHousehold } from 'react-icons/pi';
 
+import LanguageModal from '../components/modal/language';
+
+import Context from '../utility/context';
 import Utility from '../utility/utility';
 
 import { T } from '../utility/language';
 
 import Package from '../../package.json';
 import SlideIcon1 from '../assets/image/splash-slide-1.png';
-import SlideIcon2 from '../assets/image/splash-slide-1.png';
-import SlideIcon3 from '../assets/image/splash-slide-1.png';
+import SlideIcon2 from '../assets/image/splash-slide-2.png';
+import SlideIcon3 from '../assets/image/splash-slide-3.png';
 
 import 'swiper/css';
-
-const OnClickTheme = () =>
-{
-    const L = Utility.Random(70, 92);
-    const C = Utility.Random(0.03, 0.12);
-    const H = Utility.Random(0, 360);
-
-    const Content = { L: L, C: C, H: H };
-    const ContentText = { L: (L > 70 ? 15 : 95), C: 0, H };
-    const ContentHover = { L: Utility.Clamp(L + (L > 60 ? -8 : 8), 0, 100), C, H };
-    const ContentBorder = { L: Utility.Clamp(L - 12, 0, 100), C: C * 0.4, H };
-
-    document.documentElement.style.setProperty('--color-content', `oklch(${ Content.L }% ${ Content.C } ${ Content.H })`);
-    document.documentElement.style.setProperty('--color-content-text', `oklch(${ ContentText.L }% ${ ContentText.C } ${ ContentText.H })`);
-    document.documentElement.style.setProperty('--color-content-hover', `oklch(${ ContentHover.L }% ${ ContentHover.C } ${ ContentHover.H })`);
-    document.documentElement.style.setProperty('--color-content-border', `oklch(${ ContentBorder.L }% ${ ContentBorder.C } ${ ContentBorder.H })`);
-};
 
 export default function SplashPage()
 {
@@ -39,12 +25,20 @@ export default function SplashPage()
 
     const [ ActiveIndex, SetActiveIndex ] = useState(0);
 
+    const OnClickLanguage = () =>
+    {
+        Context.OpenModal(<LanguageModal ID={ Date.now() } />);
+    };
+
     return (
         <div className='flex min-h-[668px] min-w-[360px] flex-col bg-content'>
 
             <div className='flex w-full justify-between p-[16px]'>
 
-                <div className='group flex h-[40px] cursor-pointer items-center rounded-[8px] border border-content-border duration-200 hover:bg-content-hover'>
+                <button
+                    className='group flex h-[40px] cursor-pointer items-center rounded-[8px] border border-content-border outline-content-outline duration-200 hover:bg-content-hover'
+                    onClick={ OnClickLanguage }
+                    tabIndex={ 1 }>
 
                     <GrLanguage className='m-[8px] size-[24px] text-content-text/75 duration-200 group-hover:text-content-text' />
 
@@ -58,30 +52,31 @@ export default function SplashPage()
 
                     </div>
 
-                </div>
+                </button>
 
-                <div
-                    onClick={ OnClickTheme }
-                    className='group flex h-[40px] cursor-pointer items-center rounded-[8px] border border-content-border duration-200 hover:bg-content-hover'>
+                <button
+                    className='group flex h-[40px] cursor-pointer items-center rounded-[8px] border border-content-border outline-content-outline duration-200 hover:bg-content-hover'
+                    onClick={ Utility.GenerateTheme }
+                    tabIndex={ 2 }>
 
                     <PiPaintBrushHousehold className='m-[8px] size-[24px] text-content-text/75 duration-200 group-hover:text-content-text' />
 
-                </div>
+                </button>
 
             </div>
 
             <div className='flex w-screen flex-1 flex-col'>
 
                 <Swiper
-                    style={ { display: 'flex', width: '100%', flex: '1' } }
+                    onSlideChange={ (swiper) => { SetActiveIndex(swiper.activeIndex); } }
                     onSwiper={ (swiper) => SwiperRef.current = swiper }
-                    onSlideChange={ (swiper) => { SetActiveIndex(swiper.activeIndex); } }>
+                    style={ { display: 'flex', width: '100%', flex: '1' } }>
 
                     <SwiperSlide style={ { display: 'flex' } }>
 
                         <div className='flex cursor-move flex-col justify-center gap-[16px]'>
 
-                            <img src={ SlideIcon1 } className='px-[16px]' />
+                            <img className='px-[16px]' src={ SlideIcon1 } />
 
                             <div className='text-center text-[18px] font-bold text-content-text'>
 
@@ -107,7 +102,7 @@ export default function SplashPage()
 
                         <div className='flex cursor-move flex-col justify-center gap-[16px]'>
 
-                            <img src={ SlideIcon2 } className='px-[16px]' />
+                            <img className='px-[16px]' src={ SlideIcon2 } />
 
                             <div className='text-center text-[18px] font-bold text-content-text'>
 
@@ -133,7 +128,7 @@ export default function SplashPage()
 
                         <div className='flex cursor-move flex-col justify-center gap-[16px]'>
 
-                            <img src={ SlideIcon3 } className='px-[16px]' />
+                            <img className='px-[16px]' src={ SlideIcon3 } />
 
                             <div className='text-center text-[18px] font-bold text-content-text'>
 
@@ -159,31 +154,44 @@ export default function SplashPage()
 
                 <div className='my-[8px] flex justify-center gap-2'>
 
-                    <div onClick={ () => SwiperRef.current?.slideTo(0) } className={ `size-[8px] rounded-[2px] cursor-pointer ${ ActiveIndex === 0 ? 'bg-primary/75' : 'bg-content-border' }` } />
+                    <button
+                        className={ `size-[8px] cursor-pointer rounded-[2px] outline-content-outline ${ ActiveIndex === 0 ? 'bg-primary/75' : 'bg-content-border' }` }
+                        onClick={ () => SwiperRef.current?.slideTo(0) }
+                        tabIndex={ 3 } />
 
-                    <div onClick={ () => SwiperRef.current?.slideTo(1) } className={ `size-[8px] rounded-[2px] cursor-pointer ${ ActiveIndex === 1 ? 'bg-primary/75' : 'bg-content-border' }` } />
+                    <button
+                        className={ `size-[8px] cursor-pointer rounded-[2px] outline-content-outline ${ ActiveIndex === 1 ? 'bg-primary/75' : 'bg-content-border' }` }
+                        onClick={ () => SwiperRef.current?.slideTo(1) }
+                        tabIndex={ 4 } />
 
-                    <div onClick={ () => SwiperRef.current?.slideTo(2) } className={ `size-[8px] rounded-[2px] cursor-pointer ${ ActiveIndex === 2 ? 'bg-primary/75' : 'bg-content-border' }` } />
+                    <button
+                        className={ `size-[8px] cursor-pointer rounded-[2px] outline-content-outline ${ ActiveIndex === 2 ? 'bg-primary/75' : 'bg-content-border' }` }
+                        onClick={ () => SwiperRef.current?.slideTo(2) }
+                        tabIndex={ 5 } />
 
                 </div>
 
             </div>
 
-            <div className='mx-[16px] flex h-[48px] cursor-pointer items-center justify-center rounded-[8px] border border-primary-border bg-primary text-[16px] font-bold text-primary-text duration-200 hover:bg-primary-hover'>
+            <button
+                className='mx-[16px] flex h-[48px] cursor-pointer items-center justify-center rounded-[8px] border border-primary-border bg-primary text-[16px] font-bold text-primary-text outline-primary-outline duration-200 hover:bg-primary-hover'
+                tabIndex={ 6 }>
 
                 {
                     T('Splash.Create')
                 }
 
-            </div>
+            </button>
 
-            <div className='mx-[16px] my-[8px] flex h-[48px] cursor-pointer items-center justify-center rounded-[8px] border border-content-border text-[14px] font-bold text-content-text/75 duration-200 hover:bg-content-hover hover:text-content-text'>
+            <button
+                className='mx-[16px] my-[8px] flex h-[48px] cursor-pointer items-center justify-center rounded-[8px] border border-content-border text-[14px] font-bold text-content-text/75 outline-content-outline duration-200 hover:bg-content-hover hover:text-content-text'
+                tabIndex={ 7 }>
 
                 {
                     T('Splash.Import')
                 }
 
-            </div>
+            </button>
 
             <div className='m-[8px] text-center text-[12px] text-content-text/25'>
 
