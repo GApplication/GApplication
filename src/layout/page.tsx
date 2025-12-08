@@ -40,15 +40,19 @@ export default function PageLayout()
         return;
     }
 
-    return <div
-        className='absolute top-[0px] z-1 h-full min-h-[700px] min-w-[360px] overflow-hidden'
-        style={ { paddingTop: IsWindow ? '32px' : '0px' } }>
+    return <>
 
         <WindowBarComponent />
 
-        {
-            LayoutMap
-        }
+        <div
+            className='absolute left-1/2 z-1 flex h-full min-h-[700px] w-full max-w-[720px] min-w-[360px] -translate-x-1/2'
+            style={ { paddingTop: IsWindow ? '32px' : '0px' } }>
 
-    </div>;
+            {
+                LayoutMap
+            }
+
+        </div>
+
+    </>;
 }

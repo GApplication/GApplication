@@ -109,6 +109,8 @@ export default defineConfig([
             // TailwindCSS
             'better-tailwindcss/enforce-consistent-line-wrapping': 'off',
 
+            'better-tailwindcss/no-unregistered-classes': [ 'error', { ignore: [ 'fi' ] } ],
+
             // TypeScript
             '@typescript-eslint/no-unused-vars': 'off', // Handled by TypeScript Compiler
 

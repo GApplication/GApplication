@@ -31,7 +31,7 @@ export default function SplashPage()
     };
 
     return (
-        <div className='flex min-h-[668px] min-w-[360px] flex-col bg-content'>
+        <div className='flex h-full w-full flex-col bg-content'>
 
             <div className='flex w-full justify-between p-[16px]'>
 
@@ -65,16 +65,16 @@ export default function SplashPage()
 
             </div>
 
-            <div className='flex w-screen flex-1 flex-col'>
+            <div className='flex h-[1px] w-full flex-1 flex-col'>
 
                 <Swiper
                     onSlideChange={ (swiper) => { SetActiveIndex(swiper.activeIndex); } }
                     onSwiper={ (swiper) => SwiperRef.current = swiper }
-                    style={ { display: 'flex', width: '100%', flex: '1' } }>
+                    style={ { width: '100%', height: '100%' } }>
 
                     <SwiperSlide style={ { display: 'flex' } }>
 
-                        <div className='flex cursor-move flex-col justify-center gap-[16px]'>
+                        <div className='flex w-full cursor-move flex-col items-center justify-center gap-[16px]'>
 
                             <img className='px-[16px]' src={ SlideIcon1 } />
 
@@ -86,7 +86,7 @@ export default function SplashPage()
 
                             </div>
 
-                            <div className='mx-[16px] flex text-center text-[14px] font-bold text-content-text/75'>
+                            <div className='mx-[16px] text-center text-[14px] font-bold text-content-text/75'>
 
                                 {
                                     T('Splash.Slide1Text')
@@ -100,22 +100,22 @@ export default function SplashPage()
 
                     <SwiperSlide style={ { display: 'flex' } }>
 
-                        <div className='flex cursor-move flex-col justify-center gap-[16px]'>
+                        <div className='flex w-full cursor-move flex-col items-center justify-center gap-[16px]'>
 
                             <img className='px-[16px]' src={ SlideIcon2 } />
 
                             <div className='text-center text-[18px] font-bold text-content-text'>
 
                                 {
-                                    T('Splash.Slide1Header')
+                                    T('Splash.Slide2Header')
                                 }
 
                             </div>
 
-                            <div className='mx-[16px] flex text-center text-[14px] font-bold text-content-text/75'>
+                            <div className='mx-[16px] text-center text-[14px] font-bold text-content-text/75'>
 
                                 {
-                                    T('Splash.Slide1Text')
+                                    T('Splash.Slide2Text')
                                 }
 
                             </div>
@@ -126,22 +126,22 @@ export default function SplashPage()
 
                     <SwiperSlide style={ { display: 'flex' } }>
 
-                        <div className='flex cursor-move flex-col justify-center gap-[16px]'>
+                        <div className='flex w-full cursor-move flex-col items-center justify-center gap-[16px]'>
 
                             <img className='px-[16px]' src={ SlideIcon3 } />
 
                             <div className='text-center text-[18px] font-bold text-content-text'>
 
                                 {
-                                    T('Splash.Slide1Header')
+                                    T('Splash.Slide3Header')
                                 }
 
                             </div>
 
-                            <div className='mx-[16px] flex text-center text-[14px] font-bold text-content-text/75'>
+                            <div className='mx-[16px] text-center text-[14px] font-bold text-content-text/75'>
 
                                 {
-                                    T('Splash.Slide1Text')
+                                    T('Splash.Slide3Text')
                                 }
 
                             </div>
