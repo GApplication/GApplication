@@ -5,14 +5,13 @@ let LanguageMap: Record<string, Record<string, never>> = {};
 
 const Language: { Code: LanguageType; Country: string } [] =
 [
-    {
-        Code: 'en',
-        Country: 'us'
-    },
-    {
-        Code: 'fa',
-        Country: 'ir'
-    }
+    { Code: 'en', Country: 'us' },
+    { Code: 'fa', Country: 'ir' },
+    { Code: 'tr', Country: 'tr' },
+    { Code: 'ar', Country: 'sa' },
+    { Code: 'zh', Country: 'cn' },
+    { Code: 'ru', Country: 'ru' },
+    { Code: 'hi', Country: 'in' }
 ];
 
 const ResolveKey = (K: string): string | undefined =>
@@ -43,7 +42,7 @@ const SetLang = async(Lang: LanguageType) =>
 
     let Dir = 'ltr';
 
-    if (Lang === 'fa')
+    if (Lang === 'fa' || Lang === 'ar')
     {
         Dir = 'rtl';
     }

@@ -23,7 +23,7 @@ type APIResponse = InstallResponse | InviteResponse;
 type StorageKey = 'APP.LANGUAGE' | 'APP.INSTALL';
 
 // Language
-type LanguageType = 'en' | 'fa';
+type LanguageType = 'en' | 'fa' | 'tr' | 'ar' | 'zh' | 'ru' | 'hi';
 
 // General
 declare module 'swiper/css'

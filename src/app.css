@@ -3,12 +3,12 @@
 
 @theme
 {
-    --color-content: oklch(98% 0 0);
-    --color-content-text: oklch(0% 0 0);
-    --color-content-hover: oklch(96% 0 0);
-    --color-content-border: oklch(92% 0 0);
-    --color-content-reverse: oklch(8% 0 0);
-    --color-content-outline: oklch(84% 0 0);
+    --color-base: oklch(98% 0 0);
+    --color-base-text: oklch(0% 0 0);
+    --color-base-border: oklch(92% 0 0);
+    --color-base-reverse: oklch(8% 0 0);
+    --color-base-outline: oklch(84% 0 0);
+    --color-base-secondary: oklch(92% 0 0);
 
     --color-primary: oklch(75% 0.15 230);
     --color-primary-text: oklch(100% 0 0);
@@ -48,9 +48,4 @@ html, body
     font-size: 13px;
     font-family: monospace, IranSans;
     background: transparent !important;
-}
-
-.swiper-wrapper
-{
-    height: auto;
 }

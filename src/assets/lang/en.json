@@ -18,25 +18,31 @@
         "Import": "Import Existing Wallet",
         "Version": "Version %s",
 
-        "Slide1Header": "Global Application 1",
-        "Slide1Text": "This is the first slide of the global application introduction.",
+        "Slide1Header": "Connected to the World",
+        "Slide1Text": "Borderless payments powered by a global blockchain network—anytime, anywhere",
 
-        "Slide2Header": "Global Application 2",
-        "Slide2Text": "This is the second slide of the global application introduction.",
+        "Slide2Header": "Fully Decentralized",
+        "Slide2Text": "You own and control your digital assets, that puts the power back in your hands",
 
-        "Slide3Header": "Global Application 3",
-        "Slide3Text": "This is the third slide of the global application introduction."
+        "Slide3Header": "Strong Security",
+        "Slide3Text": "Your assets stay safe with modern cutting-edge encryption, your wallet stays locked tight"
     },
 
     "Modal":
     {
-        "Language": "Choose Language"
+        "Language": "Choose Language",
+        "Search": "Search Language"
     },
 
     "Language":
     {
         "en": "English",
-        "fa": "Persian"
+        "fa": "Persian",
+        "tr": "Turkey",
+        "ar": "Arabic",
+        "zh": "Chinese",
+        "ru": "Russian",
+        "hi": "Hindi"
     },
 
     "Common":
