@@ -3,7 +3,7 @@ import type { JSX } from 'react';
 import { useEffect, useState } from 'react';
 import { platform } from '@tauri-apps/plugin-os';
 
-import WindowBarComponent from '../components/shared/windowBar';
+import WindowBarComponent from '../components/windowBar';
 
 import EventMap from '../utility/event';
 

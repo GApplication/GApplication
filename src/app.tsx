@@ -16,9 +16,12 @@ import ModalLayout from './layout/modal';
 import ToastLayout from './layout/toast';
 
 import Account from './core/account';
-import Context from './utility/context';
 
-import Language, { T } from './utility/language';
+import Theme from './utility/theme';
+import Context from './utility/context';
+import Language from './utility/language';
+
+import { T } from './utility/language';
 
 import './app.css';
 
@@ -106,6 +109,8 @@ const AppDOM = document.querySelector('#App');
 
 if (AppDOM)
 {
+    await Theme.Initialize();
+
     await Language.Initialize();
 
     createRoot(AppDOM).render(<Application />);

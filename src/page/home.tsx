@@ -1,6 +1,6 @@
 import { FaLanguage } from 'react-icons/fa6';
 
-import WindowBarComponent from '../components/shared/windowBar';
+import WindowBarComponent from '../components/windowBar';
 
 export default function SplashPage()
 {

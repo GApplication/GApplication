@@ -4,7 +4,7 @@ import { FaMinus, FaX } from 'react-icons/fa6';
 import { platform } from '@tauri-apps/plugin-os';
 import { getCurrentWindow } from '@tauri-apps/api/window';
 
-import { T } from '../../utility/language';
+import { T } from '../utility/language';
 
 const OnClickMinimize = () =>
 {

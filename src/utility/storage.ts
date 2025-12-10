@@ -1,11 +1,17 @@
-export const SetValue = (Key: StorageKey, Value: string) =>
+import { load } from '@tauri-apps/plugin-store';
+
+const Storage = await load('application.bin');
+
+export const SetValue = async(Key: StorageKey, Value: string) =>
 {
-    localStorage.setItem(Key, Value);
+    await Storage.set(Key, Value);
+
+    await Storage.save();
 };
 
-export const GetValue = (Key: StorageKey) =>
+export const GetValue = async(Key: StorageKey) =>
 {
-    return localStorage.getItem(Key);
+    return await Storage.get<string>(Key);
 };
 
 export default { SetValue, GetValue };

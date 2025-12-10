@@ -35,11 +35,41 @@ const Initialize = async() =>
 {
     let Lang: LanguageType = 'en';
 
-    switch (Storage.GetValue('APP.LANGUAGE') ?? '')
+    switch (await Storage.GetValue('APP.LANGUAGE') ?? '')
     {
         case 'fa':
         {
             Lang = 'fa';
+
+            break;
+        }
+        case 'tr':
+        {
+            Lang = 'tr';
+
+            break;
+        }
+        case 'ar':
+        {
+            Lang = 'ar';
+
+            break;
+        }
+        case 'zh':
+        {
+            Lang = 'zh';
+
+            break;
+        }
+        case 'ru':
+        {
+            Lang = 'ru';
+
+            break;
+        }
+        case 'hi':
+        {
+            Lang = 'hi';
 
             break;
         }
@@ -52,7 +82,7 @@ const SetLang = async(Lang: LanguageType) =>
 {
     LangCurrent = Lang;
 
-    Storage.SetValue('APP.LANGUAGE', Lang);
+    void Storage.SetValue('APP.LANGUAGE', Lang);
 
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, unicorn/no-await-expression-member, @typescript-eslint/no-unsafe-member-access
     LanguageMap = (await import(`../assets/lang/${ Lang }.json`)).default;

@@ -2,34 +2,22 @@ import { useState } from 'react';
 import { motion } from 'motion/react';
 import { MdClose } from 'react-icons/md';
 
-import Context from '../../utility/context';
+import Context from '../utility/context';
+import Language from '../utility/language';
 
-import Language, { T } from '../../utility/language';
+import { T } from '../utility/language';
 
 export default function LanguageModal({ ID }: { readonly ID: number })
 {
     const [ IsClose, SetIsClose ] = useState(false);
 
-    const OnClickClose = () =>
+    const OnClickLanguage = async(Lang: LanguageType) =>
     {
         SetIsClose(true);
 
-        setTimeout(() =>
-        {
-            Context.CloseModal(ID);
-        }, 250);
-    };
+        await Language.SetLang(Lang);
 
-    const OnClickLanguage = (Lang: LanguageType) =>
-    {
-        SetIsClose(true);
-
-        void Language.SetLang(Lang);
-
-        setTimeout(() =>
-        {
-            window.location.reload();
-        }, 250);
+        window.location.reload();
     };
 
     return <motion.div
@@ -37,6 +25,7 @@ export default function LanguageModal({ ID }: { readonly ID: number })
         className='pointer-events-auto flex h-full flex-1 items-center justify-center bg-base-reverse/50'
         exit={ { opacity: 0 } }
         initial={ { opacity: 0 } }
+        onAnimationComplete={ () => { if (IsClose) Context.CloseModal(ID); } }
         transition={ { duration: 0.2 } }>
 
         <div className='flex max-h-[650px] min-w-[324px] flex-col gap-[8px] rounded-[4px] bg-base'>
@@ -53,7 +42,7 @@ export default function LanguageModal({ ID }: { readonly ID: number })
 
                 <button
                     className='cursor-pointer rounded-[8px] text-base-text/25 outline-base-outline duration-200 hover:bg-base-secondary hover:text-base-text/50'
-                    onClick={ OnClickClose }
+                    onClick={ () => { SetIsClose(true); } }
                     tabIndex={ 0 }>
 
                     <MdClose className='size-[24px]' />
@@ -68,9 +57,9 @@ export default function LanguageModal({ ID }: { readonly ID: number })
                     Language.Language.map((I) =>
 
                         <button
-                            className='flex h-[40px] cursor-pointer items-center gap-[8px] rounded-[8px] border border-base-border p-[8px] outline-base-outline duration-200 hover:bg-base-secondary'
+                            className='flex h-[40px] cursor-pointer items-center gap-[8px] rounded-[8px] border border-base-border p-[8px] text-base-text outline-base-outline duration-200 hover:bg-base-secondary'
                             key={ I.Code }
-                            onClick={ () => { OnClickLanguage(I.Code); } }
+                            onClick={ () => { void OnClickLanguage(I.Code); } }
                             tabIndex={ 0 }>
 
                             <div className={ `fi fi-${ I.Country } size-[24px]` } />

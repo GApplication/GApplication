@@ -1,7 +1,9 @@
 import Storage from './storage';
 
-const Toggle = () =>
+const SetTheme = async(Theme: 'LIGHT' | 'DARK') =>
 {
+    await Storage.SetValue('APP.THEME', Theme);
+
     let Base: { L: number; C: number; H: number };
     let BaseText: { L: number; C: number; H: number };
     let BaseBorder: { L: number; C: number; H: number };
@@ -9,34 +11,23 @@ const Toggle = () =>
     let BaseOutline: { L: number; C: number; H: number };
     let BaseSecondary: { L: number; C: number; H: number };
 
-    switch (Storage.GetValue('APP.THEME'))
+    if (Theme === 'LIGHT')
     {
-        case 'DARK':
-        {
-            Base = { L: 12, C: 0, H: 0 };
-            BaseText = { L: 92, C: 4, H: 240 };
-            BaseBorder = { L: 24, C: 8, H: 260 };
-            BaseReverse = { L: 98, C: 0, H: 0 };
-            BaseOutline = { L: 45, C: 20, H: 275 };
-            BaseSecondary = { L: 20, C: 10, H: 230 };
-
-            Storage.SetValue('APP.THEME', 'LIGHT');
-
-            break;
-        }
-        default:
-        {
-            Base = { L: 98, C: 0, H: 0 };
-            BaseText = { L: 0, C: 0, H: 0 };
-            BaseBorder = { L: 92, C: 0, H: 0 };
-            BaseReverse = { L: 8, C: 0, H: 0 };
-            BaseOutline = { L: 84, C: 0, H: 0 };
-            BaseSecondary = { L: 92, C: 0, H: 0 };
-
-            Storage.SetValue('APP.THEME', 'DARK');
-
-            break;
-        }
+        Base = { L: 98, C: 0, H: 0 };
+        BaseText = { L: 8, C: 0, H: 0 };
+        BaseBorder = { L: 92, C: 0, H: 0 };
+        BaseReverse = { L: 2, C: 0, H: 0 };
+        BaseOutline = { L: 84, C: 0, H: 0 };
+        BaseSecondary = { L: 92, C: 0, H: 0 };
+    }
+    else
+    {
+        Base = { L: 30.857, C: 0.023, H: 264.149 };
+        BaseText = { L: 90, C: 0, H: 0 };
+        BaseBorder = { L: 28.036, C: 0.019, H: 264.182 };
+        BaseReverse = { L: 0, C: 0, H: 0 };
+        BaseOutline = { L: 26.346, C: 0.018, H: 262.177 };
+        BaseSecondary = { L: 26.346, C: 0.018, H: 262.177 };
     }
 
     document.documentElement.style.setProperty('--color-base', `oklch(${ Base.L }% ${ Base.C } ${ Base.H })`);
@@ -47,4 +38,14 @@ const Toggle = () =>
     document.documentElement.style.setProperty('--color-base-secondary', `oklch(${ BaseSecondary.L }% ${ BaseSecondary.C } ${ BaseSecondary.H })`);
 };
 
-export default { Toggle };
+const Initialize = async() =>
+{
+    await SetTheme(await Storage.GetValue('APP.THEME') === 'DARK' ? 'DARK' : 'LIGHT');
+};
+
+const Toggle = async() =>
+{
+    await SetTheme(await Storage.GetValue('APP.THEME') === 'DARK' ? 'LIGHT' : 'DARK');
+};
+
+export default { Initialize, Toggle };

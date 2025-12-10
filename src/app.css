@@ -3,15 +3,15 @@
 
 @theme
 {
-    --color-base: oklch(98% 0 0);
-    --color-base-text: oklch(0% 0 0);
-    --color-base-border: oklch(92% 0 0);
-    --color-base-reverse: oklch(8% 0 0);
-    --color-base-outline: oklch(84% 0 0);
-    --color-base-secondary: oklch(92% 0 0);
+    --color-base: #000;
+    --color-base-text: #000;
+    --color-base-border: #000;
+    --color-base-reverse: #000;
+    --color-base-outline: #000;
+    --color-base-secondary: #000;
 
     --color-primary: oklch(75% 0.15 230);
-    --color-primary-text: oklch(100% 0 0);
+    --color-primary-text: oklch(98% 0 0);
     --color-primary-hover: oklch(73% 0.15 230);
     --color-primary-border: oklch(70% 0.15 230);
     --color-primary-outline: oklch(65% 0.15 230);

@@ -5,7 +5,8 @@ import { GrLanguage } from 'react-icons/gr';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { PiPaintBrushHousehold } from 'react-icons/pi';
 
-import LanguageModal from '../components/modal/language';
+import LanguageModal from '../components/languageModal';
+import PasscodeModal from '../components/passcodeModal';
 
 import Theme from '../utility/theme';
 import Context from '../utility/context';
@@ -25,11 +26,6 @@ export default function SplashPage()
 
     const [ ActiveIndex, SetActiveIndex ] = useState(0);
 
-    const OnClickLanguage = () =>
-    {
-        Context.OpenModal(<LanguageModal ID={ Date.now() } />);
-    };
-
     return (
         <div className='flex h-full w-full flex-col bg-base'>
 
@@ -37,7 +33,7 @@ export default function SplashPage()
 
                 <button
                     className='group flex h-[40px] cursor-pointer items-center rounded-[8px] border border-base-border outline-base-outline duration-200 hover:bg-base-secondary'
-                    onClick={ OnClickLanguage }
+                    onClick={ () => { Context.OpenModal(<LanguageModal ID={ 0 } />); } }
                     tabIndex={ 1 }>
 
                     <GrLanguage className='m-[8px] size-[24px] text-base-text/75 duration-200 group-hover:text-base-text' />
@@ -56,7 +52,7 @@ export default function SplashPage()
 
                 <button
                     className='group flex h-[40px] cursor-pointer items-center rounded-[8px] border border-base-border outline-base-outline duration-200 hover:bg-base-secondary'
-                    onClick={ Theme.Toggle }
+                    onClick={ () => void Theme.Toggle() }
                     tabIndex={ 2 }>
 
                     <PiPaintBrushHousehold className='m-[8px] size-[24px] text-base-text/75 duration-200 group-hover:text-base-text' />
@@ -176,6 +172,7 @@ export default function SplashPage()
 
             <button
                 className='mx-[16px] flex h-[48px] cursor-pointer items-center justify-center rounded-[8px] border border-primary-border bg-primary text-[16px] text-primary-text outline-primary-outline duration-200 hover:bg-primary-hover'
+                onClick={ () => { Context.OpenModal(<PasscodeModal ID={ 0 } />); } }
                 tabIndex={ 6 }>
 
                 {
