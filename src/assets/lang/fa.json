@@ -6,42 +6,34 @@
 
     "Tray":
     {
-        "Open": "Open GApp",
-        "Quit": "Quit GApp"
-    },
-
-    "Splash":
-    {
-        "Header": "Welcome To GApp",
-        "Language": "Language",
-        "InviationCode": "Inviation Code",
-        "Continue": "Continue",
-        "ContactWithUs": "Contact With Us",
-
-        "Error":
-        {
-            "InviationCode": "Inviation code is invalid"
-        }
-    },
-
-    "Modal":
-    {
-        "Language": "Choose Language"
+        "Open": "باز کردن GApp",
+        "Quit": "خروج از GApp"
     },
 
     "Language":
     {
-        "en": "انگلیش",
-        "fa": "فارسی"
+        "Header": "انتخاب زبان",
+
+        "en": "انگلیسی",
+        "fa": "فارسی",
+        "tr": "ترکی",
+        "ar": "عربی",
+        "zh": "چینی",
+        "ru": "روسی",
+        "hi": "هندی"
     },
 
-    "Common":
+    "Splash":
     {
-        "English": "English"
-    },
-
-    "Error":
-    {
-        "Internet": "Check your internet connection"
+        "Language": "زبان",
+        "Slide1Header": "متصل به جهان",
+        "Slide1Text": "پرداخت‌های بدون مرز با شبکه جهانی بلاکچین, هر زمان، هر مکان",
+        "Slide2Header": "کاملاً غیرمتمرکز",
+        "Slide2Text": "شما مالک و کنترل‌کننده دارایی‌های دیجیتال خود هستید، قدرت دوباره در دستان شماست",
+        "Slide3Header": "امنیت قوی",
+        "Slide3Text": "دارایی‌های شما با رمزنگاری پیشرفته در امنیت کامل می‌مانند، کیف پول شما همیشه محافظت‌شده است",
+        "Create": "ایجاد کیف پول جدید",
+        "Import": "وارد کردن کیف پول",
+        "Version": "نسخه %s"
     }
 }

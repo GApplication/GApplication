@@ -1,0 +1,39 @@
+{
+    "App":
+    {
+        "Name": "GApp"
+    },
+
+    "Tray":
+    {
+        "Open": "打开 GApp",
+        "Quit": "退出 GApp"
+    },
+
+    "Language":
+    {
+        "Header": "选择语言",
+
+        "en": "英语",
+        "fa": "波斯语",
+        "tr": "土耳其语",
+        "ar": "阿拉伯语",
+        "zh": "中文",
+        "ru": "俄语",
+        "hi": "印地语"
+    },
+
+    "Splash":
+    {
+        "Language": "语言",
+        "Slide1Header": "连接世界",
+        "Slide1Text": "由全球区块链网络驱动的无国界支付随时随地",
+        "Slide2Header": "完全去中心化",
+        "Slide2Text": "您拥有并控制您的数字资产，真正掌握您的力量",
+        "Slide3Header": "强大的安全性",
+        "Slide3Text": "先进加密技术保障资产安全，您的钱包始终牢固受保护",
+        "Create": "创建新钱包",
+        "Import": "导入已有钱包",
+        "Version": "版本 %s"
+    }
+}

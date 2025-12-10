@@ -31,6 +31,23 @@ const ResolveKey = (K: string): string | undefined =>
     return typeof Result === 'string' ? Result : undefined;
 };
 
+const Initialize = async() =>
+{
+    let Lang: LanguageType = 'en';
+
+    switch (Storage.GetValue('APP.LANGUAGE') ?? '')
+    {
+        case 'fa':
+        {
+            Lang = 'fa';
+
+            break;
+        }
+    }
+
+    await SetLang(Lang);
+};
+
 const SetLang = async(Lang: LanguageType) =>
 {
     LangCurrent = Lang;
@@ -60,23 +77,6 @@ const GetLang = () =>
     }
 
     return Lang;
-};
-
-const Initialize = async() =>
-{
-    let Lang: LanguageType = 'en';
-
-    switch (Storage.GetValue('APP.LANGUAGE') ?? '')
-    {
-        case 'fa':
-        {
-            Lang = 'fa';
-
-            break;
-        }
-    }
-
-    await SetLang(Lang);
 };
 
 export const T = (Name: string, ...Args: (string | number)[]): string =>

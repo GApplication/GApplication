@@ -77,12 +77,12 @@ export default defineConfig([
             parserOptions:
             {
                 projectService: true,
-                // @ts-expect-error It does not recognize import.meta.dirname
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
                 tsconfigRootDir: import.meta.dirname
             },
             globals:
             {
+                __dirname: false,
+
                 ...Globals.browser
             }
         },

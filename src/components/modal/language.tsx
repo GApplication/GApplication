@@ -46,7 +46,7 @@ export default function LanguageModal({ ID }: { readonly ID: number })
                 <div className='flex-1 text-[14px] text-base-text'>
 
                     {
-                        T('Modal.Language')
+                        T('Language.Header')
                     }
 
                 </div>

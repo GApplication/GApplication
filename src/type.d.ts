@@ -20,7 +20,7 @@ type InviteResponse = (Response?: { Result: number }) => void;
 type APIResponse = InstallResponse | InviteResponse;
 
 // Storage
-type StorageKey = 'APP.LANGUAGE' | 'APP.INSTALL';
+type StorageKey = 'APP.LANGUAGE' | 'APP.INSTALL' | 'APP.THEME';
 
 // Language
 type LanguageType = 'en' | 'fa' | 'tr' | 'ar' | 'zh' | 'ru' | 'hi';

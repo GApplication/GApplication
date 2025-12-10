@@ -7,8 +7,8 @@ import { PiPaintBrushHousehold } from 'react-icons/pi';
 
 import LanguageModal from '../components/modal/language';
 
+import Theme from '../utility/theme';
 import Context from '../utility/context';
-import Utility from '../utility/utility';
 
 import { T } from '../utility/language';
 
@@ -44,7 +44,7 @@ export default function SplashPage()
 
                     <div className='h-full w-[1px] bg-base-border' />
 
-                    <div className='px-[8px] text-[12px] font-bold text-base-text/75 duration-200 group-hover:text-base-text'>
+                    <div className='px-[8px] text-[12px] text-base-text/75 duration-200 group-hover:text-base-text'>
 
                         {
                             T('Splash.Language')
@@ -56,7 +56,7 @@ export default function SplashPage()
 
                 <button
                     className='group flex h-[40px] cursor-pointer items-center rounded-[8px] border border-base-border outline-base-outline duration-200 hover:bg-base-secondary'
-                    onClick={ Utility.GenerateTheme }
+                    onClick={ Theme.Toggle }
                     tabIndex={ 2 }>
 
                     <PiPaintBrushHousehold className='m-[8px] size-[24px] text-base-text/75 duration-200 group-hover:text-base-text' />
@@ -79,7 +79,7 @@ export default function SplashPage()
 
                             <img className='max-h-[260px] px-[16px]' src={ SlideIcon1 } />
 
-                            <div className='text-center text-[18px] font-bold text-base-text'>
+                            <div className='text-center text-[18px] text-base-text'>
 
                                 {
                                     T('Splash.Slide1Header')
@@ -87,7 +87,7 @@ export default function SplashPage()
 
                             </div>
 
-                            <div className='mx-[16px] text-center text-[14px] font-bold text-base-text/75'>
+                            <div className='mx-[16px] text-center text-[14px] leading-[20px] text-base-text/75'>
 
                                 {
                                     T('Splash.Slide1Text')
@@ -105,7 +105,7 @@ export default function SplashPage()
 
                             <img className='max-h-[260px] px-[16px]' src={ SlideIcon2 } />
 
-                            <div className='text-center text-[18px] font-bold text-base-text'>
+                            <div className='text-center text-[18px] text-base-text'>
 
                                 {
                                     T('Splash.Slide2Header')
@@ -113,7 +113,7 @@ export default function SplashPage()
 
                             </div>
 
-                            <div className='mx-[16px] text-center text-[14px] font-bold text-base-text/75'>
+                            <div className='mx-[16px] text-center text-[14px] leading-[20px] text-base-text/75'>
 
                                 {
                                     T('Splash.Slide2Text')
@@ -131,7 +131,7 @@ export default function SplashPage()
 
                             <img className='max-h-[260px] px-[16px]' src={ SlideIcon3 } />
 
-                            <div className='text-center text-[18px] font-bold text-base-text'>
+                            <div className='text-center text-[18px] text-base-text'>
 
                                 {
                                     T('Splash.Slide3Header')
@@ -139,7 +139,7 @@ export default function SplashPage()
 
                             </div>
 
-                            <div className='mx-[16px] text-center text-[14px] font-bold text-base-text/75'>
+                            <div className='mx-[16px] text-center text-[14px] leading-[20px] text-base-text/75'>
 
                                 {
                                     T('Splash.Slide3Text')
@@ -175,7 +175,7 @@ export default function SplashPage()
             </div>
 
             <button
-                className='mx-[16px] flex h-[48px] cursor-pointer items-center justify-center rounded-[8px] border border-primary-border bg-primary text-[16px] font-bold text-primary-text outline-primary-outline duration-200 hover:bg-primary-hover'
+                className='mx-[16px] flex h-[48px] cursor-pointer items-center justify-center rounded-[8px] border border-primary-border bg-primary text-[16px] text-primary-text outline-primary-outline duration-200 hover:bg-primary-hover'
                 tabIndex={ 6 }>
 
                 {
@@ -185,7 +185,7 @@ export default function SplashPage()
             </button>
 
             <button
-                className='mx-[16px] my-[8px] flex h-[48px] cursor-pointer items-center justify-center rounded-[8px] border border-base-border text-[14px] font-bold text-base-text/75 outline-base-outline duration-200 hover:bg-base-secondary hover:text-base-text'
+                className='mx-[16px] my-[8px] flex h-[48px] cursor-pointer items-center justify-center rounded-[8px] border border-base-border text-[14px] text-base-text/75 outline-base-outline duration-200 hover:bg-base-secondary hover:text-base-text'
                 tabIndex={ 7 }>
 
                 {

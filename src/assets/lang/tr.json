@@ -1,0 +1,39 @@
+{
+    "App":
+    {
+        "Name": "GApp"
+    },
+
+    "Tray":
+    {
+        "Open": "GApp'ı Aç",
+        "Quit": "GApp'tan Çık"
+    },
+
+    "Language":
+    {
+        "Header": "Dil Seçin",
+
+        "en": "İngilizce",
+        "fa": "Farsça",
+        "tr": "Türkçe",
+        "ar": "Arapça",
+        "zh": "Çince",
+        "ru": "Rusça",
+        "hi": "Hintçe"
+    },
+
+    "Splash":
+    {
+        "Language": "Dil",
+        "Slide1Header": "Dünyaya Bağlı",
+        "Slide1Text": "Küresel blockchain ağıyla sınır­sız ödemeler, her zaman, her yerde",
+        "Slide2Header": "Tamamen Merkeziyetsiz",
+        "Slide2Text": "Dijital varlıklarınıza tamamen siz sahip olur ve kontrol edersiniz; güç sizde",
+        "Slide3Header": "Güçlü Güvenlik",
+        "Slide3Text": "Varlıklarınız modern ve ileri seviye şifreleme ile güvende kalır, cüzdanınız her zaman koruma altında",
+        "Create": "Yeni Cüzdan Oluştur",
+        "Import": "Mevcut Cüzdanı İçe Aktar",
+        "Version": "Sürüm %s"
+    }
+}

@@ -4,7 +4,6 @@ import TailwindCSS from '@tailwindcss/vite';
 import { defineConfig } from 'vite';
 
 // @ts-expect-error Tauri Host
-// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 const TauriHost = (process.env.TAURI_DEV_HOST ?? false) as boolean | string;
 
 export default defineConfig(() => ({

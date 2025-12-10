@@ -15,7 +15,7 @@ import PageLayout from './layout/page';
 import ModalLayout from './layout/modal';
 import ToastLayout from './layout/toast';
 
-import Account from './utility/account';
+import Account from './core/account';
 import Context from './utility/context';
 
 import Language, { T } from './utility/language';
