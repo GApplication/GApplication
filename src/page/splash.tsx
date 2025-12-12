@@ -5,8 +5,8 @@ import { GrLanguage } from 'react-icons/gr';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { PiPaintBrushHousehold } from 'react-icons/pi';
 
-import LanguageModal from '../components/languageModal';
-import PasscodeModal from '../components/passcodeModal';
+import LanguageModal from '../components/splash/language';
+import PasscodeModal from '../components/splash/passcode';
 
 import Theme from '../utility/theme';
 import Context from '../utility/context';
@@ -33,8 +33,7 @@ export default function SplashPage()
 
                 <button
                     className='group flex h-[40px] cursor-pointer items-center rounded-[8px] border border-base-border outline-base-outline duration-200 hover:bg-base-secondary'
-                    onClick={ () => { Context.OpenModal(<LanguageModal ID={ 0 } />); } }
-                    tabIndex={ 1 }>
+                    onClick={ () => { Context.OpenModal(<LanguageModal ID={ 0 } />); } }>
 
                     <GrLanguage className='m-[8px] size-[24px] text-base-text/75 duration-200 group-hover:text-base-text' />
 
@@ -52,8 +51,7 @@ export default function SplashPage()
 
                 <button
                     className='group flex h-[40px] cursor-pointer items-center rounded-[8px] border border-base-border outline-base-outline duration-200 hover:bg-base-secondary'
-                    onClick={ () => void Theme.Toggle() }
-                    tabIndex={ 2 }>
+                    onClick={ () => void Theme.Toggle() }>
 
                     <PiPaintBrushHousehold className='m-[8px] size-[24px] text-base-text/75 duration-200 group-hover:text-base-text' />
 
@@ -153,18 +151,15 @@ export default function SplashPage()
 
                     <button
                         className={ `size-[8px] cursor-pointer rounded-[2px] outline-base-outline ${ ActiveIndex === 0 ? 'bg-primary/75' : 'bg-base-secondary' }` }
-                        onClick={ () => SwiperRef.current?.slideTo(0) }
-                        tabIndex={ 3 } />
+                        onClick={ () => SwiperRef.current?.slideTo(0) } />
 
                     <button
                         className={ `size-[8px] cursor-pointer rounded-[2px] outline-base-outline ${ ActiveIndex === 1 ? 'bg-primary/75' : 'bg-base-secondary' }` }
-                        onClick={ () => SwiperRef.current?.slideTo(1) }
-                        tabIndex={ 4 } />
+                        onClick={ () => SwiperRef.current?.slideTo(1) } />
 
                     <button
                         className={ `size-[8px] cursor-pointer rounded-[2px] outline-base-outline ${ ActiveIndex === 2 ? 'bg-primary/75' : 'bg-base-secondary' }` }
-                        onClick={ () => SwiperRef.current?.slideTo(2) }
-                        tabIndex={ 5 } />
+                        onClick={ () => SwiperRef.current?.slideTo(2) } />
 
                 </div>
 
@@ -172,8 +167,7 @@ export default function SplashPage()
 
             <button
                 className='mx-[16px] flex h-[48px] cursor-pointer items-center justify-center rounded-[8px] border border-primary-border bg-primary text-[16px] text-primary-text outline-primary-outline duration-200 hover:bg-primary-hover'
-                onClick={ () => { Context.OpenModal(<PasscodeModal ID={ 0 } />); } }
-                tabIndex={ 6 }>
+                onClick={ () => { Context.OpenModal(<PasscodeModal ID={ 0 } />); } }>
 
                 {
                     T('Splash.Create')
@@ -181,9 +175,7 @@ export default function SplashPage()
 
             </button>
 
-            <button
-                className='mx-[16px] my-[8px] flex h-[48px] cursor-pointer items-center justify-center rounded-[8px] border border-base-border text-[14px] text-base-text/75 outline-base-outline duration-200 hover:bg-base-secondary hover:text-base-text'
-                tabIndex={ 7 }>
+            <button className='mx-[16px] my-[8px] flex h-[48px] cursor-pointer items-center justify-center rounded-[8px] border border-base-border text-[14px] text-base-text/75 outline-base-outline duration-200 hover:bg-base-secondary hover:text-base-text'>
 
                 {
                     T('Splash.Import')

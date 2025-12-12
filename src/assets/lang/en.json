@@ -1,13 +1,24 @@
 {
+    "1": "1",
+    "2": "2",
+    "3": "3",
+    "4": "4",
+    "5": "5",
+    "6": "6",
+    "7": "7",
+    "8": "8",
+    "9": "9",
+    "0": "0",
+
     "App":
     {
-        "Name": "GApp"
-    },
+        "Name": "GApp",
 
-    "Tray":
-    {
-        "Open": "Open GApp",
-        "Quit": "Quit GApp"
+        "Tray":
+        {
+            "Open": "Open GApp",
+            "Quit": "Quit GApp"
+        }
     },
 
     "Language":
@@ -21,6 +32,12 @@
         "zh": "Chinese",
         "ru": "Russian",
         "hi": "Hindi"
+    },
+
+    "Passcode":
+    {
+        "Password": "Set a passcode",
+        "Repeat": "Repeat passcode"
     },
 
     "Splash":

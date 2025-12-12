@@ -18,8 +18,8 @@ export default defineConfig([
     PluginJS.configs.recommended,
 
     // TypeScript
-    PluginTS.configs.strictTypeChecked,
-    PluginTS.configs.stylisticTypeChecked,
+    PluginTS.configs.recommended,
+    PluginTS.configs.stylistic,
 
     // React
     {
@@ -99,7 +99,7 @@ export default defineConfig([
             'unicorn/no-typeof-undefined': 'off',
             'unicorn/prevent-abbreviations': 'off',
 
-            'unicorn/filename-case': [ 'error', { case: 'camelCase' } ],
+            'unicorn/filename-case': [ 'error', { cases: { snakeCase: true } } ],
 
             // React
             'react/jsx-curly-spacing': [ 'error', { when: 'always' } ],

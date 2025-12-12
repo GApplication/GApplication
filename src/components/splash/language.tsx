@@ -2,10 +2,10 @@ import { useState } from 'react';
 import { motion } from 'motion/react';
 import { MdClose } from 'react-icons/md';
 
-import Context from '../utility/context';
-import Language from '../utility/language';
+import Context from '../../utility/context';
+import Language from '../../utility/language';
 
-import { T } from '../utility/language';
+import { T } from '../../utility/language';
 
 export default function LanguageModal({ ID }: { readonly ID: number })
 {
@@ -42,8 +42,7 @@ export default function LanguageModal({ ID }: { readonly ID: number })
 
                 <button
                     className='cursor-pointer rounded-[8px] text-base-text/25 outline-base-outline duration-200 hover:bg-base-secondary hover:text-base-text/50'
-                    onClick={ () => { SetIsClose(true); } }
-                    tabIndex={ 0 }>
+                    onClick={ () => { SetIsClose(true); } }>
 
                     <MdClose className='size-[24px]' />
 
@@ -59,8 +58,7 @@ export default function LanguageModal({ ID }: { readonly ID: number })
                         <button
                             className='flex h-[40px] cursor-pointer items-center gap-[8px] rounded-[8px] border border-base-border p-[8px] text-base-text outline-base-outline duration-200 hover:bg-base-secondary'
                             key={ I.Code }
-                            onClick={ () => { void OnClickLanguage(I.Code); } }
-                            tabIndex={ 0 }>
+                            onClick={ () => { void OnClickLanguage(I.Code); } }>
 
                             <div className={ `fi fi-${ I.Country } size-[24px]` } />
 

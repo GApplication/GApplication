@@ -39,7 +39,7 @@ export default function ModalLayout()
     }
 
     return <div
-        className='absolute left-1/2 z-2 flex h-full min-h-[700px] w-full max-w-[720px] min-w-[360px] -translate-x-1/2'
+        className='absolute left-1/2 z-2 flex h-full min-h-[700px] w-full max-w-[720px] min-w-[360px] -translate-x-1/2 overflow-hidden'
         style={ { paddingTop: IsWindow ? '32px' : '0px' } }>
 
         {

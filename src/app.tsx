@@ -43,7 +43,7 @@ function Application()
                         [
                             {
                                 id: 'open',
-                                text: T('Tray.Open'),
+                                text: T('App.Tray.Open'),
                                 action: () =>
                                 {
                                     void getCurrentWindow().show();
@@ -51,7 +51,7 @@ function Application()
                             },
                             {
                                 id: 'quit',
-                                text: T('Tray.Quit'),
+                                text: T('App.Tray.Quit'),
                                 action: () =>
                                 {
                                     void getCurrentWindow().close();

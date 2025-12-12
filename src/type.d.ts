@@ -13,14 +13,8 @@ interface EventMap
 
 type EventCall<T extends keyof EventMap> = (...Args: EventMap[T]) => void;
 
-// API
-type InstallResponse = (Response?: { Result: number }) => void;
-type InviteResponse = (Response?: { Result: number }) => void;
-
-type APIResponse = InstallResponse | InviteResponse;
-
 // Storage
-type StorageKey = 'APP.LANGUAGE' | 'APP.INSTALL' | 'APP.THEME';
+type StorageKey = 'App.Language' | 'App.Theme';
 
 // Language
 type LanguageType = 'en' | 'fa' | 'tr' | 'ar' | 'zh' | 'ru' | 'hi';

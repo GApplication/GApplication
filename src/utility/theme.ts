@@ -2,7 +2,7 @@ import Storage from './storage';
 
 const SetTheme = async(Theme: 'LIGHT' | 'DARK') =>
 {
-    await Storage.SetValue('APP.THEME', Theme);
+    await Storage.SetValue('App.Theme', Theme);
 
     let Base: { L: number; C: number; H: number };
     let BaseText: { L: number; C: number; H: number };
@@ -40,12 +40,12 @@ const SetTheme = async(Theme: 'LIGHT' | 'DARK') =>
 
 const Initialize = async() =>
 {
-    await SetTheme(await Storage.GetValue('APP.THEME') === 'DARK' ? 'DARK' : 'LIGHT');
+    await SetTheme(await Storage.GetValue('App.Theme') === 'DARK' ? 'DARK' : 'LIGHT');
 };
 
 const Toggle = async() =>
 {
-    await SetTheme(await Storage.GetValue('APP.THEME') === 'DARK' ? 'LIGHT' : 'DARK');
+    await SetTheme(await Storage.GetValue('App.Theme') === 'DARK' ? 'LIGHT' : 'DARK');
 };
 
 export default { Initialize, Toggle };

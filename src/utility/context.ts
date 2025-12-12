@@ -8,7 +8,7 @@ const OpenPage = (Component: JSX.Element, Option?: { ID: number }) =>
 {
     const ID = Option?.ID ?? Date.now();
 
-    EventMap.Emit('Page.Open', cloneElement(Component, { ID }));
+    EventMap.Emit('Page.Open', cloneElement(Component, { ID, key: ID }));
 };
 
 const ClosePage = (ID: number) =>
@@ -20,7 +20,7 @@ const OpenModal = (Component: JSX.Element, Option?: { ID: number }) =>
 {
     const ID = Option?.ID ?? Date.now();
 
-    EventMap.Emit('Modal.Open', cloneElement(Component, { ID }));
+    EventMap.Emit('Modal.Open', cloneElement(Component, { ID, key: ID }));
 };
 
 const CloseModal = (ID: number) =>
