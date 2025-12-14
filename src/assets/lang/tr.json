@@ -1,13 +1,24 @@
 {
+    "1": "1",
+    "2": "2",
+    "3": "3",
+    "4": "4",
+    "5": "5",
+    "6": "6",
+    "7": "7",
+    "8": "8",
+    "9": "9",
+    "0": "0",
+
     "App":
     {
-        "Name": "GApp"
-    },
+        "Name": "GApp",
 
-    "Tray":
-    {
-        "Open": "GApp'ı Aç",
-        "Quit": "GApp'tan Çık"
+        "Tray":
+        {
+            "Open": "GApp'ı Aç",
+            "Quit": "GApp'tan Çık"
+        }
     },
 
     "Language":
@@ -23,15 +34,25 @@
         "hi": "Hintçe"
     },
 
+    "Passcode":
+    {
+        "Password": "Bir şifre ayarlayın",
+        "Repeat": "Şifreyi tekrarla"
+    },
+
     "Splash":
     {
         "Language": "Dil",
+
         "Slide1Header": "Dünyaya Bağlı",
-        "Slide1Text": "Küresel blockchain ağıyla sınır­sız ödemeler, her zaman, her yerde",
-        "Slide2Header": "Tamamen Merkeziyetsiz",
-        "Slide2Text": "Dijital varlıklarınıza tamamen siz sahip olur ve kontrol edersiniz; güç sizde",
+        "Slide1Text": "Küresel bir blok zinciri ağı tarafından desteklenen sınır tanımayan ödemeler, her zaman, her yerde",
+
+        "Slide2Header": "Tamamen Merkezi Olmayan",
+        "Slide2Text": "Dijital varlıklarınızın sahibi ve kontrolcüsü sizsiniz, bu güç sizin ellerinize geri veriyor",
+
         "Slide3Header": "Güçlü Güvenlik",
-        "Slide3Text": "Varlıklarınız modern ve ileri seviye şifreleme ile güvende kalır, cüzdanınız her zaman koruma altında",
+        "Slide3Text": "Varlıklarınız modern son teknoloji şifreleme ile güvende kalır, cüzdanınız sıkıca kilitli kalır",
+
         "Create": "Yeni Cüzdan Oluştur",
         "Import": "Mevcut Cüzdanı İçe Aktar",
         "Version": "Sürüm %s"

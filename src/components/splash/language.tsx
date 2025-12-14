@@ -35,7 +35,7 @@ export default function LanguageModal({ ID }: { readonly ID: number })
                 <div className='flex-1 text-[14px] text-base-text'>
 
                     {
-                        T('Language.Header')
+                        T('Splash.LanguageModal.Header')
                     }
 
                 </div>
@@ -63,7 +63,7 @@ export default function LanguageModal({ ID }: { readonly ID: number })
                             <div className={ `fi fi-${ I.Country } size-[24px]` } />
 
                             {
-                                T(`Language.${ I.Code }`)
+                                T(`Splash.LanguageModal.${ I.Code }`)
                             }
 
                         </button>

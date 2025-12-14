@@ -1,13 +1,24 @@
 {
+    "1": "1",
+    "2": "2",
+    "3": "3",
+    "4": "4",
+    "5": "5",
+    "6": "6",
+    "7": "7",
+    "8": "8",
+    "9": "9",
+    "0": "0",
+
     "App":
     {
-        "Name": "GApp"
-    },
+        "Name": "GApp",
 
-    "Tray":
-    {
-        "Open": "打开 GApp",
-        "Quit": "退出 GApp"
+        "Tray":
+        {
+            "Open": "打开 GApp",
+            "Quit": "退出 GApp"
+        }
     },
 
     "Language":
@@ -23,17 +34,27 @@
         "hi": "印地语"
     },
 
+    "Passcode":
+    {
+        "Password": "设置密码",
+        "Repeat": "重复密码"
+    },
+
     "Splash":
     {
         "Language": "语言",
+
         "Slide1Header": "连接世界",
-        "Slide1Text": "由全球区块链网络驱动的无国界支付随时随地",
+        "Slide1Text": "由全球区块链网络驱动的无国界支付，随时随地",
+
         "Slide2Header": "完全去中心化",
-        "Slide2Text": "您拥有并控制您的数字资产，真正掌握您的力量",
-        "Slide3Header": "强大的安全性",
-        "Slide3Text": "先进加密技术保障资产安全，您的钱包始终牢固受保护",
+        "Slide2Text": "您拥有并控制您的数字资产，这将权力交还到您手中",
+
+        "Slide3Header": "强大安全",
+        "Slide3Text": "您的资产通过现代尖端加密保持安全，您的钱包保持紧密锁定",
+
         "Create": "创建新钱包",
-        "Import": "导入已有钱包",
+        "Import": "导入现有钱包",
         "Version": "版本 %s"
     }
 }

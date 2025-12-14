@@ -21,12 +21,27 @@ export default function PasscodeModal({ ID = 0 }: { readonly ID: number })
     {
         if (Value === '-')
         {
+            SwiperRef.current?.slideTo(0);
+
             SetCounter(0);
 
             return;
         }
 
+        if (Counter === 3)
+        {
+            SwiperRef.current?.slideTo(1);
+        }
+
         SetCounter((PreviousValue) => PreviousValue + 1);
+
+        if (Counter === 7)
+        {
+            // Validate Passcode
+            // Store Passcode
+            // Generate Wallet
+            // Move To Home Page
+        }
     };
 
     return <motion.div
@@ -36,7 +51,7 @@ export default function PasscodeModal({ ID = 0 }: { readonly ID: number })
         onAnimationComplete={ () => { if (IsClose) Context.CloseModal(ID); } }
         transition={ { duration: 0.2 } }>
 
-        <div className='flex flex-1 flex-col bg-base'>
+        <div className='flex w-full flex-1 flex-col items-center bg-base'>
 
             <div className='h-[72px] w-full p-[16px]'>
 
@@ -51,31 +66,59 @@ export default function PasscodeModal({ ID = 0 }: { readonly ID: number })
             </div>
 
             <Swiper
-                autoHeight
-                onSwiper={ (swiper) => SwiperRef.current = swiper }
-                style={ { width: '100%', height: '100%' } }>
+                allowTouchMove={ false }
+                className='w-full flex-1 items-center justify-center'
+                onSwiper={ (swiper) => SwiperRef.current = swiper }>
 
-                <SwiperSlide style={ { height: '100%', display: 'flex', justifyContent: 'center' } }>
+                <SwiperSlide className='m-auto flex items-center justify-center'>
 
-                    <div className='flex flex-1 flex-col items-center justify-center'>
+                    <div className='flex h-full flex-1 flex-col items-center justify-center gap-[16px]'>
 
-                        <div className='p-[16px] text-[16px] font-bold text-base-text'>
+                        <div className='text-[18px] text-base-text'>
 
                             {
-                                T(`Passcode.Password`)
+                                T('Splash.PasscodeModal.Password')
                             }
 
                         </div>
 
-                        <div className='flex justify-center gap-[8px]'>
+                        <div className='flex gap-[10px]'>
 
-                            <div className={ `size-[10px] rounded-[2px] bg-base-secondary ${ Counter > 0 && 'bg-primary' }` } />
+                            <div className={ `size-[10px] rounded-[2px] ${ Counter > 0 ? 'bg-primary' : 'bg-base-secondary' }` } />
 
-                            <div className={ `size-[10px] rounded-[2px] bg-base-secondary ${ Counter > 1 && 'bg-primary' }` } />
+                            <div className={ `size-[10px] rounded-[2px] ${ Counter > 1 ? 'bg-primary' : 'bg-base-secondary' }` } />
 
-                            <div className={ `size-[10px] rounded-[2px] bg-base-secondary ${ Counter > 2 && 'bg-primary' }` } />
+                            <div className={ `size-[10px] rounded-[2px] ${ Counter > 2 ? 'bg-primary' : 'bg-base-secondary' }` } />
 
-                            <div className={ `size-[10px] rounded-[2px] bg-base-secondary ${ Counter > 3 && 'bg-primary' }` } />
+                            <div className={ `size-[10px] rounded-[2px] ${ Counter > 3 ? 'bg-primary' : 'bg-base-secondary' }` } />
+
+                        </div>
+
+                    </div>
+
+                </SwiperSlide>
+
+                <SwiperSlide className='m-auto flex items-center justify-center'>
+
+                    <div className='flex h-full flex-1 flex-col items-center justify-center gap-[16px]'>
+
+                        <div className='text-[18px] text-base-text'>
+
+                            {
+                                T('Splash.PasscodeModal.Repeat')
+                            }
+
+                        </div>
+
+                        <div className='flex gap-[10px]'>
+
+                            <div className={ `size-[10px] rounded-[2px] ${ Counter > 4 ? 'bg-primary' : 'bg-base-secondary' }` } />
+
+                            <div className={ `size-[10px] rounded-[2px] ${ Counter > 5 ? 'bg-primary' : 'bg-base-secondary' }` } />
+
+                            <div className={ `size-[10px] rounded-[2px] ${ Counter > 6 ? 'bg-primary' : 'bg-base-secondary' }` } />
+
+                            <div className={ `size-[10px] rounded-[2px] ${ Counter > 7 ? 'bg-primary' : 'bg-base-secondary' }` } />
 
                         </div>
 
@@ -85,7 +128,7 @@ export default function PasscodeModal({ ID = 0 }: { readonly ID: number })
 
             </Swiper>
 
-            <div className='mx-auto grid grid-cols-3 gap-[20px] p-[32px] text-[18px] font-bold text-base-text'>
+            <div className='grid grid-cols-3 gap-[20px] p-[32px] text-[18px] font-bold text-base-text'>
 
                 <button
                     className='size-[48px] cursor-pointer rounded-[8px] border border-base-border outline-base-outline hover:bg-base-secondary'

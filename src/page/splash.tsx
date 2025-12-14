@@ -5,6 +5,7 @@ import { GrLanguage } from 'react-icons/gr';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { PiPaintBrushHousehold } from 'react-icons/pi';
 
+import MenuModal from '../components/splash/menu';
 import LanguageModal from '../components/splash/language';
 import PasscodeModal from '../components/splash/passcode';
 
@@ -175,7 +176,9 @@ export default function SplashPage()
 
             </button>
 
-            <button className='mx-[16px] my-[8px] flex h-[48px] cursor-pointer items-center justify-center rounded-[8px] border border-base-border text-[14px] text-base-text/75 outline-base-outline duration-200 hover:bg-base-secondary hover:text-base-text'>
+            <button
+                className='mx-[16px] my-[8px] flex h-[48px] cursor-pointer items-center justify-center rounded-[8px] border border-base-border text-[14px] text-base-text/75 outline-base-outline duration-200 hover:bg-base-secondary hover:text-base-text'
+                onClick={ () => { Context.OpenModal(<MenuModal ID={ 0 } />); } }>
 
                 {
                     T('Splash.Import')

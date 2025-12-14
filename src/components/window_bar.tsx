@@ -1,14 +1,20 @@
 import type { JSX } from 'react';
 
+import { LuMinimize } from 'react-icons/lu';
 import { FaMinus, FaX } from 'react-icons/fa6';
 import { platform } from '@tauri-apps/plugin-os';
-import { getCurrentWindow } from '@tauri-apps/api/window';
+import { getCurrentWindow, LogicalSize } from '@tauri-apps/api/window';
 
 import { T } from '../utility/language';
 
 const OnClickMinimize = () =>
 {
     void getCurrentWindow().minimize();
+};
+
+const OnClickRestore = () =>
+{
+    void getCurrentWindow().setSize(new LogicalSize(360, 700)); // It must be same as in tauri.conf.json
 };
 
 const OnClickMaximize = () =>
@@ -49,6 +55,14 @@ export default function WindowBar(): JSX.Element | undefined
                     onClick={ OnClickMinimize }>
 
                     <FaMinus className='size-[16px] text-base-text/25 duration-200 group-hover:text-base-text/50' />
+
+                </div>
+
+                <div
+                    className='group flex size-[24px] cursor-pointer items-center justify-center rounded-[4px] duration-200 hover:bg-base-secondary'
+                    onClick={ OnClickRestore }>
+
+                    <LuMinimize className='size-[16px] text-base-text/25 duration-200 group-hover:text-base-text/50' />
 
                 </div>
 

@@ -21,25 +21,6 @@
         }
     },
 
-    "Language":
-    {
-        "Header": "Choose Language",
-
-        "en": "English",
-        "fa": "Persian",
-        "tr": "Turkey",
-        "ar": "Arabic",
-        "zh": "Chinese",
-        "ru": "Russian",
-        "hi": "Hindi"
-    },
-
-    "Passcode":
-    {
-        "Password": "Set a passcode",
-        "Repeat": "Repeat passcode"
-    },
-
     "Splash":
     {
         "Language": "Language",
@@ -55,6 +36,42 @@
 
         "Create": "Create New Wallet",
         "Import": "Import Existing Wallet",
-        "Version": "Version %s"
+        "Version": "Version %s",
+
+        "LanguageModal":
+        {
+            "Header": "Choose Language",
+
+            "en": "English",
+            "fa": "Persian",
+            "tr": "Turkey",
+            "ar": "Arabic",
+            "zh": "Chinese",
+            "ru": "Russian",
+            "hi": "Hindi"
+        },
+
+        "PasscodeModal":
+        {
+            "Password": "Set a passcode",
+            "Repeat": "Repeat passcode"
+        },
+
+        "MenuModal":
+        {
+            "Header": "Add Wallet",
+            "Description": "Add an existing wallet, or use other options",
+
+            "Wallet": "Existing Wallet",
+            "WalletDescription": "Import wallet with 12 or 24 secret recovery words",
+
+            "Signer": "Pair Signer",
+            "SignerDescription": "A higher level of control and security",
+
+            "Option": "Other options",
+
+            "Watch": "Watch Account",
+            "WatchDescription": "For monitor wallet activity without recovery phrase"
+        }
     }
 }
