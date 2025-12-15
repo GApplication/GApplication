@@ -34,7 +34,7 @@ export default function SplashPage()
 
                 <button
                     className='group flex h-[40px] cursor-pointer items-center rounded-[8px] border border-base-border outline-base-outline duration-200 hover:bg-base-secondary'
-                    onClick={ () => { Context.OpenModal(<LanguageModal ID={ 0 } />); } }>
+                    onClick={ () => { Context.OpenModal(LanguageModal); } }>
 
                     <GrLanguage className='m-[8px] size-[24px] text-base-text/75 duration-200 group-hover:text-base-text' />
 
@@ -168,7 +168,7 @@ export default function SplashPage()
 
             <button
                 className='mx-[16px] flex h-[48px] cursor-pointer items-center justify-center rounded-[8px] border border-primary-border bg-primary text-[16px] text-primary-text outline-primary-outline duration-200 hover:bg-primary-hover'
-                onClick={ () => { Context.OpenModal(<PasscodeModal ID={ 0 } />); } }>
+                onClick={ () => { Context.OpenModal(PasscodeModal); } }>
 
                 {
                     T('Splash.Create')
@@ -178,7 +178,7 @@ export default function SplashPage()
 
             <button
                 className='mx-[16px] my-[8px] flex h-[48px] cursor-pointer items-center justify-center rounded-[8px] border border-base-border text-[14px] text-base-text/75 outline-base-outline duration-200 hover:bg-base-secondary hover:text-base-text'
-                onClick={ () => { Context.OpenModal(<MenuModal ID={ 0 } />); } }>
+                onClick={ () => { Context.OpenModal(MenuModal); } }>
 
                 {
                     T('Splash.Import')

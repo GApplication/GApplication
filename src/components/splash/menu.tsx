@@ -6,13 +6,25 @@ import { LuWallet } from 'react-icons/lu';
 import { FaSignature } from 'react-icons/fa';
 import { IoIosArrowForward } from 'react-icons/io';
 
+import SuccessToast from '../info_toast';
+
 import Context from '../../utility/context';
 
 import { T } from '../../utility/language';
 
+const OnClickSoon = () =>
+{
+    Context.OpenToast(SuccessToast, { Message: 'Work in progress. it will be available in next major update' });
+};
+
 export default function MenuModal({ ID = 0 }: { readonly ID: number })
 {
     const [ IsClose, SetIsClose ] = useState(false);
+
+    const OnClickWallet = () =>
+    {
+        //
+    };
 
     return <motion.div
         animate={ { y: IsClose ? '100%' : '0%' } }
@@ -55,7 +67,9 @@ export default function MenuModal({ ID = 0 }: { readonly ID: number })
 
             </div>
 
-            <button className='group mx-[24px] flex h-[80px] cursor-pointer items-center gap-[8px] rounded-[8px] border border-base-border bg-base-secondary/25 p-[8px] outline-base-outline duration-200 hover:bg-base-secondary/50'>
+            <button
+                className='group mx-[24px] flex h-[80px] cursor-pointer items-center gap-[8px] rounded-[8px] border border-base-border bg-base-secondary/25 p-[8px] outline-base-outline duration-200 hover:bg-base-secondary/50'
+                onClick={ OnClickWallet }>
 
                 <LuWallet className='m-[8px] min-h-[24px] min-w-[24px] text-base-text/50 duration-200 group-hover:text-base-text' />
 
@@ -83,7 +97,10 @@ export default function MenuModal({ ID = 0 }: { readonly ID: number })
 
             </button>
 
-            <button className='group mx-[24px] flex h-[80px] cursor-pointer items-center gap-[8px] rounded-[8px] border border-base-border bg-base-secondary/25 p-[8px] outline-base-outline duration-200 hover:bg-base-secondary/50'>
+            <button
+
+                className='group mx-[24px] flex h-[80px] cursor-pointer items-center gap-[8px] rounded-[8px] border border-base-border bg-base-secondary/25 p-[8px] outline-base-outline duration-200 hover:bg-base-secondary/50'
+                onClick={ OnClickSoon }>
 
                 <FaSignature className='m-[8px] min-h-[24px] min-w-[24px] text-base-text/50 duration-200 group-hover:text-base-text' />
 
@@ -92,7 +109,7 @@ export default function MenuModal({ ID = 0 }: { readonly ID: number })
                     <div className='text-[14px] text-base-text'>
 
                         {
-                            T('Splash.MenuModal.Signer')
+                            T('Splash.MenuModal.Ledger')
                         }
 
                     </div>
@@ -100,7 +117,7 @@ export default function MenuModal({ ID = 0 }: { readonly ID: number })
                     <div className='text-[13px] text-base-text/50'>
 
                         {
-                            T('Splash.MenuModal.SignerDescription')
+                            T('Splash.MenuModal.LedgerDescription')
                         }
 
                     </div>
@@ -119,7 +136,9 @@ export default function MenuModal({ ID = 0 }: { readonly ID: number })
 
             </div>
 
-            <button className='group mx-[24px] flex h-[80px] cursor-pointer items-center gap-[8px] rounded-[8px] border border-base-border bg-base-secondary/25 p-[8px] outline-base-outline duration-200 hover:bg-base-secondary/50'>
+            <button
+                className='group mx-[24px] flex h-[80px] cursor-pointer items-center gap-[8px] rounded-[8px] border border-base-border bg-base-secondary/25 p-[8px] outline-base-outline duration-200 hover:bg-base-secondary/50'
+                onClick={ OnClickSoon }>
 
                 <GoSearch className='m-[8px] min-h-[24px] min-w-[24px] text-base-text/50 duration-200 group-hover:text-base-text' />
 

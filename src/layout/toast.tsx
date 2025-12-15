@@ -39,7 +39,7 @@ export default function ToastLayout()
     }
 
     return <div
-        className='absolute left-1/2 z-1 flex h-full min-h-[700px] w-full max-w-[720px] min-w-[360px] -translate-x-1/2'
+        className='pointer-events-none absolute left-1/2 z-3 flex h-full min-h-[700px] w-full max-w-[720px] min-w-[360px] -translate-x-1/2 flex-col overflow-hidden'
         style={ { paddingTop: IsWindow ? '32px' : '0px' } }>
 
         {

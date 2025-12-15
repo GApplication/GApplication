@@ -56,7 +56,7 @@ export default function PasscodeModal({ ID = 0 }: { readonly ID: number })
             <div className='h-[72px] w-full p-[16px]'>
 
                 <button
-                    className='group flex h-[40px] cursor-pointer items-center rounded-[8px] border border-base-border outline-base-outline duration-200 hover:bg-base-secondary'
+                    className='group ml-auto flex h-[40px] cursor-pointer items-center rounded-[8px] border border-base-border outline-base-outline duration-200 hover:bg-base-secondary'
                     onClick={ () => { SetIsClose(true); } }>
 
                     <MdClose className='m-[8px] size-[24px] text-base-text/75 duration-200 group-hover:text-base-text' />
