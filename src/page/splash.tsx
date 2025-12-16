@@ -5,9 +5,9 @@ import { GrLanguage } from 'react-icons/gr';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { PiPaintBrushHousehold } from 'react-icons/pi';
 
-import MenuModal from '../components/splash/menu';
-import LanguageModal from '../components/splash/language';
-import PasscodeModal from '../components/splash/passcode';
+import MenuModal from '../components/splash/menu.modal';
+import LanguageModal from '../components/splash/language.modal';
+import PasscodeModal from '../components/splash/passcode.modal';
 
 import Theme from '../utility/theme';
 import Context from '../utility/context';

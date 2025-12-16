@@ -3,9 +3,9 @@ import { motion } from 'motion/react';
 import { MdClose } from 'react-icons/md';
 import { IoIosInformationCircleOutline } from 'react-icons/io';
 
-import Context from '../utility/context';
+import Context from '../../utility/context';
 
-export default function SuccessToast({ ID, Delay, Message }: Readonly<{ ID: number; Delay: number; Message: string }>)
+export default function InfoToast({ ID, Delay, Message }: Readonly<{ ID: number; Delay: number; Message: string }>)
 {
     const [ IsClose, SetIsClose ] = useState(false);
 

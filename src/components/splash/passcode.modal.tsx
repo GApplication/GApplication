@@ -10,7 +10,7 @@ import Context from '../../utility/context';
 
 import { T } from '../../utility/language';
 
-export default function PasscodeModal({ ID = 0 }: { readonly ID: number })
+export default function PasscodeModal({ ID, Phrase }: Readonly<{ ID: number; Phrase: string }>)
 {
     const SwiperRef = useRef<SwiperClass>(undefined);
 
@@ -39,7 +39,7 @@ export default function PasscodeModal({ ID = 0 }: { readonly ID: number })
         {
             // Validate Passcode
             // Store Passcode
-            // Generate Wallet
+            // Generate Wallet -- only if Phrase is not available
             // Move To Home Page
         }
     };

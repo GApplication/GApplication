@@ -6,31 +6,42 @@ import { LuWallet } from 'react-icons/lu';
 import { FaSignature } from 'react-icons/fa';
 import { IoIosArrowForward } from 'react-icons/io';
 
-import SuccessToast from '../info_toast';
+import InfoToast from './info.toast';
+import WalletModal from './wallet.modal';
 
 import Context from '../../utility/context';
 
 import { T } from '../../utility/language';
 
-const OnClickSoon = () =>
-{
-    Context.OpenToast(SuccessToast, { Message: 'Work in progress. it will be available in next major update' });
-};
-
-export default function MenuModal({ ID = 0 }: { readonly ID: number })
+export default function MenuModal({ ID }: { readonly ID: number })
 {
     const [ IsClose, SetIsClose ] = useState(false);
+    const [ IsWallet, SetIsWallet ] = useState(false);
 
     const OnClickWallet = () =>
     {
-        //
+        SetIsClose(true);
+        SetIsWallet(true);
+    };
+
+    const OnAnimationComplete = () =>
+    {
+        if (IsClose)
+        {
+            Context.CloseModal(ID);
+        }
+
+        if (IsWallet)
+        {
+            Context.OpenModal(WalletModal);
+        }
     };
 
     return <motion.div
         animate={ { y: IsClose ? '100%' : '0%' } }
         className='flex h-full w-full'
         initial={ { y: '100%' } }
-        onAnimationComplete={ () => { if (IsClose) Context.CloseModal(ID); } }
+        onAnimationComplete={ OnAnimationComplete }
         transition={ { duration: 0.2 } }>
 
         <div className='flex w-full flex-1 flex-col items-center gap-[16px] bg-base'>
@@ -100,7 +111,7 @@ export default function MenuModal({ ID = 0 }: { readonly ID: number })
             <button
 
                 className='group mx-[24px] flex h-[80px] cursor-pointer items-center gap-[8px] rounded-[8px] border border-base-border bg-base-secondary/25 p-[8px] outline-base-outline duration-200 hover:bg-base-secondary/50'
-                onClick={ OnClickSoon }>
+                onClick={ () => Context.OpenToast<{ Delay: number; Message: string }>(InfoToast, { Delay: 5000, Message: T('Splash.MenuModal.Wip') }) }>
 
                 <FaSignature className='m-[8px] min-h-[24px] min-w-[24px] text-base-text/50 duration-200 group-hover:text-base-text' />
 
@@ -138,7 +149,7 @@ export default function MenuModal({ ID = 0 }: { readonly ID: number })
 
             <button
                 className='group mx-[24px] flex h-[80px] cursor-pointer items-center gap-[8px] rounded-[8px] border border-base-border bg-base-secondary/25 p-[8px] outline-base-outline duration-200 hover:bg-base-secondary/50'
-                onClick={ OnClickSoon }>
+                onClick={ () => Context.OpenToast<{ Delay: number; Message: string }>(InfoToast, { Delay: 5000, Message: T('Splash.MenuModal.Wip') }) }>
 
                 <GoSearch className='m-[8px] min-h-[24px] min-w-[24px] text-base-text/50 duration-200 group-hover:text-base-text' />
 
