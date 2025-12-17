@@ -21,6 +21,10 @@ import SlideIcon3 from '../assets/image/splash-slide-3.png';
 
 import 'swiper/css';
 
+/**
+ * SplashPage - The onboarding splash screen containing feature slides
+ * @returns {JSX.Element} The splash page component
+ */
 export default function SplashPage()
 {
     const SwiperRef = useRef<SwiperClass>(undefined);

@@ -5,6 +5,10 @@ import { platform } from '@tauri-apps/plugin-os';
 
 import EventMap from '../utility/event';
 
+/**
+ * ToastLayout - Renders active toast components and adjusts for platform UI
+ * @returns {JSX.Element | undefined} Container for toast components or undefined when empty
+ */
 export default function ToastLayout()
 {
     const IsWindow = platform() === 'windows';
@@ -13,11 +17,19 @@ export default function ToastLayout()
 
     useEffect(() =>
     {
+        /**
+         * OpenHandler - Adds a toast component to the layout map
+         * @param {JSX.Element} Component - The toast component instance to add
+         */
         const OpenHandler = (Component: JSX.Element) =>
         {
             SetLayoutMap((Previous) => [ ...Previous, Component ]);
         };
 
+        /**
+         * CloseHandler - Removes a toast component from the layout map by ID
+         * @param {number} ID - The toast component numeric identifier
+         */
         const CloseHandler = (ID: number) =>
         {
             SetLayoutMap((Previous) => Previous.filter((I) => I.key !== `${ ID }`));

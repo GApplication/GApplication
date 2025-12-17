@@ -14,6 +14,11 @@ const Language: { Code: LanguageType; Country: string } [] =
     { Code: 'hi', Country: 'in' }
 ];
 
+/**
+ * ResolveKey - Resolves a dotted translation key into a localized string value
+ * @param {string} K - Dot-separated key path (e.g. 'Splash.Slide1Header')
+ * @returns {string | undefined} The resolved string or undefined if missing
+ */
 const ResolveKey = (K: string): string | undefined =>
 {
     let Result = LanguageMap;
@@ -31,6 +36,10 @@ const ResolveKey = (K: string): string | undefined =>
     return typeof Result === 'string' ? Result : undefined;
 };
 
+/**
+ * Initialize - Loads persisted language preference and applies it
+ * @returns {Promise<void>} Resolves after language resources are loaded
+ */
 const Initialize = async() =>
 {
     let Lang: LanguageType = 'en';
@@ -78,6 +87,11 @@ const Initialize = async() =>
     await SetLang(Lang);
 };
 
+/**
+ * SetLang - Sets the current language and loads language resource file
+ * @param {LanguageType} Lang - The language code to set (e.g. 'en')
+ * @returns {Promise<void>} Resolves when resource has been loaded and applied
+ */
 const SetLang = async(Lang: LanguageType) =>
 {
     LangCurrent = Lang;
@@ -97,6 +111,10 @@ const SetLang = async(Lang: LanguageType) =>
     document.documentElement.dir = Dir;
 };
 
+/**
+ * GetLang - Returns the metadata for the currently selected language
+ * @returns {{ Code: LanguageType; Country: string }} Language metadata object
+ */
 const GetLang = () =>
 {
     const Lang = Language.find((I) => I.Code === LangCurrent);
@@ -109,6 +127,13 @@ const GetLang = () =>
     return Lang;
 };
 
+/**
+ * T - Translation helper that resolves a localized string and applies simple
+ * positional substitutions using %s tokens
+ * @param {string} Name - The translation key
+ * @param {...(string|number)} Args - Optional substitution values for %s tokens
+ * @returns {string} The final translated string
+ */
 export const T = (Name: string, ...Args: (string | number)[]): string =>
 {
     let Template = ResolveKey(Name) ?? `[${ Name }]`;

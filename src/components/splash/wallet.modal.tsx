@@ -13,15 +13,23 @@ import WordList from '../../assets/wordlist.json';
 const PhraseKey = Array.from({ length: 12 }, (_, I) => String(I + 1) as PhraseKey);
 const PhraseMap = Object.fromEntries(PhraseKey.map((K) => [ K, { Word: '', Error: false } ])) as Record<PhraseKey, { Word: string; Error: boolean }>;
 
+/**
+ * IsValidWord - Checks whether a mnemonic word is valid or empty
+ * @param {string} W - The word to validate
+ * @returns {boolean} True if the word is empty or exists in the wordlist
+ */
 const IsValidWord = (W: string) => W === '' || WordList.includes(W);
 
-export default function WalletModal({ ID }: { readonly ID: number })
+export default function WalletModal({ ID }: Readonly<{ ID: number }>)
 {
     const InputMap = useRef<Record<PhraseKey, HTMLInputElement>>({} as Record<PhraseKey, HTMLInputElement>);
 
     const [ IsClose, SetIsClose ] = useState(false);
     const [ Phrase, SetPhrase ] = useState(PhraseMap);
 
+    /**
+     * OnClickContinue - Validates the entered phrase and proceeds to passcode entry
+     */
     const OnClickContinue = () =>
     {
         const InvalidKey = PhraseKey.find((Key) => Phrase[Key].Word === '' || !IsValidWord(Phrase[Key].Word));
@@ -30,6 +38,8 @@ export default function WalletModal({ ID }: { readonly ID: number })
         {
             SetPhrase((P) =>
             {
+                InputMap.current[PhraseKey[PhraseKey.indexOf(InvalidKey)]]?.focus();
+
                 return { ...P, [InvalidKey]: { Word: '', Error: true } };
             });
 
@@ -43,6 +53,11 @@ export default function WalletModal({ ID }: { readonly ID: number })
         Context.OpenModal<{ Phrase: string }>(PasscodeModal, { Phrase: RecoveryPhrase });
     };
 
+    /**
+     * OnWordChange - Handles changes to individual mnemonic word inputs
+     * @param {PhraseKey} Key - The positional key (1..12) of the word being edited
+     * @param {string} Value - The new input value for the word
+     */
     const OnWordChange = (Key: PhraseKey, Value: string) =>
     {
         const Word = Value.toLowerCase().trim().replaceAll(/\s+/g, '');

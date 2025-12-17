@@ -6,10 +6,18 @@ import { MdClose } from 'react-icons/md';
 import { FaArrowLeft } from 'react-icons/fa6';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
+import Wallet from '../../core/wallet';
+
 import Context from '../../utility/context';
 
 import { T } from '../../utility/language';
 
+/**
+ * PasscodeModal - A modal component for entering and confirming a passcode
+ * @param {number} ID - The unique identifier for the modal instance
+ * @param {string} Phrase - The existing mnemonic phrase (empty if creating new wallet)
+ * @returns {JSX.Element} The rendered passcode modal component
+ */
 export default function PasscodeModal({ ID, Phrase }: Readonly<{ ID: number; Phrase: string }>)
 {
     const SwiperRef = useRef<SwiperClass>(undefined);
@@ -17,7 +25,12 @@ export default function PasscodeModal({ ID, Phrase }: Readonly<{ ID: number; Phr
     const [ Counter, SetCounter ] = useState(0);
     const [ IsClose, SetIsClose ] = useState(false);
 
-    const OnPush = (Value: string) =>
+    /**
+     * OnPush - Handles passcode digit input and validation
+     * Manages the passcode entry flow, validates input, and triggers wallet generation
+     * @param {string} Value - The digit/action value entered ('0'-'9' for digits)
+     */
+    const OnPush = async(Value: string) =>
     {
         if (Value === '-')
         {
@@ -37,10 +50,24 @@ export default function PasscodeModal({ ID, Phrase }: Readonly<{ ID: number; Phr
 
         if (Counter === 7)
         {
-            // Validate Passcode
-            // Store Passcode
-            // Generate Wallet -- only if Phrase is not available
-            // Move To Home Page
+            if (Phrase.length > 0)
+            {
+                if (Wallet.Validate(Phrase))
+                {
+                    return;
+                }
+
+                // Future: Handle invalid mnemonic validation failure
+
+                return;
+            }
+
+            Wallet.Generate();
+            
+            // Future: Validate Passcode
+            // Future: Store Passcode
+            // Future: Generate Wallet (only if Phrase not available)
+            // Future: Move To Home Page
         }
     };
 

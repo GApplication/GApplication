@@ -7,6 +7,10 @@ import WindowBarComponent from '../components/window_bar';
 
 import EventMap from '../utility/event';
 
+/**
+ * PageLayout - Renders the active pages stack and the platform window bar
+ * @returns {JSX.Element} The page container including the window bar and page views
+ */
 export default function PageLayout()
 {
     const IsWindow = platform() === 'windows';
@@ -15,11 +19,19 @@ export default function PageLayout()
 
     useEffect(() =>
     {
+        /**
+         * OpenHandler - Adds a page component to the layout map
+         * @param {JSX.Element} Component - The page component instance to add
+         */
         const OpenHandler = (Component: JSX.Element) =>
         {
             SetLayoutMap((Previous) => [ ...Previous, Component ]);
         };
 
+        /**
+         * CloseHandler - Removes a page component from the layout map by ID
+         * @param {number} ID - The page component numeric identifier
+         */
         const CloseHandler = (ID: number) =>
         {
             SetLayoutMap((Previous) => Previous.filter((I) => I.key !== `${ ID }`));

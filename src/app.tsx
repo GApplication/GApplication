@@ -25,12 +25,20 @@ import { T } from './utility/language';
 
 import './app.css';
 
+/**
+ * Application - Root React application component that initializes platform integrations
+ * and opens the initial page (home or splash)
+ * @returns {JSX.Element} The root application component
+ */
 function Application()
 {
     useEffect(() =>
     {
         if (platform() === 'windows')
         {
+            /**
+             * AsyncTask - Performs async platform-specific initialization (tray/menu/icon)
+             */
             const AsyncTask = async() =>
             {
                 const AppIcon = await defaultWindowIcon();
@@ -62,7 +70,7 @@ function Application()
 
                     const AppTrayMenu = await Menu.new(TryMenu);
 
-                    await TrayIcon.new({ menu: AppTrayMenu, icon: AppIcon });
+                    await TrayIcon.new({ menu: AppTrayMenu, icon: AppIcon, showMenuOnLeftClick: false });
                 }
             };
 
@@ -90,12 +98,15 @@ function Application()
     </>;
 }
 
-document.addEventListener('keydown', (Ev) =>
+/**
+ * Prevent certain keyboard shortcuts from triggering browser behavior
+ */
+document.addEventListener('keydown', (_Ev) =>
 {
     /*
-    if (Ev.key === 'F3' || Ev.key === 'F5' || Ev.key === 'F7' || Ev.ctrlKey && Ev.key === 'r')
+    if (_Ev.key === 'F3' || _Ev.key === 'F5' || _Ev.key === 'F7' || _Ev.ctrlKey && _Ev.key === 'r')
     {
-        Ev.preventDefault();
+        _Ev.preventDefault();
     }
     */
 });

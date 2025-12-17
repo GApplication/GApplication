@@ -5,6 +5,13 @@ import { IoIosInformationCircleOutline } from 'react-icons/io';
 
 import Context from '../../utility/context';
 
+/**
+ * InfoToast - A small informational toast component with auto-dismiss
+ * @param {number} ID - Toast instance identifier
+ * @param {number} Delay - Milliseconds before auto-dismiss
+ * @param {string} Message - The message text to display
+ * @returns {JSX.Element} The info toast component
+ */
 export default function InfoToast({ ID, Delay, Message }: Readonly<{ ID: number; Delay: number; Message: string }>)
 {
     const [ IsClose, SetIsClose ] = useState(false);

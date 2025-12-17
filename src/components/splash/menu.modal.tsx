@@ -13,35 +13,30 @@ import Context from '../../utility/context';
 
 import { T } from '../../utility/language';
 
-export default function MenuModal({ ID }: { readonly ID: number })
+/**
+ * MenuModal - A splash menu modal exposing quick actions
+ * @param {number} ID - Modal instance identifier
+ * @returns {JSX.Element} The menu modal component
+ */
+export default function MenuModal({ ID }: Readonly<{ ID: number }>)
 {
     const [ IsClose, SetIsClose ] = useState(false);
-    const [ IsWallet, SetIsWallet ] = useState(false);
 
+    /**
+     * OnClickWallet - Closes this modal and opens the wallet modal
+     */
     const OnClickWallet = () =>
     {
-        SetIsClose(true);
-        SetIsWallet(true);
-    };
+        Context.CloseModal(ID);
 
-    const OnAnimationComplete = () =>
-    {
-        if (IsClose)
-        {
-            Context.CloseModal(ID);
-        }
-
-        if (IsWallet)
-        {
-            Context.OpenModal(WalletModal);
-        }
+        Context.OpenModal(WalletModal);
     };
 
     return <motion.div
         animate={ { y: IsClose ? '100%' : '0%' } }
         className='flex h-full w-full'
         initial={ { y: '100%' } }
-        onAnimationComplete={ OnAnimationComplete }
+        onAnimationComplete={ () => { if (IsClose) Context.CloseModal(ID); } }
         transition={ { duration: 0.2 } }>
 
         <div className='flex w-full flex-1 flex-col items-center gap-[16px] bg-base'>
@@ -79,7 +74,7 @@ export default function MenuModal({ ID }: { readonly ID: number })
             </div>
 
             <button
-                className='group mx-[24px] flex h-[80px] cursor-pointer items-center gap-[8px] rounded-[8px] border border-base-border bg-base-secondary/25 p-[8px] outline-base-outline duration-200 hover:bg-base-secondary/50'
+                className='group mx-[24px] flex h-[80px] max-w-[420px] cursor-pointer items-center gap-[8px] rounded-[8px] border border-base-border bg-base-secondary/25 p-[8px] outline-base-outline duration-200 hover:bg-base-secondary/50'
                 onClick={ OnClickWallet }>
 
                 <LuWallet className='m-[8px] min-h-[24px] min-w-[24px] text-base-text/50 duration-200 group-hover:text-base-text' />
@@ -109,8 +104,7 @@ export default function MenuModal({ ID }: { readonly ID: number })
             </button>
 
             <button
-
-                className='group mx-[24px] flex h-[80px] cursor-pointer items-center gap-[8px] rounded-[8px] border border-base-border bg-base-secondary/25 p-[8px] outline-base-outline duration-200 hover:bg-base-secondary/50'
+                className='group mx-[24px] flex h-[80px] max-w-[420px] cursor-pointer items-center gap-[8px] rounded-[8px] border border-base-border bg-base-secondary/25 p-[8px] outline-base-outline duration-200 hover:bg-base-secondary/50'
                 onClick={ () => Context.OpenToast<{ Delay: number; Message: string }>(InfoToast, { Delay: 5000, Message: T('Splash.MenuModal.Wip') }) }>
 
                 <FaSignature className='m-[8px] min-h-[24px] min-w-[24px] text-base-text/50 duration-200 group-hover:text-base-text' />
@@ -148,7 +142,7 @@ export default function MenuModal({ ID }: { readonly ID: number })
             </div>
 
             <button
-                className='group mx-[24px] flex h-[80px] cursor-pointer items-center gap-[8px] rounded-[8px] border border-base-border bg-base-secondary/25 p-[8px] outline-base-outline duration-200 hover:bg-base-secondary/50'
+                className='group mx-[24px] flex h-[80px] max-w-[420px] cursor-pointer items-center gap-[8px] rounded-[8px] border border-base-border bg-base-secondary/25 p-[8px] outline-base-outline duration-200 hover:bg-base-secondary/50'
                 onClick={ () => Context.OpenToast<{ Delay: number; Message: string }>(InfoToast, { Delay: 5000, Message: T('Splash.MenuModal.Wip') }) }>
 
                 <GoSearch className='m-[8px] min-h-[24px] min-w-[24px] text-base-text/50 duration-200 group-hover:text-base-text' />

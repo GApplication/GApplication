@@ -1,5 +1,10 @@
 import Storage from './storage';
 
+/**
+ * SetTheme - Applies the given theme values to the document and persists selection
+ * @param {'LIGHT' | 'DARK'} Theme - The theme to apply
+ * @returns {Promise<void>} Resolves when theme is applied and stored
+ */
 const SetTheme = async(Theme: 'LIGHT' | 'DARK') =>
 {
     await Storage.SetValue('App.Theme', Theme);
@@ -38,11 +43,19 @@ const SetTheme = async(Theme: 'LIGHT' | 'DARK') =>
     document.documentElement.style.setProperty('--color-base-secondary', `oklch(${ BaseSecondary.L }% ${ BaseSecondary.C } ${ BaseSecondary.H })`);
 };
 
+/**
+ * Initialize - Reads persisted theme preference and applies it
+ * @returns {Promise<void>} Resolves when initialization is complete
+ */
 const Initialize = async() =>
 {
     await SetTheme(await Storage.GetValue('App.Theme') === 'DARK' ? 'DARK' : 'LIGHT');
 };
 
+/**
+ * Toggle - Toggles between LIGHT and DARK themes and persists selection
+ * @returns {Promise<void>} Resolves when theme has been toggled and applied
+ */
 const Toggle = async() =>
 {
     await SetTheme(await Storage.GetValue('App.Theme') === 'DARK' ? 'LIGHT' : 'DARK');

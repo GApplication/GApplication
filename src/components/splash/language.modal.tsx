@@ -7,10 +7,19 @@ import Language from '../../utility/language';
 
 import { T } from '../../utility/language';
 
-export default function LanguageModal({ ID }: { readonly ID: number })
+/**
+ * LanguageModal - Modal for selecting application language
+ * @param {number} ID - Modal instance identifier
+ * @returns {JSX.Element} The language selection modal
+ */
+export default function LanguageModal({ ID }: Readonly<{ ID: number }>)
 {
     const [ IsClose, SetIsClose ] = useState(false);
 
+    /**
+     * OnClickLanguage - Sets the application language and reloads the UI
+     * @param {LanguageType} Lang - The language code to set
+     */
     const OnClickLanguage = async(Lang: LanguageType) =>
     {
         SetIsClose(true);

@@ -2,6 +2,10 @@ import { FaLanguage } from 'react-icons/fa6';
 
 import WindowBarComponent from '../components/window_bar';
 
+/**
+ * HomePage - Primary application home page wrapper
+ * @returns {JSX.Element} The home page component
+ */
 export default function SplashPage()
 {
     return (

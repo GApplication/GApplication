@@ -1,32 +1,48 @@
 import type { JSX } from 'react';
 
-import { LuMinimize } from 'react-icons/lu';
 import { FaMinus, FaX } from 'react-icons/fa6';
 import { platform } from '@tauri-apps/plugin-os';
+import { LuRectangleVertical } from 'react-icons/lu';
 import { getCurrentWindow, LogicalSize } from '@tauri-apps/api/window';
 
 import { T } from '../utility/language';
 
+/**
+ * OnClickMinimize - Minimizes the current application window
+ */
 const OnClickMinimize = () =>
 {
     void getCurrentWindow().minimize();
 };
 
+/**
+ * OnClickRestore - Restores the application window to the default logical size
+ */
 const OnClickRestore = () =>
 {
     void getCurrentWindow().setSize(new LogicalSize(360, 700)); // It must be same as in tauri.conf.json
 };
 
+/**
+ * OnClickMaximize - Maximizes the current application window
+ */
 const OnClickMaximize = () =>
 {
     void getCurrentWindow().maximize();
 };
 
+/**
+ * OnClickClose - Hides (closes) the current application window
+ */
 const OnClickClose = () =>
 {
     void getCurrentWindow().hide();
 };
 
+/**
+ * WindowBar - Platform-specific top window bar with basic window controls
+ * @returns {JSX.Element | undefined} The window bar element or undefined on unsupported platforms
+ */
 export default function WindowBar(): JSX.Element | undefined
 {
     if (platform() !== 'windows')
@@ -62,7 +78,7 @@ export default function WindowBar(): JSX.Element | undefined
                     className='group flex size-[24px] cursor-pointer items-center justify-center rounded-[4px] duration-200 hover:bg-base-secondary'
                     onClick={ OnClickRestore }>
 
-                    <LuMinimize className='size-[16px] text-base-text/25 duration-200 group-hover:text-base-text/50' />
+                    <LuRectangleVertical className='size-[16px] text-base-text/25 duration-200 group-hover:text-base-text/50' />
 
                 </div>
 

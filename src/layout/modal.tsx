@@ -5,6 +5,10 @@ import { platform } from '@tauri-apps/plugin-os';
 
 import EventMap from '../utility/event';
 
+/**
+ * ModalLayout - Renders modal components and manages open/close lifecycle
+ * @returns {JSX.Element | undefined} Modal container or undefined when empty
+ */
 export default function ModalLayout()
 {
     const IsWindow = platform() === 'windows';
@@ -13,11 +17,19 @@ export default function ModalLayout()
 
     useEffect(() =>
     {
+        /**
+         * OpenHandler - Adds a modal component to the layout map
+         * @param {JSX.Element} Component - The modal component instance to add
+         */
         const OpenHandler = (Component: JSX.Element) =>
         {
             SetLayoutMap((Previous) => [ ...Previous, Component ]);
         };
 
+        /**
+         * CloseHandler - Removes a modal component from the layout map by ID
+         * @param {number} ID - The modal component numeric identifier
+         */
         const CloseHandler = (ID: number) =>
         {
             SetLayoutMap((Previous) => Previous.filter((I) => I.key !== `${ ID }`));
