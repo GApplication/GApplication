@@ -56,7 +56,7 @@ export default function SplashPage()
 
                 <button
                     className='group flex h-[40px] cursor-pointer items-center rounded-[8px] border border-base-border outline-base-outline duration-200 hover:bg-base-secondary'
-                    onClick={ () => void Theme.Toggle() }>
+                    onClick={ () => Theme.Toggle() }>
 
                     <PiPaintBrushHousehold className='m-[8px] size-[24px] text-base-text/75 duration-200 group-hover:text-base-text' />
 

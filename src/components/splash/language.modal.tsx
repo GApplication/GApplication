@@ -67,7 +67,7 @@ export default function LanguageModal({ ID }: Readonly<{ ID: number }>)
                         <button
                             className='flex h-[40px] cursor-pointer items-center gap-[8px] rounded-[8px] border border-base-border p-[8px] text-base-text outline-base-outline duration-200 hover:bg-base-secondary'
                             key={ I.Code }
-                            onClick={ () => { void OnClickLanguage(I.Code); } }>
+                            onClick={ () => { OnClickLanguage(I.Code); } }>
 
                             <div className={ `fi fi-${ I.Country } size-[24px]` } />
 

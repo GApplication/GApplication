@@ -6,13 +6,13 @@ import EventMap from './event';
  * OpenPage - Emits a page open event to render a new page component
  * @template T
  * @param {(Prop: { ID: number } & T) => JSX.Element} Component - The page component to render
- * @param {object} [Option] - Optional props to pass into the page (may include ID)
+ * @param {object} [Option] - Props to pass into the page
  */
-const OpenPage = <T extends object = object>(Component: (Prop: { ID: number } & T) => JSX.Element, Option?: keyof T extends never ? { ID?: number } : { ID?: number } & T) =>
+const OpenPage = <T extends object = object>(Component: (Prop: { ID: number } & T) => JSX.Element, Option: keyof T extends never ? { ID: number } : { ID: number } & T) =>
 {
-    const ID = Option?.ID || Date.now();
+    const ID = Option.ID;
 
-    const Props = { ...Option, ID } as { ID: number } & T;
+    const Props = { ...Option } as { ID: number } & T;
 
     EventMap.Emit('Page.Open', <Component { ...Props } key={ ID } />);
 };

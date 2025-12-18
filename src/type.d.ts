@@ -17,7 +17,7 @@ type EventCall<T extends keyof EventMap> = (...Args: EventMap[T]) => void;
 type PhraseKey = '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '10' | '11' | '12';
 
 // Storage
-type StorageKey = 'App.Language' | 'App.Theme';
+type StorageKey = 'App.Language' | 'App.Theme' | 'App.Phrase' | 'App.Passcode';
 
 // Language
 type LanguageType = 'en' | 'fa' | 'tr' | 'ar' | 'zh' | 'ru' | 'hi';

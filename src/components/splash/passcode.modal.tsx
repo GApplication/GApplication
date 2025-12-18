@@ -6,11 +6,17 @@ import { MdClose } from 'react-icons/md';
 import { FaArrowLeft } from 'react-icons/fa6';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
+import HomePage from '../../page/home';
+
 import Wallet from '../../core/wallet';
 
+import Misc from '../../utility/misc';
+import Storage from '../../utility/storage';
 import Context from '../../utility/context';
 
 import { T } from '../../utility/language';
+
+const Passcode: string[] = [];
 
 /**
  * PasscodeModal - A modal component for entering and confirming a passcode
@@ -36,6 +42,8 @@ export default function PasscodeModal({ ID, Phrase }: Readonly<{ ID: number; Phr
         {
             SwiperRef.current?.slideTo(0);
 
+            Passcode.length = 0;
+
             SetCounter(0);
 
             return;
@@ -46,28 +54,48 @@ export default function PasscodeModal({ ID, Phrase }: Readonly<{ ID: number; Phr
             SwiperRef.current?.slideTo(1);
         }
 
+        Passcode.push(Value);
+
+        if ('vibrate' in navigator)
+        {
+            navigator.vibrate(200);
+        }
+
         SetCounter((PreviousValue) => PreviousValue + 1);
 
         if (Counter === 7)
         {
-            if (Phrase.length > 0)
+            if (Misc.ValidatePasscode(Passcode))
             {
-                if (Wallet.Validate(Phrase))
+                // @todo Add visual feedback for invalid passcode
+
+                if ('vibrate' in navigator)
                 {
-                    return;
+                    navigator.vibrate(500);
                 }
 
-                // Future: Handle invalid mnemonic validation failure
+                SwiperRef.current?.slideTo(0);
+
+                Passcode.length = 0;
+
+                SetCounter(0);
 
                 return;
             }
 
-            Wallet.Generate();
-            
-            // Future: Validate Passcode
-            // Future: Store Passcode
-            // Future: Generate Wallet (only if Phrase not available)
-            // Future: Move To Home Page
+            const PasscodeHash = await Misc.HashWithSalt(Passcode.slice(0, 4).join(''));
+
+            await Storage.SetValueSafe('App.Passcode', PasscodeHash);
+
+            const Mnemonic = Phrase && Phrase.length > 0 ? Phrase : Wallet.Generate();
+
+            await Storage.SetValueSafe('App.Phrase', Mnemonic);
+
+            Context.CloseModal(ID);
+
+            Context.ClosePage(1);
+
+            Context.OpenPage(HomePage, { ID: 1 });
         }
     };
 

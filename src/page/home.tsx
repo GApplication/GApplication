@@ -6,7 +6,7 @@ import WindowBarComponent from '../components/window_bar';
  * HomePage - Primary application home page wrapper
  * @returns {JSX.Element} The home page component
  */
-export default function SplashPage()
+export default function HomePage()
 {
     return (
         <div className='flex h-screen w-screen'>
@@ -21,7 +21,7 @@ export default function SplashPage()
 
                 <div className='px-[8px] text-[13px] text-primary1'>
 
-                    English
+                    Home Page
 
                 </div>
 

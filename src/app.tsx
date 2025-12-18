@@ -54,7 +54,7 @@ function Application()
                                 text: T('App.Tray.Open'),
                                 action: () =>
                                 {
-                                    void getCurrentWindow().show();
+                                    getCurrentWindow().show();
                                 }
                             },
                             {
@@ -62,7 +62,7 @@ function Application()
                                 text: T('App.Tray.Quit'),
                                 action: () =>
                                 {
-                                    void getCurrentWindow().close();
+                                    getCurrentWindow().close();
                                 }
                             }
                         ]
@@ -74,16 +74,16 @@ function Application()
                 }
             };
 
-            void AsyncTask();
+            AsyncTask();
         }
 
         if (Account.IsLogged())
         {
-            Context.OpenPage(HomePage);
+            Context.OpenPage(HomePage, { ID: 1 });
         }
         else
         {
-            Context.OpenPage(SplashPage);
+            Context.OpenPage(SplashPage, { ID: 1 });
         }
     }, [ ]);
 
