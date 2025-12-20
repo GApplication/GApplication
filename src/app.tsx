@@ -77,15 +77,37 @@ function Application()
             AsyncTask();
         }
 
-        if (Account.IsLogged())
+        const AsyncTaskAccount = async() =>
         {
-            Context.OpenPage(HomePage, { ID: 1 });
-        }
-        else
-        {
-            Context.OpenPage(SplashPage, { ID: 1 });
-        }
+            if (await Account.IsLogged())
+            {
+                Context.OpenPage(HomePage, { ID: 1 });
+            }
+            else
+            {
+                Context.OpenPage(SplashPage, { ID: 1 });
+            }
+        };
+
+        AsyncTaskAccount();
     }, [ ]);
+
+    useEffect(() =>
+    {
+        function MessageHandler(event: MessageEvent)
+        {
+            console.log(event.origin);
+            console.log(event.data.type);
+            console.log(event.data.payload);
+        }
+
+        window.addEventListener('message', MessageHandler);
+
+        return () =>
+        {
+            window.removeEventListener('message', MessageHandler);
+        };
+    }, []);
 
     return <>
 

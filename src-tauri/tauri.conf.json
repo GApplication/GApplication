@@ -12,6 +12,7 @@
     },
     "app":
     {
+        "withGlobalTauri": false,
         "windows":
         [
             {
@@ -82,6 +83,10 @@
     },
     "bundle":
     {
+        "android":
+        {
+            "minSdkVersion": 26
+        },
         "active": true,
         "targets": "all",
         "icon":

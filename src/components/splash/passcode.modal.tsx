@@ -8,10 +8,9 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 import HomePage from '../../page/home';
 
-import Wallet from '../../core/wallet';
-
 import Misc from '../../utility/misc';
-import Storage from '../../utility/storage';
+import Wallet from '../../core/wallet';
+import Account from '../../core/account';
 import Context from '../../utility/context';
 
 import { T } from '../../utility/language';
@@ -67,8 +66,6 @@ export default function PasscodeModal({ ID, Phrase }: Readonly<{ ID: number; Phr
         {
             if (Misc.ValidatePasscode(Passcode))
             {
-                // @todo Add visual feedback for invalid passcode
-
                 if ('vibrate' in navigator)
                 {
                     navigator.vibrate(500);
@@ -85,11 +82,9 @@ export default function PasscodeModal({ ID, Phrase }: Readonly<{ ID: number; Phr
 
             const PasscodeHash = await Misc.HashWithSalt(Passcode.slice(0, 4).join(''));
 
-            await Storage.SetValueSafe('App.Passcode', PasscodeHash);
-
             const Mnemonic = Phrase && Phrase.length > 0 ? Phrase : Wallet.Generate();
 
-            await Storage.SetValueSafe('App.Phrase', Mnemonic);
+            Account.Login(PasscodeHash, Mnemonic);
 
             Context.CloseModal(ID);
 

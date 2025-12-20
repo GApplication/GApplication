@@ -8,7 +8,7 @@ import EventMap from './event';
  * @param {(Prop: { ID: number } & T) => JSX.Element} Component - The page component to render
  * @param {object} [Option] - Props to pass into the page
  */
-const OpenPage = <T extends object = object>(Component: (Prop: { ID: number } & T) => JSX.Element, Option: keyof T extends never ? { ID: number } : { ID: number } & T) =>
+const OpenPage = <T extends object>(Component: (Prop: { ID: number } & T) => JSX.Element, Option: keyof T extends never ? { ID: number } : { ID: number } & T) =>
 {
     const ID = Option.ID;
 

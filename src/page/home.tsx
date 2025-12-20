@@ -1,32 +1,22 @@
-import { FaLanguage } from 'react-icons/fa6';
+import { GrLanguage } from 'react-icons/gr';
+import { PiPaintBrushHousehold } from 'react-icons/pi';
 
-import WindowBarComponent from '../components/window_bar';
+import NavigationComponent from '../components/home/navigation';
 
-/**
- * HomePage - Primary application home page wrapper
- * @returns {JSX.Element} The home page component
- */
+import { T } from '../utility/language';
+
 export default function HomePage()
 {
     return (
-        <div className='flex h-screen w-screen'>
+        <div className='relative flex h-full w-full flex-col items-center justify-center bg-base'>
 
-            <WindowBarComponent />
+            <iframe
+                className='h-full w-full border-0'
+                referrerPolicy='no-referrer'
+                sandbox='allow-scripts allow-forms allow-popups allow-modals allow-downloads allow-same-origin'
+                src='https://guardian-service.ir' />
 
-            <div className='m-[16px] flex h-[40px] cursor-pointer items-center rounded-[8px] border border-gray-300 bg-gray-200'>
+            <NavigationComponent />
 
-                <FaLanguage className='m-[8px] size-[24px] text-black' />
-
-                <div className='h-full w-[1px] bg-gray-300' />
-
-                <div className='px-[8px] text-[13px] text-primary1'>
-
-                    Home Page
-
-                </div>
-
-            </div>
-
-        </div>
-    );
+        </div>);
 }

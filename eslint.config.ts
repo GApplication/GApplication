@@ -2,7 +2,6 @@ import Globals from 'globals';
 import PluginJS from '@eslint/js';
 import PluginTS from 'typescript-eslint';
 import PluginReact from 'eslint-plugin-react';
-import PluginSonar from 'eslint-plugin-sonarjs';
 import PluginUnicorn from 'eslint-plugin-unicorn';
 import PluginStylistic from '@stylistic/eslint-plugin';
 import PluginTailwindCSS from 'eslint-plugin-better-tailwindcss';
@@ -35,7 +34,6 @@ export default defineConfig([
     },
 
     // Popular Plugin
-    PluginSonar.configs.recommended,
     PluginUnicorn.configs.recommended,
 
     // Stylistic
@@ -88,12 +86,6 @@ export default defineConfig([
         },
         rules:
         {
-            // SonarJS
-            'sonarjs/pseudo-random': 'off',
-            'sonarjs/no-small-switch': 'off',
-            'sonarjs/no-nested-functions': 'off',
-            'sonarjs/function-return-type': 'off',
-
             // Unicorn
             'unicorn/prefer-global-this': 'off',
             'unicorn/no-typeof-undefined': 'off',
@@ -112,7 +104,7 @@ export default defineConfig([
             'better-tailwindcss/no-unregistered-classes': [ 'error', { ignore: [ 'fi' ] } ],
 
             // TypeScript
-            '@typescript-eslint/no-unused-vars': 'off', // Handled by TypeScript Compiler
+            '@typescript-eslint/no-unused-vars': 'off', // Handled by TypeScript compiler
 
             // Stylistic
             '@stylistic/jsx-curly-spacing': 'off',
@@ -140,92 +132,3 @@ export default defineConfig([
         }
     }
 ]);
-
-/*
-import type { Rule } from 'eslint';
-import type { TSESTree } from '@typescript-eslint/utils';
-
-    // Custom
-    {
-        plugins:
-        {
-            custom:
-            {
-                rules:
-                {
-                    //
-                }
-            }
-        },
-        rules:
-        {
-            // 'custom/no-predefined-tailwindcss': 'error'
-        }
-    }
-
-    'no-predefined-tailwindcss':
-    {
-        meta:
-        {
-            type: 'problem',
-            docs:
-            {
-                description: 'Disallow predefined TailwindCSS numeric values.'
-            },
-            messages:
-            {
-                predefined: 'Avoid predefined.'
-            },
-            schema:
-            [
-                //
-            ]
-        },
-        create(context)
-        {
-            const sourceCode = context.sourceCode;
-
-            return {
-                JSXAttribute(node: TSESTree.JSXAttribute)
-                {
-                    if (node.name.name !== 'className' || !node.value)
-                    {
-                        return;
-                    }
-
-                    // eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison
-                    if (node.value.type !== 'Literal' || typeof node.value.value !== 'string')
-                    {
-                        return;
-                    }
-
-                    if (node.value.value.length < 3 || !node.value.value.includes('-'))
-                    {
-                        return;
-                    }
-
-                    const Result = node.value.value.split(' ');
-
-                    for (const R of Result)
-                    {
-                        if (!(/-\d/).test(R))
-                        {
-                            continue;
-                        }
-
-                        const ID = node.value.value.indexOf(R);
-
-                        if (ID === -1 || R.includes('duration-') || R.includes('flex-') || R.includes('z-') || R.includes('bg-') || R.includes('border-') || R.includes('text-') || R.includes('from-') || R.includes('to-') || R.includes('calc('))
-                        {
-                            continue;
-                        }
-
-                        const Begin = node.value.range[0] + 1 + ID;
-
-                        context.report({ node: node.value, loc: { start: sourceCode.getLocFromIndex(Begin), end: sourceCode.getLocFromIndex(Begin + R.length) }, messageId: 'predefined' });
-                    }
-                }
-            };
-        }
-    } as Rule.RuleModule
-*/
