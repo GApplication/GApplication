@@ -1,11 +1,11 @@
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run()
 {
-    let mut builder = tauri::Builder::default();
+    let builder = tauri::Builder::default();
 
     #[cfg(desktop)]
     {
-        builder = builder.on_tray_icon_event(|app, event|
+        let builder = builder.on_tray_icon_event(|app, event|
         {
             match event
             {
