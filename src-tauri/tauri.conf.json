@@ -3,6 +3,8 @@
 
     "identifier": "client.global-application",
 
+    "productName": "GApp",
+
     "build":
     {
         "frontendDist": "../dist",
