@@ -1,0 +1,57 @@
+{
+    "compilerOptions":
+    {
+        // Core
+        "outDir": "./dist",
+        "target": "ESNext",
+        "module": "ESNext",
+        "moduleResolution": "bundler",
+        "lib":
+        [
+            "ESNext"
+        ],
+        "types":
+        [
+            "node"
+        ],
+
+        // Type Safety
+        "strict": true,
+        "alwaysStrict": true,
+        "noImplicitOverride": true,
+        "noFallthroughCasesInSwitch": true,
+        "noPropertyAccessFromIndexSignature": true,
+
+        // Linting
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "forceConsistentCasingInFileNames": true,
+
+        // Compatibility
+        "skipLibCheck": true,
+        "esModuleInterop": true,
+        "resolveJsonModule": true,
+        "useDefineForClassFields": true,
+        "allowSyntheticDefaultImports": true,
+
+        // Misc
+        "noEmit": true,
+        "allowJs": false,
+        "incremental": true,
+        "isolatedModules": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "allowImportingTsExtensions": true
+    },
+    "include":
+    [
+        "src/*",
+        "src/**/*",
+        "eslint.config.ts"
+    ],
+    "exclude":
+    [
+        "dist",
+        "node_modules"
+    ]
+}
