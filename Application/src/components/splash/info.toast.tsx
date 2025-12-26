@@ -18,7 +18,7 @@ export default function InfoToast({ ID, Delay, Message }: Readonly<{ ID: number;
 
     return <motion.div
         animate={ { opacity: IsClose ? 0 : 1 } }
-        className='pointer-events-auto mx-[16px] mt-[16px] flex flex-col overflow-hidden rounded-[4px] bg-blue-100'
+        className='pointer-events-auto mx-[16px] mt-[16px] flex flex-col overflow-hidden rounded-[4px] bg-blue-100 shadow-sm'
         initial={ { opacity: 0 } }
         onAnimationComplete={ () => { if (IsClose) Context.CloseToast(ID); } }
         transition={ { duration: 0.2 } }>

@@ -1,11 +1,14 @@
+mod tun;
+mod command;
+
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run()
 {
-    let builder = tauri::Builder::default();
+    let mut builder = tauri::Builder::default();
 
     #[cfg(desktop)]
     {
-        let builder = builder.on_tray_icon_event(|app, event|
+        builder = builder.on_tray_icon_event(|app, event|
         {
             match event
             {
@@ -33,10 +36,11 @@ pub fn run()
         });
     }
 
-    builder
-        .plugin(tauri_plugin_os::init())
-        .plugin(tauri_plugin_opener::init())
-        .plugin(tauri_plugin_store::Builder::new().build())
-        .run(tauri::generate_context!())
-        .expect("Application Failed");
+    builder = builder.plugin(tauri_plugin_os::init());
+
+    builder = builder.plugin(tauri_plugin_store::Builder::new().build());
+
+    builder = builder.invoke_handler(tauri::generate_handler![ command::tun_start, command::tun_stop ]);
+
+    builder.run(tauri::generate_context!()).expect("Application Failed");
 }

@@ -3,8 +3,7 @@ import TailwindCSS from '@tailwindcss/vite';
 
 import { defineConfig } from 'vite';
 
-// @ts-expect-error Tauri Host
-const TauriHost = (process.env.TAURI_DEV_HOST ?? false) as boolean | string;
+const TauriHost = process.env['TAURI_DEV_HOST'];
 
 export default defineConfig(() => ({
 
@@ -20,8 +19,9 @@ export default defineConfig(() => ({
     server:
     {
         port: 1420,
-        host: TauriHost,
         strictPort: true,
+        host: TauriHost || true,
+        hmr: TauriHost ? { port: 1421, protocol: 'ws', host: TauriHost } : true,
         watch:
         {
             ignored:

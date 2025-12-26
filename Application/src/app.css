@@ -28,6 +28,7 @@
 
 *
 {
+    flex-shrink: 0;
     user-select: none;
     -webkit-user-drag: none;
     -webkit-user-select: none;

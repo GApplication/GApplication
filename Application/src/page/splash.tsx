@@ -67,16 +67,15 @@ export default function SplashPage()
             <div className='flex w-full flex-1 flex-col'>
 
                 <Swiper
-                    autoHeight
                     onSlideChange={ (swiper) => { SetActiveIndex(swiper.activeIndex); } }
                     onSwiper={ (swiper) => SwiperRef.current = swiper }
-                    style={ { width: '100%', height: '100%' } }>
+                    style={ { width: '100%', flex: '1' } }>
 
-                    <SwiperSlide style={ { height: '100%', display: 'flex', justifyContent: 'center' } }>
+                    <SwiperSlide style={ { height: '100%', position: 'relative' } }>
 
-                        <div className='flex cursor-move flex-col items-center justify-center gap-[16px]'>
+                        <div className='absolute top-1/2 flex -translate-y-1/2 cursor-move flex-col items-center justify-center gap-[16px]'>
 
-                            <img className='max-h-[260px] px-[16px]' src={ SlideIcon1 } />
+                            <img className='px-[16px]' src={ SlideIcon1 } />
 
                             <div className='text-center text-[18px] text-base-text'>
 
@@ -98,11 +97,11 @@ export default function SplashPage()
 
                     </SwiperSlide>
 
-                    <SwiperSlide style={ { height: '100%', display: 'flex', justifyContent: 'center' } }>
+                    <SwiperSlide style={ { height: '100%', position: 'relative' } }>
 
-                        <div className='flex cursor-move flex-col items-center justify-center gap-[16px]'>
+                        <div className='absolute top-1/2 flex -translate-y-1/2 cursor-move flex-col items-center justify-center gap-[16px]'>
 
-                            <img className='max-h-[260px] px-[16px]' src={ SlideIcon2 } />
+                            <img className='px-[16px]' src={ SlideIcon2 } />
 
                             <div className='text-center text-[18px] text-base-text'>
 
@@ -124,11 +123,11 @@ export default function SplashPage()
 
                     </SwiperSlide>
 
-                    <SwiperSlide style={ { height: '100%', display: 'flex', justifyContent: 'center' } }>
+                    <SwiperSlide style={ { height: '100%', position: 'relative' } }>
 
-                        <div className='flex cursor-move flex-col items-center justify-center gap-[16px]'>
+                        <div className='absolute top-1/2 flex -translate-y-1/2 cursor-move flex-col items-center justify-center gap-[16px]'>
 
-                            <img className='max-h-[260px] px-[16px]' src={ SlideIcon3 } />
+                            <img className='px-[16px]' src={ SlideIcon3 } />
 
                             <div className='text-center text-[18px] text-base-text'>
 
@@ -152,7 +151,7 @@ export default function SplashPage()
 
                 </Swiper>
 
-                <div className='my-[8px] flex justify-center gap-2'>
+                <div className='my-[8px] flex h-[16px] items-center justify-center gap-2'>
 
                     <button
                         className={ `size-[8px] cursor-pointer rounded-[2px] outline-base-outline ${ ActiveIndex === 0 ? 'bg-primary/75' : 'bg-base-secondary' }` }

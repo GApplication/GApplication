@@ -67,17 +67,7 @@
                         "os:allow-version",
                         "os:allow-family",
                         "os:allow-locale",
-                        "os:allow-arch",
-
-                        {
-                            "identifier": "opener:allow-open-url",
-                            "allow":
-                            [
-                                {
-                                    "url": "https://*"
-                                }
-                            ]
-                        }
+                        "os:allow-arch"
                     ]
                 }
             ]
@@ -87,13 +77,17 @@
     {
         "android":
         {
-            "minSdkVersion": 26
+            "minSdkVersion": 25
         },
         "active": true,
         "targets": "all",
         "icon":
         [
             "icons/icon.ico"
+        ],
+        "resources":
+        [
+            "bin/*"
         ]
     }
 }

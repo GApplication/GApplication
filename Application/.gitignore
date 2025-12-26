@@ -14,6 +14,8 @@ src-tauri/gen/android/.gradle
 src-tauri/gen/android/.idea
 
 src-tauri/gen/android/app/src/main/assets/tauri.conf.json
+src-tauri/gen/android/app/tauri.build.gradle.kts
+src-tauri/gen/android/app/proguard-tauri.pro
 src-tauri/gen/android/tauri.settings.gradle
 src-tauri/gen/android/proguard-tauri.pro
 src-tauri/gen/android/local.properties

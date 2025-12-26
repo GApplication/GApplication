@@ -1,10 +1,11 @@
 import type { MenuOptions } from '@tauri-apps/api/menu';
 
+import * as OS from '@tauri-apps/plugin-os';
+
 import { useEffect } from 'react';
 import { Menu } from '@tauri-apps/api/menu';
 import { createRoot } from 'react-dom/client';
 import { TrayIcon } from '@tauri-apps/api/tray';
-import { platform } from '@tauri-apps/plugin-os';
 import { defaultWindowIcon } from '@tauri-apps/api/app';
 import { getCurrentWindow } from '@tauri-apps/api/window';
 
@@ -34,12 +35,12 @@ function Application()
 {
     useEffect(() =>
     {
-        if (platform() === 'windows')
+        if (OS.platform() === 'windows')
         {
             /**
              * AsyncTask - Performs async platform-specific initialization (tray/menu/icon)
              */
-            const AsyncTask = async() =>
+            const AsyncTaskTray = async() =>
             {
                 const AppIcon = await defaultWindowIcon();
 
@@ -74,7 +75,7 @@ function Application()
                 }
             };
 
-            AsyncTask();
+            AsyncTaskTray();
         }
 
         const AsyncTaskAccount = async() =>
@@ -90,6 +91,24 @@ function Application()
         };
 
         AsyncTaskAccount();
+
+        const OnlineInterval = setInterval(async() =>
+        {
+            console.log('Arch:', OS.arch());
+            console.log('family:', OS.family());
+            console.log('hostname:', await OS.hostname());
+            console.log('locale:', await OS.locale());
+            console.log('platform:', OS.platform());
+            console.log('type:', OS.type());
+            console.log('version:', OS.version());
+
+            // Keep the user online every 5 minutes
+        }, 5 * 60 * 1000);
+
+        return () =>
+        {
+            clearInterval(OnlineInterval);
+        };
     }, [ ]);
 
     useEffect(() =>

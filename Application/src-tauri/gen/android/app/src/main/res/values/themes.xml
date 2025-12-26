@@ -1,0 +1,17 @@
+<resources>
+
+    <style name="App.Theme" parent="Theme.AppCompat.Light.NoActionBar">
+
+        <item name="android:windowActionBar">false</item>
+        <item name="android:overScrollMode">never</item>
+        <item name="android:windowNoTitle">true</item>
+
+        <item name="android:windowBackground">#FFFFFF</item>
+        <item name="android:colorPrimaryDark">#FFFFFF</item>
+        <item name="android:colorPrimary">#FFFFFF</item>
+        <item name="android:colorAccent">#FFFFFF</item>
+
+    </style>
+
+</resources>
+

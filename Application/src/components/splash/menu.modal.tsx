@@ -77,9 +77,9 @@ export default function MenuModal({ ID }: Readonly<{ ID: number }>)
                 className='group mx-[24px] flex h-[80px] max-w-[420px] cursor-pointer items-center gap-[8px] rounded-[8px] border border-base-border bg-base-secondary/25 p-[8px] outline-base-outline duration-200 hover:bg-base-secondary/50'
                 onClick={ OnClickWallet }>
 
-                <LuWallet className='m-[8px] min-h-[24px] min-w-[24px] text-base-text/50 duration-200 group-hover:text-base-text' />
+                <LuWallet className='m-[8px] size-[24px] text-base-text/50 duration-200 group-hover:text-base-text' />
 
-                <div className='flex flex-col gap-[4px] text-left'>
+                <div className='flex flex-1 flex-col gap-[4px] text-left'>
 
                     <div className='text-[14px] text-base-text'>
 
@@ -99,7 +99,7 @@ export default function MenuModal({ ID }: Readonly<{ ID: number }>)
 
                 </div>
 
-                <IoIosArrowForward className='min-h-[24px] min-w-[24px] text-base-text/50 duration-200 group-hover:text-base-text' />
+                <IoIosArrowForward className='size-[24px] text-base-text/50 duration-200 group-hover:text-base-text' />
 
             </button>
 
@@ -109,7 +109,7 @@ export default function MenuModal({ ID }: Readonly<{ ID: number }>)
 
                 <FaSignature className='m-[8px] min-h-[24px] min-w-[24px] text-base-text/50 duration-200 group-hover:text-base-text' />
 
-                <div className='flex flex-col gap-[4px] text-left'>
+                <div className='flex flex-1 flex-col gap-[4px] text-left'>
 
                     <div className='text-[14px] text-base-text'>
 
@@ -129,7 +129,7 @@ export default function MenuModal({ ID }: Readonly<{ ID: number }>)
 
                 </div>
 
-                <IoIosArrowForward className='min-h-[24px] min-w-[24px] text-base-text/50 duration-200 group-hover:text-base-text' />
+                <IoIosArrowForward className='size-[24px] text-base-text/50 duration-200 group-hover:text-base-text' />
 
             </button>
 
@@ -147,7 +147,7 @@ export default function MenuModal({ ID }: Readonly<{ ID: number }>)
 
                 <GoSearch className='m-[8px] min-h-[24px] min-w-[24px] text-base-text/50 duration-200 group-hover:text-base-text' />
 
-                <div className='flex flex-col gap-[4px] text-left'>
+                <div className='flex flex-1 flex-col gap-[4px] text-left'>
 
                     <div className='text-[14px] text-base-text'>
 
@@ -167,7 +167,7 @@ export default function MenuModal({ ID }: Readonly<{ ID: number }>)
 
                 </div>
 
-                <IoIosArrowForward className='min-h-[24px] min-w-[24px] text-base-text/50 duration-200 group-hover:text-base-text' />
+                <IoIosArrowForward className='size-[24px] text-base-text/50 duration-200 group-hover:text-base-text' />
 
             </button>
 

@@ -1,5 +1,26 @@
+/**
+ * Configuration Module
+ *
+ * This file loads and validates all environment variables needed by the application.
+ * It provides type-safe access to configuration with automatic validation.
+ *
+ * Environment variables are defined in a .env file and must be set before the app starts.
+ * Using dotenv/config to automatically load from .env file.
+ */
+
 import 'dotenv/config';
 
+/**
+ * Builder function factory - validates and converts environment variables
+ *
+ * This function implements the "builder pattern" to:
+ * 1. Check if the environment variable exists (throw error if missing)
+ * 2. Provide methods to convert the string value to the desired type
+ * 3. Validate the converted value
+ *
+ * @param name - Name of the environment variable to load
+ * @returns Object with methods to convert the value (asNumber, asString, asBoolean)
+ */
 const builder = (name: string) =>
 {
     const value = process.env[name];
