@@ -55,7 +55,7 @@ function Application()
                                 text: T('App.Tray.Open'),
                                 action: () =>
                                 {
-                                    getCurrentWindow().show();
+                                    void getCurrentWindow().show();
                                 }
                             },
                             {
@@ -63,7 +63,7 @@ function Application()
                                 text: T('App.Tray.Quit'),
                                 action: () =>
                                 {
-                                    getCurrentWindow().close();
+                                    void getCurrentWindow().close();
                                 }
                             }
                         ]
@@ -75,7 +75,7 @@ function Application()
                 }
             };
 
-            AsyncTaskTray();
+            void AsyncTaskTray();
         }
 
         const AsyncTaskAccount = async() =>
@@ -90,7 +90,7 @@ function Application()
             }
         };
 
-        AsyncTaskAccount();
+        void AsyncTaskAccount();
 
         const OnlineInterval = setInterval(async() =>
         {

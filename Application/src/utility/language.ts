@@ -96,9 +96,8 @@ const SetLang = async(Lang: LanguageType) =>
 {
     LangCurrent = Lang;
 
-    Storage.SetValue('App.Language', Lang);
+    void Storage.SetValue('App.Language', Lang);
 
-    // eslint-disable-next-line unicorn/no-await-expression-member
     LanguageMap = (await import(`../assets/lang/${ Lang }.json`)).default;
 
     let Dir = 'ltr';

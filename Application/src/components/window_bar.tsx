@@ -12,7 +12,7 @@ import { T } from '../utility/language';
  */
 const OnClickMinimize = () =>
 {
-    getCurrentWindow().minimize();
+    void getCurrentWindow().minimize();
 };
 
 /**
@@ -20,7 +20,7 @@ const OnClickMinimize = () =>
  */
 const OnClickRestore = () =>
 {
-    getCurrentWindow().setSize(new LogicalSize(360, 700)); // It must be same as in tauri.conf.json
+    void getCurrentWindow().setSize(new LogicalSize(360, 700)); // It must be same as in tauri.conf.json
 };
 
 /**
@@ -28,7 +28,7 @@ const OnClickRestore = () =>
  */
 const OnClickMaximize = () =>
 {
-    getCurrentWindow().maximize();
+    void getCurrentWindow().maximize();
 };
 
 /**
@@ -36,7 +36,7 @@ const OnClickMaximize = () =>
  */
 const OnClickClose = () =>
 {
-    getCurrentWindow().hide();
+    void getCurrentWindow().hide();
 };
 
 /**

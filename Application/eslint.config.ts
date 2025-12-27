@@ -2,7 +2,6 @@ import Globals from 'globals';
 import PluginJS from '@eslint/js';
 import PluginTS from 'typescript-eslint';
 import PluginReact from 'eslint-plugin-react';
-import PluginUnicorn from 'eslint-plugin-unicorn';
 import PluginStylistic from '@stylistic/eslint-plugin';
 import PluginTailwindCSS from 'eslint-plugin-better-tailwindcss';
 
@@ -32,9 +31,6 @@ export default defineConfig([
             }
         }
     },
-
-    // Popular Plugin
-    PluginUnicorn.configs.recommended,
 
     // Stylistic
     PluginStylistic.configs.customize({ indent: 4, semi: true, jsx: true, braceStyle: 'allman', commaDangle: 'never', quoteProps: 'as-needed' }),
@@ -86,13 +82,6 @@ export default defineConfig([
         },
         rules:
         {
-            // Unicorn
-            'unicorn/prefer-global-this': 'off',
-            'unicorn/no-typeof-undefined': 'off',
-            'unicorn/prevent-abbreviations': 'off',
-
-            'unicorn/filename-case': [ 'error', { cases: { snakeCase: true } } ],
-
             // React
             'react/jsx-curly-spacing': [ 'error', { when: 'always' } ],
             'react/jsx-closing-bracket-location': [ 'error', 'after-props' ],
@@ -104,7 +93,11 @@ export default defineConfig([
             'better-tailwindcss/no-unregistered-classes': [ 'error', { ignore: [ 'fi' ] } ],
 
             // TypeScript
-            '@typescript-eslint/no-unused-vars': 'off', // Handled by TypeScript compiler
+            '@typescript-eslint/no-explicit-any': 'warn',
+            '@typescript-eslint/no-unsafe-argument': 'warn',
+            '@typescript-eslint/no-floating-promises': 'warn',
+
+            '@typescript-eslint/no-unused-vars': [ 'error', { argsIgnorePattern: '^_', destructuredArrayIgnorePattern: '^_' } ],
 
             // Stylistic
             '@stylistic/jsx-curly-spacing': 'off',

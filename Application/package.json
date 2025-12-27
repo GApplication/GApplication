@@ -4,6 +4,8 @@
     "scripts": {
         "dev": "vite",
         "tauri": "tauri",
+        "lint": "eslint src/**/*.ts",
+        "lint:fix": "eslint src/**/*.ts --fix",
         "build": "tsc && vite build",
         "desktop": "npm run tauri dev",
         "desktop-build": "npm run tauri build",
@@ -26,7 +28,6 @@
         "eslint": "^9.39.1",
         "eslint-plugin-better-tailwindcss": "^3.8.0",
         "eslint-plugin-react": "^7.37.5",
-        "eslint-plugin-unicorn": "^62.0.0",
         "ethers": "^6.16.0",
         "flag-icons": "^7.5.0",
         "motion": "^12.23.25",
