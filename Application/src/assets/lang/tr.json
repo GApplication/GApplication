@@ -1,4 +1,5 @@
 {
+    "0": "0",
     "1": "1",
     "2": "2",
     "3": "3",
@@ -8,7 +9,9 @@
     "7": "7",
     "8": "8",
     "9": "9",
-    "0": "0",
+    "10": "10",
+    "11": "11",
+    "12": "12",
 
     "App":
     {
@@ -16,28 +19,9 @@
 
         "Tray":
         {
-            "Open": "GApp'ı Aç",
-            "Quit": "GApp'tan Çık"
+            "Open": "GApp Aç",
+            "Quit": "GApp Kapat"
         }
-    },
-
-    "Language":
-    {
-        "Header": "Dil Seçin",
-
-        "en": "İngilizce",
-        "fa": "Farsça",
-        "tr": "Türkçe",
-        "ar": "Arapça",
-        "zh": "Çince",
-        "ru": "Rusça",
-        "hi": "Hintçe"
-    },
-
-    "Passcode":
-    {
-        "Password": "Bir şifre ayarlayın",
-        "Repeat": "Şifreyi tekrarla"
     },
 
     "Splash":
@@ -45,16 +29,69 @@
         "Language": "Dil",
 
         "Slide1Header": "Dünyaya Bağlı",
-        "Slide1Text": "Küresel bir blok zinciri ağı tarafından desteklenen sınır tanımayan ödemeler, her zaman, her yerde",
+        "Slide1Text": "Küresel bir blokzincir ağı tarafından desteklenen sınırları olmayan ödemeler, her zaman ve her yerde",
 
         "Slide2Header": "Tamamen Merkezi Olmayan",
-        "Slide2Text": "Dijital varlıklarınızın sahibi ve kontrolcüsü sizsiniz, bu güç sizin ellerinize geri veriyor",
+        "Slide2Text": "Dijital varlıklarınızın sahibi ve kontrolcüsüsünüz, bu gücü ellerinize geri koyar",
 
         "Slide3Header": "Güçlü Güvenlik",
-        "Slide3Text": "Varlıklarınız modern son teknoloji şifreleme ile güvende kalır, cüzdanınız sıkıca kilitli kalır",
+        "Slide3Text": "Varlıklarınız modern ileri şifreleme ile güvende kalır, cüzdanınız sıkı bir şekilde kilitli kalır",
 
         "Create": "Yeni Cüzdan Oluştur",
         "Import": "Mevcut Cüzdanı İçe Aktar",
-        "Version": "Sürüm %s"
+        "Version": "Sürüm %s",
+
+        "LanguageModal":
+        {
+            "Header": "Dil Seç",
+
+            "en": "İngilizce",
+            "fa": "Farsça",
+            "tr": "Türkçe",
+            "ar": "Arapça",
+            "zh": "Çince",
+            "ru": "Rusça",
+            "hi": "Hintçe"
+        },
+
+        "PasscodeModal":
+        {
+            "Password": "Şifreyi Ayarla",
+            "Repeat": "Şifreyi Tekrarla"
+        },
+
+        "MenuModal":
+        {
+            "Header": "Cüzdan Ekle",
+            "Description": "Mevcut bir cüzdan ekleyin veya diğer seçenekleri kullanın",
+
+            "Wallet": "Mevcut Cüzdan",
+            "WalletDescription": "12 veya 24 gizli kurtarma sözcüğü ile cüzdanı içe aktar",
+
+            "Ledger": "Ledger ile Eşleştir",
+            "LedgerDescription": "Donanım modülü ve Bluetooth ile daha yüksek kontrol ve güvenlik seviyesi",
+
+            "Option": "Diğer Seçenekler",
+
+            "Watch": "Hesabı İzle",
+            "WatchDescription": "Kurtarma ifadesi olmadan cüzdan etkinliğini izlemek için",
+
+            "Wip": "Yakında"
+        },
+
+        "WalletModal":
+        {
+            "Header": "Kurtarma İfadesini Girin",
+            "Description": "Cüzdanınıza erişimi geri yüklemek için, cüzdanınızı oluştururken size verilen 24 veya 12 gizli kurtarma sözcüğünü girin",
+
+            "Continue": "Devam Et"
+        }
+    },
+
+    "Home":
+    {
+        "Profile": "Profil",
+        "Home": "Anasayfa",
+        "Explore": "Keşfet"
     }
 }

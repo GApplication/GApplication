@@ -1,4 +1,5 @@
 {
+    "0": "0",
     "1": "1",
     "2": "2",
     "3": "3",
@@ -8,7 +9,9 @@
     "7": "7",
     "8": "8",
     "9": "9",
-    "0": "0",
+    "10": "10",
+    "11": "11",
+    "12": "12",
 
     "App":
     {
@@ -21,40 +24,74 @@
         }
     },
 
-    "Language":
-    {
-        "Header": "选择语言",
-
-        "en": "英语",
-        "fa": "波斯语",
-        "tr": "土耳其语",
-        "ar": "阿拉伯语",
-        "zh": "中文",
-        "ru": "俄语",
-        "hi": "印地语"
-    },
-
-    "Passcode":
-    {
-        "Password": "设置密码",
-        "Repeat": "重复密码"
-    },
-
     "Splash":
     {
         "Language": "语言",
 
-        "Slide1Header": "连接世界",
-        "Slide1Text": "由全球区块链网络驱动的无国界支付，随时随地",
+        "Slide1Header": "连接全球",
+        "Slide1Text": "由全球区块链网络驱动的无边界支付，随时随地",
 
         "Slide2Header": "完全去中心化",
-        "Slide2Text": "您拥有并控制您的数字资产，这将权力交还到您手中",
+        "Slide2Text": "您拥有并控制您的数字资产，将权力重新掌握在您手中",
 
         "Slide3Header": "强大安全",
-        "Slide3Text": "您的资产通过现代尖端加密保持安全，您的钱包保持紧密锁定",
+        "Slide3Text": "您的资产通过现代先进加密保持安全，您的钱包保持紧密锁定",
 
         "Create": "创建新钱包",
         "Import": "导入现有钱包",
-        "Version": "版本 %s"
+        "Version": "版本 %s",
+
+        "LanguageModal":
+        {
+            "Header": "选择语言",
+
+            "en": "英文",
+            "fa": "波斯语",
+            "tr": "土耳其语",
+            "ar": "阿拉伯语",
+            "zh": "中文",
+            "ru": "俄语",
+            "hi": "印地语"
+        },
+
+        "PasscodeModal":
+        {
+            "Password": "设置密码",
+            "Repeat": "重复密码"
+        },
+
+        "MenuModal":
+        {
+            "Header": "添加钱包",
+            "Description": "添加现有钱包或使用其他选项",
+
+            "Wallet": "现有钱包",
+            "WalletDescription": "使用 12 或 24 个秘密恢复词导入钱包",
+
+            "Ledger": "与 Ledger 配对",
+            "LedgerDescription": "通过硬件模块和蓝牙实现更高级的控制和安全性",
+
+            "Option": "其他选项",
+
+            "Watch": "观察账户",
+            "WatchDescription": "监视钱包活动而无需恢复短语",
+
+            "Wip": "即将推出"
+        },
+
+        "WalletModal":
+        {
+            "Header": "输入恢复短语",
+            "Description": "要恢复对钱包的访问权限，请输入创建钱包时提供给您的 24 个或 12 个秘密恢复词",
+
+            "Continue": "继续"
+        }
+    },
+
+    "Home":
+    {
+        "Profile": "个人资料",
+        "Home": "主页",
+        "Explore": "浏览"
     }
 }
