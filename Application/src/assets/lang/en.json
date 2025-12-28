@@ -90,8 +90,8 @@
 
     "Home":
     {
-        "Profile": "Profile",
+        "Wallet": "Wallet",
         "Home": "Home",
-        "Explore": "Explore"
+        "Browser": "Browser"
     }
 }

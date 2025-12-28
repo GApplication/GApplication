@@ -74,4 +74,13 @@ const CloseToast = (ID: number) =>
     EventMap.Emit('Toast.Close', ID);
 };
 
-export default { OpenPage, ClosePage, OpenModal, CloseModal, OpenToast, CloseToast };
+/**
+ * SetHomePage - Emits a page event to render a new page component
+ * @param {() => JSX.Element} Component - The page component to render
+ */
+const SetHomePage = (Component: () => JSX.Element) =>
+{
+    EventMap.Emit('Home.Page', <Component />);
+};
+
+export default { OpenPage, ClosePage, OpenModal, CloseModal, OpenToast, CloseToast, SetHomePage };

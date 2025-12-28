@@ -1,3 +1,6 @@
+// Home Navigation
+type NavigationMap = 'WALLET' | 'HOME' | 'BROWSER';
+
 // Event
 interface EventMap
 {
@@ -9,6 +12,8 @@ interface EventMap
 
     'Modal.Open': [Component: JSX.Element];
     'Modal.Close': [ID: number];
+
+    'Home.Page': [Component: JSX.Element];
 }
 
 type EventCall<T extends keyof EventMap> = (...Args: EventMap[T]) => void;
