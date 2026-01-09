@@ -8,6 +8,7 @@
  * - autoLoad: Automatically loads and registers route files
  * - typeorm: Initializes database connection
  * - ratelimit: Implements rate limiting for endpoints
+ * - authentication:
  */
 
 import 'reflect-metadata';
@@ -15,17 +16,19 @@ import 'reflect-metadata';
 import type { FastifyError } from 'fastify';
 
 import path from 'node:path';
-
 import fastify from 'fastify';
+import cookie from '@fastify/cookie';
 import swagger from '@fastify/swagger';
 import autoLoad from '@fastify/autoload';
 import swaggerUI from '@fastify/swagger-ui';
 
-import config from './utils/config';
+import history from './plugins/history';
 import typeorm from './plugins/typeorm';
 import ratelimit from './plugins/ratelimit';
+import authentication from './plugins/authentication';
 
-import './types/fastify';
+import status from './utils/status';
+import config from './utils/config';
 
 const main = async() =>
 {
@@ -43,13 +46,13 @@ const main = async() =>
         // Return 400 Bad Request for validation errors with the first validation message
         if (error.validation)
         {
-            reply.status(400).send({ error: 'Bad Request', message: error.validation[0]?.message ?? 'Validation Error' });
+            reply.status(status.BAD_REQUEST).send({ message: `${ error.validation[0].instancePath } -- ${ error.validation[0].message }` });
 
             return;
         }
 
         // Return 500 Internal Server Error for all other errors
-        reply.status(500).send({ error: 'Internal Error', message: error.message });
+        reply.status(status.INTERNAL_SERVER_ERROR).send({ message: error.message });
     });
 
     /**
@@ -58,7 +61,12 @@ const main = async() =>
      */
     if (config.NODE_ENV === 'development')
     {
-        await app.register(swagger, { openapi: { info: { title: 'API', version: '1.0.0' }, servers: [ { url: `http://localhost:${ config.NODE_PORT }` } ] } });
+        await app.register(swagger, { openapi: {
+            security: [ { auth: [] } ],
+            info: { title: 'API', version: '1.0.0' },
+            servers: [ { url: `http://localhost:${ config.NODE_PORT }` } ],
+            components: { securitySchemes: { auth: { type: 'http', scheme: 'bearer' } } }
+        } });
 
         await app.register(swaggerUI, { routePrefix: '/api' });
     }
@@ -68,6 +76,22 @@ const main = async() =>
      * Prevents abuse by limiting request frequency per IP address
      */
     await app.register(ratelimit);
+
+    /**
+     * Register cookie plugin
+     */
+    await app.register(cookie, { secret: config.NODE_COOKIE, hook: 'onRequest', parseOptions: { secure: true, httpOnly: true, sameSite: 'none' } });
+
+    /**
+     * Register authentication plugin
+     */
+    await app.register(authentication);
+
+    /**
+     * Register history plugin
+     * Provides fastify.history() method to log events to the database
+     */
+    await app.register(history);
 
     /**
      * Register TypeORM database plugin

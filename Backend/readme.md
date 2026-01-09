@@ -15,12 +15,10 @@ Production-ready Fastify backend with TypeScript, TypeORM, and ESLint.
 
 ```
 src/
-├── database/        # TypeORM entities
 ├── plugins/         # Business logic
 ├── routes/          # API endpoints
 ├── types/           # Interfaces and types
 ├── utils/           # Utility functions
-├── utils/config.ts  # Configuration
 └── main.ts          # Application entry point
 ```
 
@@ -42,24 +40,7 @@ npm install
 cp .env.example .env
 ```
 
-3. Update `.env` with your database credentials:
-```env
-DATABASE_URL=postgresql://user:password@localhost:5432/fastify_db
-DB_HOST=localhost
-DB_PORT=5432
-DB_USER=user
-DB_PASSWORD=password
-DB_NAME=fastify_db
-NODE_ENV=development
-NODE_PORT=3000
-```
-
-### Running the Database
-
-Start PostgreSQL with Docker Compose:
-```bash
-docker-compose up -d
-```
+3. Update `.env` with your credentials
 
 ### Development
 
@@ -91,17 +72,6 @@ npm start
 - `npm start` - Start production server
 - `npm run lint` - Run ESLint
 - `npm run lint:fix` - Fix ESLint issues
-- `npm run format` - Format code with Prettier
-
-## API Endpoints
-
-### Health Check
-- `GET /health` - Check server status
-
-Get server health:
-```bash
-curl http://localhost:3000/health
-```
 
 ## Configuration
 

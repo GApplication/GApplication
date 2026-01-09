@@ -12,12 +12,19 @@ declare module 'fastify'
 {
     interface FastifyContextConfig
     {
+        authentication?: boolean;
+
         rateLimit?:
         {
             name: string;
             count: number;
             time: number;
         };
+    }
+
+    interface FastifyRequest
+    {
+        account_id: number;
     }
 
     interface FastifyInstance
@@ -33,5 +40,7 @@ declare module 'fastify'
                 time: number;
             };
         };
+
+        history(tag: string, ip: string, value1?: string, value2?: string, value3?: string, value4?: string): Promise<void>;
     }
 }

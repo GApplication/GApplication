@@ -50,7 +50,7 @@ export default fastifyPlugin(async function(fastify)
             return;
         }
 
-        const now = Date.now() / 1000;
+        const now = Math.floor(Date.now() / 1000);
         const key = `${ request.ip }:${ routeConfig.name }`;
 
         let record = rateLimitMap.get(key);
@@ -63,7 +63,7 @@ export default fastifyPlugin(async function(fastify)
         }
 
         reply.header('X-RateLimit-Limit', routeConfig.count);
-        reply.header('X-RateLimit-Reset', Math.floor(record.time));
+        reply.header('X-RateLimit-Reset', now);
 
         if (record.count == 0)
         {

@@ -58,11 +58,7 @@ export default defineConfig([
             '@stylistic/object-property-newline': [ 'error', { allowAllPropertiesOnSameLine: true } ],
             '@stylistic/space-before-function-paren': [ 'error', { anonymous: 'never', named: 'never', asyncArrow: 'never', catch: 'always' } ],
 
-            // Hamed
-            'space-before-blocks': 'error',
-
-            'block-spacing': [ 'error', 'always' ],
-
+            // TypeScript
             '@typescript-eslint/no-explicit-any': 'warn',
             '@typescript-eslint/no-unsafe-argument': 'warn',
             '@typescript-eslint/no-floating-promises': 'warn',
@@ -70,24 +66,6 @@ export default defineConfig([
             '@typescript-eslint/consistent-type-definitions': [ 'error', 'interface' ],
             '@typescript-eslint/restrict-template-expressions': [ 'error', { allowNumber: true } ],
             '@typescript-eslint/no-unused-vars': [ 'error', { argsIgnorePattern: '^_', destructuredArrayIgnorePattern: '^_' } ],
-            '@typescript-eslint/member-ordering':
-            [
-                'error',
-                {
-                    default:
-                    [
-                        'public-instance-field',
-                        'protected-instance-field',
-                        'private-instance-field',
-
-                        'constructor',
-
-                        'public-instance-method',
-                        'protected-instance-method',
-                        'private-instance-method'
-                    ]
-                }
-            ],
             '@typescript-eslint/naming-convention':
             [
                 'error',
@@ -97,7 +75,7 @@ export default defineConfig([
                 { selector: 'interface', format: [ 'PascalCase' ] },
                 { selector: 'variable', format: [ 'camelCase' ] },
                 { selector: 'variable', modifiers: [ 'const' ], format: [ 'camelCase', 'UPPER_CASE' ] },
-                { selector: 'variable', modifiers: [ 'const', 'exported' ], types: [ 'function' ], format: [ 'camelCase', 'PascalCase' ] }
+                { selector: 'variable', modifiers: [ 'exported' ], types: [ 'function' ], format: [ 'camelCase' ] }
             ]
         }
     }
