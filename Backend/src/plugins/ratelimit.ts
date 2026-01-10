@@ -12,6 +12,8 @@ import type { FastifyRequest, FastifyReply } from 'fastify';
 
 import fastifyPlugin from 'fastify-plugin';
 
+import { STATUS_QQ } from '../utils/status';
+
 const rateLimitMap = new Map<string, { count: number; time: number }>();
 
 /**
@@ -21,10 +23,6 @@ const rateLimitMap = new Map<string, { count: number; time: number }>();
  * @param count - Maximum number of requests allowed in the time window
  * @param time - Time window in milliseconds
  * @returns Configuration object to spread into route schema
- *
- * @example
- * // Limit /user/online to 2 requests per 10 minutes per IP
- * rateLimit('user-online', 2, 600000)
  */
 export function rateLimit(name: string, count: number, time: number)
 {
@@ -69,7 +67,7 @@ export default fastifyPlugin(async function(fastify)
         {
             reply.header('X-RateLimit-Remaining', 0);
 
-            return reply.code(429).send();
+            return reply.code(STATUS_QQ).send();
         }
 
         record.count -= 1;

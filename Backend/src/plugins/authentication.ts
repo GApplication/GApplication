@@ -5,18 +5,12 @@ import { createHmac, timingSafeEqual } from 'node:crypto';
 import fastifyPlugin from 'fastify-plugin';
 
 import config from '../utils/config';
-import status from '../utils/status';
 
-function verifyAccessToken(token: string)
+import { STATUS_UNAUTHORIZED } from '../utils/status';
+
+export function verifyAccessToken(token: string)
 {
-    const bearer = token.split(' ');
-
-    if (bearer.length !== 2)
-    {
-        return;
-    }
-
-    const accessToken = bearer[1].split('.');
+    const accessToken = token.split('.');
 
     if (accessToken.length !== 2)
     {
@@ -26,7 +20,7 @@ function verifyAccessToken(token: string)
     const payload = Buffer.from(accessToken[0], 'base64url');
     const signature = Buffer.from(accessToken[1], 'base64url');
 
-    const signatureServer = createHmac('sha256', config.NODE_SESSION_ACCESS_SECRET).update(accessToken[0]).digest();
+    const signatureServer = createHmac('sha512', config.NODE_SESSION_ACCESS_SECRET).update(accessToken[0]).digest();
 
     if (signatureServer.length !== signature.length || !timingSafeEqual(signatureServer, signature))
     {
@@ -45,14 +39,7 @@ function verifyAccessToken(token: string)
 
 export function verifyRefreshToken(token: string)
 {
-    const bearer = token.split(' ');
-
-    if (bearer.length !== 2)
-    {
-        return;
-    }
-
-    const accessToken = bearer[1].split('.');
+    const accessToken = token.split('.');
 
     if (accessToken.length !== 2)
     {
@@ -62,7 +49,7 @@ export function verifyRefreshToken(token: string)
     const payload = Buffer.from(accessToken[0], 'base64url');
     const signature = Buffer.from(accessToken[1], 'base64url');
 
-    const signatureServer = createHmac('sha256', config.NODE_SESSION_ACCESS_SECRET).update(accessToken[0]).digest();
+    const signatureServer = createHmac('sha512', config.NODE_SESSION_REFRESH_SECRET).update(accessToken[0]).digest();
 
     if (signatureServer.length !== signature.length || !timingSafeEqual(signatureServer, signature))
     {
@@ -97,7 +84,7 @@ export function createRefreshToken(id: number): string
     return `${ payload }.${ signature }`;
 }
 
-export function authentication()
+export function authGuard()
 {
     return { config: { authentication: true } };
 }
@@ -117,7 +104,14 @@ export default fastifyPlugin(async function(fastify)
 
         if (typeof accessToken === 'string')
         {
-            const payload = verifyAccessToken(accessToken);
+            const bearer = accessToken.split(' ');
+
+            if (bearer.length !== 2)
+            {
+                return;
+            }
+
+            const payload = verifyAccessToken(bearer[1]);
 
             if (payload)
             {
@@ -127,6 +121,6 @@ export default fastifyPlugin(async function(fastify)
             }
         }
 
-        reply.status(status.UNAUTHORIZED).send();
+        reply.status(STATUS_UNAUTHORIZED).send();
     });
 });

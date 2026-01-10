@@ -3,10 +3,9 @@ import type { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
 import { Type, Static } from 'typebox';
 
 import { rateLimit } from '../../plugins/ratelimit';
-import { createRefreshToken, createAccessToken, authentication, verifyRefreshToken } from '../../plugins/authentication';
+import { createRefreshToken, createAccessToken, authGuard, verifyRefreshToken } from '../../plugins/authentication';
 
 import config from '../../utils/config';
-import status from '../../utils/status';
 
 import { Account, AccountSession } from './account.entity';
 
@@ -15,45 +14,48 @@ export function signUp(fastify: FastifyInstance)
     const body = Type.Object({
         fname: Type.Optional(Type.String({ minLength: 1, maxLength: 64 })),
         lname: Type.Optional(Type.String({ minLength: 1, maxLength: 64 })),
+        referral: Type.Optional(Type.String({ minLength: 1, maxLength: 64 })),
         email: Type.String({ minLength: 5, maxLength: 256, format: 'email' }),
         password: Type.String({ minLength: 5, maxLength: 64 })
     });
 
-    const schema = { body, response: { 200: Type.Null(), 409: Type.Null() } };
+    const response200 = Type.Object({ code: Type.Number({ minimum: 0, maximum: 1 }) });
 
-    const handler = async(request: FastifyRequest<{ Body: Static<typeof body> }>, reply: FastifyReply) =>
+    const schema = { body, response: { 200: response200 } };
+
+    const handler = async(request: FastifyRequest<{ Body: Static<typeof body> }>, reply: FastifyReply<{ Reply: Static<typeof response200> }>) =>
     {
         if (await fastify.db.getRepository(Account).findOneBy({ email: request.body.email.toLowerCase() }))
         {
-            reply.status(status.CONFLICT).send();
+            reply.send({ code: 1 });
 
             return;
         }
 
         await fastify.db.getRepository(Account).save({ ...request.body, email: request.body.email.toLowerCase() });
 
-        reply.status(status.CREATED).send();
+        reply.send({ code: 0 });
     };
 
     // 5x per day
-    return [ { schema, ...rateLimit('account-sign-up', 5, 24 * 60 * 60 * 1000) }, handler ] as const;
+    return [ { schema, ...rateLimit('account-sign-up', 5, 24 * 60 * 60 * 1000) }, handler ];
 }
 
 export function signIn(fastify: FastifyInstance)
 {
     const body = Type.Object({ email: Type.String({ minLength: 5, maxLength: 256, format: 'email' }), password: Type.String({ minLength: 5, maxLength: 64 }) });
 
-    const response200 = Type.Object({ accessToken: Type.String() });
+    const response200 = Type.Object({ code: Type.Number({ minimum: 0, maximum: 1 }), accessToken: Type.Optional(Type.String()) });
 
-    const schema = { body, response: { 200: response200, 401: Type.Null() } };
+    const schema = { body, response: { 200: response200 } };
 
-    const handler = async(request: FastifyRequest<{ Body: Static<typeof body> }>, reply: FastifyReply) =>
+    const handler = async(request: FastifyRequest<{ Body: Static<typeof body> }>, reply: FastifyReply<{ Reply: Static<typeof response200> }>) =>
     {
         const account = await fastify.db.getRepository(Account).findOneBy({ email: request.body.email.toLowerCase(), password: request.body.password });
 
         if (account === null)
         {
-            reply.status(status.UNAUTHORIZED).send();
+            reply.send({ code: 1 });
 
             return;
         }
@@ -70,7 +72,9 @@ export function signIn(fastify: FastifyInstance)
 
         [ '/account/refresh', '/account/sign-out' ].map((path) => reply.setCookie('refresh', refreshToken, { path }));
 
-        return { accessToken };
+        fastify.history('ACCOUNT_SIGNIN', request.ip, request.account_id, request.headers['user-agent']);
+
+        reply.send({ code: 0, accessToken });
     };
 
     // 10x per hour
@@ -79,15 +83,17 @@ export function signIn(fastify: FastifyInstance)
 
 export function signOut(fastify: FastifyInstance)
 {
-    const schema = { response: { 200: Type.Null(), 401: Type.Null() } };
+    const response200 = Type.Object({ code: Type.Number({ minimum: 0, maximum: 2 }) });
 
-    const handler = async(request: FastifyRequest, reply: FastifyReply) =>
+    const schema = { response: { 200: response200 } };
+
+    const handler = async(request: FastifyRequest, reply: FastifyReply<{ Reply: Static<typeof response200> }>) =>
     {
         const refreshToken = request.cookies['refresh'];
 
         if (refreshToken === undefined)
         {
-            reply.status(status.UNAUTHORIZED).send();
+            reply.send({ code: 1 });
 
             return;
         }
@@ -96,7 +102,7 @@ export function signOut(fastify: FastifyInstance)
 
         if (accountSession === null)
         {
-            reply.status(status.UNAUTHORIZED).send();
+            reply.send({ code: 2 });
 
             return;
         }
@@ -105,42 +111,50 @@ export function signOut(fastify: FastifyInstance)
 
         await fastify.db.getRepository(AccountSession).save(accountSession);
 
-        reply.send();
+        fastify.history('ACCOUNT_SIGNOUT', request.ip, request.account_id);
+
+        reply.send({ code: 0 });
     };
 
     // 10x per hour
-    return [ { schema, ...rateLimit('account-sign-out', 10, 60 * 60 * 1000), ...authentication() }, handler ] as const;
+    return [ { schema, ...rateLimit('account-sign-out', 10, 60 * 60 * 1000), ...authGuard() }, handler ] as const;
 }
 
 export function forgot(fastify: FastifyInstance)
 {
     const body = Type.Object({ email: Type.String({ minLength: 5, maxLength: 256, format: 'email' }) });
 
-    const schema = { body, response: { 200: Type.Null(), 404: Type.Null() } };
+    const response200 = Type.Object({ code: Type.Number({ minimum: 0, maximum: 2 }) });
 
-    const handler = async(request: FastifyRequest<{ Body: Static<typeof body> }>, reply: FastifyReply) =>
+    const schema = { body, response: { 200: response200 } };
+
+    const handler = async(request: FastifyRequest<{ Body: Static<typeof body> }>, reply: FastifyReply<{ Reply: Static<typeof response200> }>) =>
     {
         const account = await fastify.db.getRepository(Account).findOneBy({ email: request.body.email.toLowerCase() });
 
         if (account === null)
         {
-            reply.status(status.NOT_FOUND).send();
+            reply.send({ code: 1 });
 
             return;
         }
 
-        reply.send();
+        // TODO: send email here
+
+        reply.send({ code: 0 });
     };
 
-    // 8x per hour
-    return [ { schema, ...rateLimit('account-forgot', 8, 60 * 60 * 1000) }, handler ] as const;
+    // 5x per hour
+    return [ { schema, ...rateLimit('account-forgot', 5, 60 * 60 * 1000) }, handler ] as const;
 }
 
 export function password(fastify: FastifyInstance)
 {
     const body = Type.Object({ passwordold: Type.String({ minLength: 5, maxLength: 64 }), passwordnew: Type.String({ minLength: 5, maxLength: 64 }) });
 
-    const schema = { body, response: { 200: Type.Null(), 404: Type.Null() } };
+    const response200 = Type.Object({ code: Type.Number({ minimum: 0, maximum: 1 }) });
+
+    const schema = { body, response: response200 };
 
     const handler = async(request: FastifyRequest<{ Body: Static<typeof body> }>, reply: FastifyReply) =>
     {
@@ -148,7 +162,7 @@ export function password(fastify: FastifyInstance)
 
         if (account === null)
         {
-            reply.status(status.NOT_FOUND).send();
+            reply.send({ code: 1 });
 
             return;
         }
@@ -157,26 +171,31 @@ export function password(fastify: FastifyInstance)
 
         await fastify.db.getRepository(Account).save(account);
 
-        reply.send();
+        // TODO: send notify email here
+        // TODO: should we revoke all refresh tokens ?
+
+        fastify.history('ACCOUNT_PASSWORD', request.ip, request.account_id, request.body.passwordold, request.body.passwordold);
+
+        reply.send({ code: 0 });
     };
 
-    // 30x per hour
-    return [ { schema, ...rateLimit('account-password', 30, 60 * 60 * 1000), ...authentication() }, handler ] as const;
+    // 10x per hour
+    return [ { schema, ...rateLimit('account-password', 10, 60 * 60 * 1000), ...authGuard() }, handler ] as const;
 }
 
 export function refresh(fastify: FastifyInstance)
 {
-    const response200 = Type.Object({ accessToken: Type.String() });
+    const response200 = Type.Object({ code: Type.Number({ minimum: 0, maximum: 1 }), accessToken: Type.Optional(Type.String()) });
 
-    const schema = { response: { 200: response200, 401: Type.Null() } };
+    const schema = { response: { 200: response200 } };
 
-    const handler = async(request: FastifyRequest, reply: FastifyReply) =>
+    const handler = async(request: FastifyRequest, reply: FastifyReply<{ Reply: Static<typeof response200> }>) =>
     {
         const refreshToken = request.cookies['refresh'];
 
         if (refreshToken === undefined)
         {
-            reply.status(status.UNAUTHORIZED).send();
+            reply.send({ code: 1 });
 
             return;
         }
@@ -185,7 +204,7 @@ export function refresh(fastify: FastifyInstance)
 
         if (accountId === undefined || accountId !== request.account_id)
         {
-            reply.status(status.UNAUTHORIZED).send();
+            reply.send({ code: 2 });
 
             return;
         }
@@ -194,16 +213,16 @@ export function refresh(fastify: FastifyInstance)
 
         if (accountSession === null || accountSession.revoked_at > 0)
         {
-            reply.status(status.UNAUTHORIZED).send();
+            reply.send({ code: 3 });
 
             return;
         }
 
-        return { accessToken: createAccessToken(request.account_id) };
+        return { code: 0, accessToken: createAccessToken(request.account_id) };
     };
 
     // 30x per hour
-    return [ { schema, ...rateLimit('account-refresh', 30, 60 * 60 * 1000), ...authentication() }, handler ] as const;
+    return [ { schema, ...rateLimit('account-refresh', 30, 60 * 60 * 1000), ...authGuard() }, handler ] as const;
 }
 
 export function sessionList(fastify: FastifyInstance)
@@ -222,7 +241,7 @@ export function sessionList(fastify: FastifyInstance)
 
     const schema = { querystring: query, response: { 200: response200 } };
 
-    const handler = async(request: FastifyRequest<{ Querystring: Static<typeof query> }>) =>
+    const handler = async(request: FastifyRequest<{ Querystring: Static<typeof query> }>, reply: FastifyReply<{ Reply: Static<typeof response200> }>) =>
     {
         const { page, limit } = request.query;
 
@@ -242,26 +261,28 @@ export function sessionList(fastify: FastifyInstance)
             }
         });
 
-        return { total, items: items.map((s) => ({ id: s.id, device: s.device, expiresAt: s.expires_at, createdAt: s.created_at })) };
+        reply.send({ total, items: items.map((s) => ({ id: s.id, device: s.device, expiresAt: s.expires_at, createdAt: s.created_at.getDate() })) });
     };
 
     // 100x per hour
-    return [ { schema, ...rateLimit('account-session', 100, 60 * 60 * 1000), ...authentication() }, handler ] as const;
+    return [ { schema, ...rateLimit('account-session', 100, 60 * 60 * 1000), ...authGuard() }, handler ] as const;
 }
 
 export function sessionDelete(fastify: FastifyInstance)
 {
-    const query = Type.Object({ id: Type.Integer({ minimum: 1 }) });
+    const response200 = Type.Object({ code: Type.Number({ minimum: 0, maximum: 1 }) });
 
-    const schema = { querystring: query, response: { 200: Type.Null(), 404: Type.Null() } };
+    const querystring = Type.Object({ id: Type.Integer({ minimum: 1 }) });
 
-    const handler = async(request: FastifyRequest<{ Querystring: Static<typeof query> }>, reply: FastifyReply) =>
+    const schema = { querystring, response: response200 };
+
+    const handler = async(request: FastifyRequest<{ Querystring: Static<typeof querystring> }>, reply: FastifyReply) =>
     {
         const session = await fastify.db.getRepository(AccountSession).findOneBy({ id: request.query.id, account_id: request.account_id, revoked_at: 0 });
 
         if (session === null)
         {
-            reply.status(status.NOT_FOUND).send();
+            reply.send({ code: 1 });
 
             return;
         }
@@ -270,9 +291,52 @@ export function sessionDelete(fastify: FastifyInstance)
 
         await fastify.db.getRepository(AccountSession).save(session);
 
-        reply.send();
+        fastify.history('ACCOUNT_SESSION_DELETE', request.ip, request.account_id, request.query.id);
+
+        reply.send({ code: 0 });
     };
 
     // 30x per hour
-    return [ { schema, ...rateLimit('account-session', 30, 60 * 60 * 1000), ...authentication() }, handler ] as const;
+    return [ { schema, ...rateLimit('account-session', 30, 60 * 60 * 1000), ...authGuard() }, handler ] as const;
+}
+
+export function history(fastify: FastifyInstance)
+{
+    const querystring = Type.Object({ tag: Type.String(), page: Type.Integer({ minimum: 1, default: 1 }), limit: Type.Integer({ minimum: 1, maximum: 30, default: 10 }) });
+
+    const schema = { querystring };
+
+    const handler = async(request: FastifyRequest<{ Querystring: Static<typeof querystring> }>, reply: FastifyReply) =>
+    {
+        reply.send({ code: 0 });
+    };
+
+    // 100x per hour
+    return [ { schema, ...rateLimit('account-history', 100, 60 * 60 * 1000), ...authGuard() }, handler ] as const;
+}
+
+export function transfer(fastify: FastifyInstance)
+{
+    const schema = { };
+
+    const handler = async(request: FastifyRequest, reply: FastifyReply) =>
+    {
+        reply.send({ code: 0 });
+    };
+
+    // 100x per hour
+    return [ { schema, ...rateLimit('account-transfer', 100, 60 * 60 * 1000), ...authGuard() }, handler ] as const;
+}
+
+export function me(fastify: FastifyInstance)
+{
+    const schema = { };
+
+    const handler = async(request: FastifyRequest, reply: FastifyReply) =>
+    {
+        reply.send({ code: 0 });
+    };
+
+    // 100x per hour
+    return [ { schema, ...rateLimit('account-me', 100, 60 * 60 * 1000), ...authGuard() }, handler ] as const;
 }

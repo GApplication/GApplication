@@ -4,8 +4,6 @@ import fastifyPlugin from 'fastify-plugin';
 
 import { AccountHistory } from '../routes/account/account.entity';
 
-export type HistoryTag = 'ACCOUNT_PASSWORD' | 'ACCOUNT_EMAIL' | 'ACCOUNT_LOGIN' | 'ACCOUNT_LOGOUT' | 'ACCOUNT_REGISTER' | 'ACCOUNT_DELETE' | 'API_KEY_CREATE' | 'API_KEY_REVOKE' | 'DATA_EXPORT' | 'DATA_IMPORT' | 'SETTINGS_UPDATE' | 'RATE_LIMIT_EXCEEDED';
-
 export default fastifyPlugin(async function(fastify: FastifyInstance)
 {
     /**
@@ -18,16 +16,34 @@ export default fastifyPlugin(async function(fastify: FastifyInstance)
      * @param value2 - Second optional value (max 512 chars)
      * @param value3 - Third optional value (max 512 chars)
      * @param value4 - Fourth optional value (max 512 chars)
-     *
-     * @example
-     * // In a route handler with request context
-     * fastify.history('user-login', userId, 'success', null, null, request);
      */
-    fastify.decorate('history', async(tag: HistoryTag, ip: string, value1?: string, value2?: string, value3?: string, value4?: string) =>
+    fastify.decorate('history', async(tag: string, ip: string, value1?: string | number, value2?: string | number, value3?: string | number, value4?: string | number) =>
     {
         try
         {
-            void fastify.db.getRepository(AccountHistory).save({ tag, ip, value1: value1 ?? null, value2: value2 ?? null, value3: value3 ?? null, value4: value4 ?? null });
+            const record = { tag, ip } as { tag: string; ip: string; value1?: string; value2?: string; value3?: string; value4?: string };
+
+            if (value1)
+            {
+                record['value1'] = `${ value1 }`;
+            }
+
+            if (value2)
+            {
+                record['value2'] = `${ value2 }`;
+            }
+
+            if (value3)
+            {
+                record['value3'] = `${ value3 }`;
+            }
+
+            if (value4)
+            {
+                record['value4'] = `${ value4 }`;
+            }
+
+            void fastify.db.getRepository(AccountHistory).save(record);
         }
         catch (error)
         {

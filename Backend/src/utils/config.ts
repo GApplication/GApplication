@@ -19,7 +19,7 @@ import 'dotenv/config';
  * 3. Validate the converted value
  *
  * @param name - Name of the environment variable to load
- * @returns Object with methods to convert the value (asNumber, asString, asBoolean)
+ * @returns Object with methods to convert the value (asNumber, asString, asBoolean, asDuration)
  */
 const builder = (name: string) =>
 {

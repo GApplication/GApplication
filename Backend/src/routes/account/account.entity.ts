@@ -6,17 +6,23 @@ export class Account
     @PrimaryGeneratedColumn()
     id!: number;
 
-    @Column({ type: 'varchar', length: 64, nullable: true })
-    fname!: string;
-
-    @Column({ type: 'varchar', length: 64, nullable: true })
-    lname!: string;
+    @Column({ type: 'float64', default: 0 })
+    usdt!: number;
 
     @Column({ type: 'varchar', length: 256 })
     email!: string;
 
     @Column({ type: 'varchar', length: 64 })
     password!: string;
+
+    @Column({ type: 'varchar', length: 64, nullable: true })
+    fname!: string;
+
+    @Column({ type: 'varchar', length: 64, nullable: true })
+    lname!: string;
+
+    @Column({ type: 'varchar', length: 64, nullable: true })
+    referral!: string;
 
     @CreateDateColumn()
     created_at!: Date;
@@ -34,7 +40,7 @@ export class AccountSession
     @Column({ type: 'varchar', length: 512 })
     token!: string;
 
-    @Column({ type: 'varchar', length: 256 })
+    @Column({ type: 'varchar', length: 512 })
     device!: string;
 
     @Column({ type: 'int' })
@@ -57,16 +63,16 @@ export class AccountHistory
     tag!: string;
 
     @Column({ type: 'varchar', length: 512, nullable: true })
-    value1!: string | null;
+    value1!: string;
 
     @Column({ type: 'varchar', length: 512, nullable: true })
-    value2!: string | null;
+    value2!: string;
 
     @Column({ type: 'varchar', length: 512, nullable: true })
-    value3!: string | null;
+    value3!: string;
 
     @Column({ type: 'varchar', length: 512, nullable: true })
-    value4!: string | null;
+    value4!: string;
 
     @Column({ type: 'varchar', length: 128 })
     ip!: string;

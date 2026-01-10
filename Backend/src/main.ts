@@ -1,5 +1,5 @@
 /**
- * Main entry point for the Wallet Backend API server
+ * Main entry point for the API server
  *
  * This file initializes the Fastify server and registers all necessary plugins:
  * - reflect-metadata: Required for TypeORM decorators to work
@@ -8,7 +8,7 @@
  * - autoLoad: Automatically loads and registers route files
  * - typeorm: Initializes database connection
  * - ratelimit: Implements rate limiting for endpoints
- * - authentication:
+ * - authentication: Implements user authetication system
  */
 
 import 'reflect-metadata';
@@ -27,8 +27,9 @@ import typeorm from './plugins/typeorm';
 import ratelimit from './plugins/ratelimit';
 import authentication from './plugins/authentication';
 
-import status from './utils/status';
 import config from './utils/config';
+
+import { STATUS_BAD_REQUEST, STATUS_INTERNAL_ERROR } from './utils/status';
 
 const main = async() =>
 {
@@ -46,13 +47,15 @@ const main = async() =>
         // Return 400 Bad Request for validation errors with the first validation message
         if (error.validation)
         {
-            reply.status(status.BAD_REQUEST).send({ message: `${ error.validation[0].instancePath } -- ${ error.validation[0].message }` });
+            console.log('error.validation', error.validation);
+
+            reply.status(STATUS_BAD_REQUEST).send({ message: `${ error.validation[0].instancePath } -- ${ error.validation[0].message }` });
 
             return;
         }
 
         // Return 500 Internal Server Error for all other errors
-        reply.status(status.INTERNAL_SERVER_ERROR).send({ message: error.message });
+        reply.status(STATUS_INTERNAL_ERROR).send({ message: error.message });
     });
 
     /**

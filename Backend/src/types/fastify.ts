@@ -8,6 +8,8 @@
 
 import type { DataSource } from 'typeorm';
 
+type HistoryTag = 'ACCOUNT_SIGNIN' | 'ACCOUNT_SIGNOUT' | 'ACCOUNT_PASSWORD' | 'ACCOUNT_SESSION_DELETE';
+
 declare module 'fastify'
 {
     interface FastifyContextConfig
@@ -41,6 +43,6 @@ declare module 'fastify'
             };
         };
 
-        history(tag: string, ip: string, value1?: string, value2?: string, value3?: string, value4?: string): Promise<void>;
+        history(tag: HistoryTag, ip: string, value1?: string | number, value2?: string | number, value3?: string | number, value4?: string | number): void;
     }
 }
