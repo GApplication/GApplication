@@ -6,12 +6,14 @@ interface EventMap
 {
     'Page.Open': [Component: JSX.Element];
     'Page.Close': [ID: number];
+    'Page.CloseAll': [ID: number];
 
     'Toast.Open': [Component: JSX.Element];
     'Toast.Close': [ID: number];
 
     'Modal.Open': [Component: JSX.Element];
     'Modal.Close': [ID: number];
+    'Modal.CloseAll': [ID: number];
 
     'Home.Page': [Component: JSX.Element];
 }

@@ -35,13 +35,23 @@ export default function ModalLayout()
             SetLayoutMap((Previous) => Previous.filter((I) => I.key !== `${ ID }`));
         };
 
+        /**
+         * CloseAllHandler - Removes all modal component from the layout map
+         */
+        const CloseAllHandler = () =>
+        {
+            SetLayoutMap([ ]);
+        };
+
         EventMap.On('Modal.Open', OpenHandler);
         EventMap.On('Modal.Close', CloseHandler);
+        EventMap.On('Modal.CloseAll', CloseAllHandler);
 
         return () =>
         {
             EventMap.Off('Modal.Open', OpenHandler);
             EventMap.Off('Modal.Close', CloseHandler);
+            EventMap.Off('Modal.CloseAll', CloseAllHandler);
         };
     }, [ ]);
 
@@ -54,9 +64,13 @@ export default function ModalLayout()
         className='absolute left-1/2 z-2 flex h-full min-h-[700px] w-full max-w-[720px] min-w-[360px] -translate-x-1/2 overflow-hidden'
         style={ { paddingTop: IsWindow ? '32px' : '0px' } }>
 
-        {
-            LayoutMap
-        }
+        <div className='relative size-full'>
+
+            {
+                LayoutMap
+            }
+
+        </div>
 
     </div>;
 }

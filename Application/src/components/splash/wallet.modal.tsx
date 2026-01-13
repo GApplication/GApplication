@@ -46,8 +46,6 @@ export default function WalletModal({ ID }: Readonly<{ ID: number }>)
             return;
         }
 
-        Context.CloseModal(ID);
-
         const RecoveryPhrase = PhraseKey.map((Key) => Phrase[Key].Word).join(' ');
 
         Context.OpenModal<{ Phrase: string }>(PasscodeModal, { Phrase: RecoveryPhrase });
@@ -80,7 +78,7 @@ export default function WalletModal({ ID }: Readonly<{ ID: number }>)
 
     return <motion.div
         animate={ { y: IsClose ? '100%' : '0%' } }
-        className='flex h-full w-full'
+        className='absolute flex h-full w-full'
         initial={ { y: '100%' } }
         onAnimationComplete={ () => { if (IsClose) Context.CloseModal(ID); } }
         transition={ { duration: 0.2 } }>
@@ -90,7 +88,7 @@ export default function WalletModal({ ID }: Readonly<{ ID: number }>)
             <div className='h-[72px] w-full p-[16px]'>
 
                 <button
-                    className='group ml-auto flex h-[40px] cursor-pointer items-center rounded-[8px] border border-base-border outline-base-outline duration-200 hover:bg-base-secondary'
+                    className='group ml-auto flex h-[40px] cursor-pointer items-center rounded-[8px] border border-base-border outline-base-outline duration-200 hover:bg-base-hover'
                     onClick={ () => { SetIsClose(true); } }>
 
                     <MdClose className='m-[8px] size-[24px] text-base-text/75 duration-200 group-hover:text-base-text' />
@@ -144,7 +142,7 @@ export default function WalletModal({ ID }: Readonly<{ ID: number }>)
                                 <input
                                     className='h-full w-[116px] text-center outline-0'
                                     onChange={ (E) => OnWordChange(Key, E.target.value) }
-                                    placeholder='...'
+                                    placeholder='.'
                                     ref={ (R) => { if (R) InputMap.current[Key] = R; } }
                                     value={ Input.Word } />
 

@@ -27,6 +27,14 @@ const ClosePage = (ID: number) =>
 };
 
 /**
+ * CloseAllPage - Emits a page close all event
+ */
+const CloseAllPage = () =>
+{
+    EventMap.Emit('Page.CloseAll', 0);
+};
+
+/**
  * OpenModal - Emits a modal open event to render a modal component
  * @template T
  * @param {(Prop: { ID: number } & T) => JSX.Element} Component - The modal component to open
@@ -48,6 +56,14 @@ const OpenModal = <T extends object = object>(Component: (Prop: { ID: number } &
 const CloseModal = (ID: number) =>
 {
     EventMap.Emit('Modal.Close', ID);
+};
+
+/**
+ * CloseAllModal - Emits a modal close all event
+ */
+const CloseAllModal = () =>
+{
+    EventMap.Emit('Modal.CloseAll', 0);
 };
 
 /**
@@ -83,4 +99,4 @@ const SetHomePage = (Component: () => JSX.Element) =>
     EventMap.Emit('Home.Page', <Component />);
 };
 
-export default { OpenPage, ClosePage, OpenModal, CloseModal, OpenToast, CloseToast, SetHomePage };
+export default { OpenPage, ClosePage, CloseAllPage, OpenModal, CloseModal, CloseAllModal, OpenToast, CloseToast, SetHomePage };

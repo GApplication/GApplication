@@ -86,9 +86,8 @@ export default function PasscodeModal({ ID, Phrase }: Readonly<{ ID: number; Phr
 
             await Account.Login(PasscodeHash, Mnemonic);
 
-            Context.CloseModal(ID);
-
-            Context.ClosePage(1);
+            Context.CloseAllModal();
+            Context.CloseAllPage();
 
             Context.OpenPage(HomePage, { ID: 1 });
         }
@@ -96,7 +95,7 @@ export default function PasscodeModal({ ID, Phrase }: Readonly<{ ID: number; Phr
 
     return <motion.div
         animate={ { y: IsClose ? '100%' : '0%' } }
-        className='flex h-full w-full'
+        className='absolute flex h-full w-full'
         initial={ { y: '100%' } }
         onAnimationComplete={ () => { if (IsClose) Context.CloseModal(ID); } }
         transition={ { duration: 0.2 } }>
