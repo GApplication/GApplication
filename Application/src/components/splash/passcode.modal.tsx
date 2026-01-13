@@ -106,7 +106,7 @@ export default function PasscodeModal({ ID, Phrase }: Readonly<{ ID: number; Phr
             <div className='h-[72px] w-full p-[16px]'>
 
                 <button
-                    className='group ml-auto flex h-[40px] cursor-pointer items-center rounded-[8px] border border-base-border outline-base-outline duration-200 hover:bg-base-secondary'
+                    className='group ml-auto flex h-[40px] cursor-pointer items-center rounded-[8px] border border-base-border outline-base-outline duration-200 hover:bg-base-hover'
                     onClick={ () => { SetIsClose(true); } }>
 
                     <MdClose className='m-[8px] size-[24px] text-base-text/75 duration-200 group-hover:text-base-text' />
@@ -181,7 +181,7 @@ export default function PasscodeModal({ ID, Phrase }: Readonly<{ ID: number; Phr
             <div className='grid grid-cols-3 gap-[20px] p-[32px] text-[18px] font-bold text-base-text'>
 
                 <button
-                    className='size-[48px] cursor-pointer rounded-[8px] border border-base-border outline-base-outline hover:bg-base-secondary'
+                    className='size-[48px] cursor-pointer rounded-[8px] border border-base-border outline-base-outline hover:bg-base-hover'
                     onClick={ () => { void OnPush('1'); } }>
 
                     {
@@ -191,7 +191,7 @@ export default function PasscodeModal({ ID, Phrase }: Readonly<{ ID: number; Phr
                 </button>
 
                 <button
-                    className='size-[48px] cursor-pointer rounded-[8px] border border-base-border outline-base-outline hover:bg-base-secondary'
+                    className='size-[48px] cursor-pointer rounded-[8px] border border-base-border outline-base-outline hover:bg-base-hover'
                     onClick={ () => { void OnPush('2'); } }>
 
                     {
@@ -201,7 +201,7 @@ export default function PasscodeModal({ ID, Phrase }: Readonly<{ ID: number; Phr
                 </button>
 
                 <button
-                    className='size-[48px] cursor-pointer rounded-[8px] border border-base-border outline-base-outline hover:bg-base-secondary'
+                    className='size-[48px] cursor-pointer rounded-[8px] border border-base-border outline-base-outline hover:bg-base-hover'
                     onClick={ () => { void OnPush('3'); } }>
 
                     {
@@ -211,7 +211,7 @@ export default function PasscodeModal({ ID, Phrase }: Readonly<{ ID: number; Phr
                 </button>
 
                 <button
-                    className='size-[48px] cursor-pointer rounded-[8px] border border-base-border outline-base-outline hover:bg-base-secondary'
+                    className='size-[48px] cursor-pointer rounded-[8px] border border-base-border outline-base-outline hover:bg-base-hover'
                     onClick={ () => { void OnPush('4'); } }>
 
                     {
@@ -221,7 +221,7 @@ export default function PasscodeModal({ ID, Phrase }: Readonly<{ ID: number; Phr
                 </button>
 
                 <button
-                    className='size-[48px] cursor-pointer rounded-[8px] border border-base-border outline-base-outline hover:bg-base-secondary'
+                    className='size-[48px] cursor-pointer rounded-[8px] border border-base-border outline-base-outline hover:bg-base-hover'
                     onClick={ () => { void OnPush('5'); } }>
 
                     {
@@ -231,7 +231,7 @@ export default function PasscodeModal({ ID, Phrase }: Readonly<{ ID: number; Phr
                 </button>
 
                 <button
-                    className='size-[48px] cursor-pointer rounded-[8px] border border-base-border outline-base-outline hover:bg-base-secondary'
+                    className='size-[48px] cursor-pointer rounded-[8px] border border-base-border outline-base-outline hover:bg-base-hover'
                     onClick={ () => { void OnPush('6'); } }>
 
                     {
@@ -241,7 +241,7 @@ export default function PasscodeModal({ ID, Phrase }: Readonly<{ ID: number; Phr
                 </button>
 
                 <button
-                    className='size-[48px] cursor-pointer rounded-[8px] border border-base-border outline-base-outline hover:bg-base-secondary'
+                    className='size-[48px] cursor-pointer rounded-[8px] border border-base-border outline-base-outline hover:bg-base-hover'
                     onClick={ () => { void OnPush('7'); } }>
 
                     {
@@ -251,7 +251,7 @@ export default function PasscodeModal({ ID, Phrase }: Readonly<{ ID: number; Phr
                 </button>
 
                 <button
-                    className='size-[48px] cursor-pointer rounded-[8px] border border-base-border outline-base-outline hover:bg-base-secondary'
+                    className='size-[48px] cursor-pointer rounded-[8px] border border-base-border outline-base-outline hover:bg-base-hover'
                     onClick={ () => { void OnPush('8'); } }>
 
                     {
@@ -261,7 +261,7 @@ export default function PasscodeModal({ ID, Phrase }: Readonly<{ ID: number; Phr
                 </button>
 
                 <button
-                    className='size-[48px] cursor-pointer rounded-[8px] border border-base-border outline-base-outline hover:bg-base-secondary'
+                    className='size-[48px] cursor-pointer rounded-[8px] border border-base-border outline-base-outline hover:bg-base-hover'
                     onClick={ () => { void OnPush('9'); } }>
 
                     {
@@ -273,7 +273,7 @@ export default function PasscodeModal({ ID, Phrase }: Readonly<{ ID: number; Phr
                 <div className='size-[48px]' />
 
                 <button
-                    className='size-[48px] cursor-pointer rounded-[8px] border border-base-border outline-base-outline hover:bg-base-secondary'
+                    className='size-[48px] cursor-pointer rounded-[8px] border border-base-border outline-base-outline hover:bg-base-hover'
                     onClick={ () => { void OnPush('0'); } }>
 
                     {
@@ -283,7 +283,7 @@ export default function PasscodeModal({ ID, Phrase }: Readonly<{ ID: number; Phr
                 </button>
 
                 <button
-                    className='flex size-[48px] cursor-pointer items-center justify-center rounded-[8px] border border-base-border outline-base-outline hover:bg-base-secondary'
+                    className='flex size-[48px] cursor-pointer items-center justify-center rounded-[8px] border border-base-border outline-base-outline hover:bg-base-hover'
                     onClick={ () => { void OnPush('-'); } }>
 
                     <FaArrowLeft className='p-[2px] text-[24px]' />

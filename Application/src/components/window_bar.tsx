@@ -21,6 +21,7 @@ const OnClickMinimize = () =>
 const OnClickRestore = () =>
 {
     void getCurrentWindow().setSize(new LogicalSize(360, 700)); // It must be same as in tauri.conf.json
+    void getCurrentWindow().center();
 };
 
 /**
@@ -51,7 +52,7 @@ export default function WindowBar(): JSX.Element | undefined
     }
 
     return (
-        <div className='absolute top-[0px] z-4 flex h-[32px] w-full items-center border-b border-base-border bg-base'>
+        <div className='fixed top-0 z-10 flex h-[32px] w-full items-center border-b border-base-border bg-base'>
 
             <div
                 className='m-[8px] flex h-full flex-1 cursor-pointer items-center text-[14px] font-semibold text-base-text/50'
@@ -67,7 +68,7 @@ export default function WindowBar(): JSX.Element | undefined
             <div className='m-[8px] flex gap-[4px]'>
 
                 <div
-                    className='group flex size-[24px] cursor-pointer items-center justify-center rounded-[4px] duration-200 hover:bg-base-secondary'
+                    className='group flex size-[24px] cursor-pointer items-center justify-center rounded-[4px] duration-200 hover:bg-base-hover'
                     onClick={ OnClickMinimize }>
 
                     <FaMinus className='size-[16px] text-base-text/25 duration-200 group-hover:text-base-text/50' />
@@ -75,7 +76,7 @@ export default function WindowBar(): JSX.Element | undefined
                 </div>
 
                 <div
-                    className='group flex size-[24px] cursor-pointer items-center justify-center rounded-[4px] duration-200 hover:bg-base-secondary'
+                    className='group flex size-[24px] cursor-pointer items-center justify-center rounded-[4px] duration-200 hover:bg-base-hover'
                     onClick={ OnClickRestore }>
 
                     <LuRectangleVertical className='size-[16px] text-base-text/25 duration-200 group-hover:text-base-text/50' />
@@ -83,7 +84,7 @@ export default function WindowBar(): JSX.Element | undefined
                 </div>
 
                 <div
-                    className='group flex size-[24px] cursor-pointer items-center justify-center rounded-[4px] duration-200 hover:bg-base-secondary'
+                    className='group flex size-[24px] cursor-pointer items-center justify-center rounded-[4px] duration-200 hover:bg-base-hover'
                     onClick={ OnClickClose }>
 
                     <FaX className='size-[16px] text-base-text/25 duration-200 group-hover:text-base-text/50' />

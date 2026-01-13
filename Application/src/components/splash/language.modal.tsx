@@ -50,7 +50,7 @@ export default function LanguageModal({ ID }: Readonly<{ ID: number }>)
                 </div>
 
                 <button
-                    className='cursor-pointer rounded-[8px] text-base-text/25 outline-base-outline duration-200 hover:bg-base-secondary hover:text-base-text/50'
+                    className='cursor-pointer rounded-[8px] text-base-text/25 outline-base-outline duration-200 hover:bg-base-hover hover:text-base-text/50'
                     onClick={ () => { SetIsClose(true); } }>
 
                     <MdClose className='size-[24px]' />
@@ -59,13 +59,13 @@ export default function LanguageModal({ ID }: Readonly<{ ID: number }>)
 
             </div>
 
-            <div className='mb-[8px] flex max-h-[328px] flex-col gap-[8px] overflow-y-auto px-[8px]'>
+            <div className='mb-[8px] grid max-h-[328px] grid-cols-2 gap-[8px] px-[8px]'>
 
                 {
                     Language.Language.map((I) =>
 
                         <button
-                            className='flex h-[40px] cursor-pointer items-center gap-[8px] rounded-[8px] border border-base-border p-[8px] text-base-text outline-base-outline duration-200 hover:bg-base-secondary'
+                            className='flex h-[40px] cursor-pointer items-center gap-[8px] rounded-[8px] border border-base-border p-[8px] text-base-text outline-base-outline duration-200 hover:bg-base-hover'
                             key={ I.Code }
                             onClick={ () => { void OnClickLanguage(I.Code); } }>
 

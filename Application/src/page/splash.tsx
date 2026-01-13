@@ -37,7 +37,7 @@ export default function SplashPage()
             <div className='flex w-full justify-between p-[16px]'>
 
                 <button
-                    className='group flex h-[40px] cursor-pointer items-center rounded-[8px] border border-base-border outline-base-outline duration-200 hover:bg-base-secondary'
+                    className='group flex h-[40px] cursor-pointer items-center rounded-[8px] border border-base-border outline-base-outline duration-200 hover:bg-base-hover'
                     onClick={ () => { Context.OpenModal(LanguageModal); } }>
 
                     <GrLanguage className='m-[8px] size-[24px] text-base-text/75 duration-200 group-hover:text-base-text' />
@@ -55,7 +55,7 @@ export default function SplashPage()
                 </button>
 
                 <button
-                    className='group flex h-[40px] cursor-pointer items-center rounded-[8px] border border-base-border outline-base-outline duration-200 hover:bg-base-secondary'
+                    className='group flex h-[40px] cursor-pointer items-center rounded-[8px] border border-base-border outline-base-outline duration-200 hover:bg-base-hover'
                     onClick={ () => Theme.Toggle() }>
 
                     <PiPaintBrushHousehold className='m-[8px] size-[24px] text-base-text/75 duration-200 group-hover:text-base-text' />
@@ -73,9 +73,9 @@ export default function SplashPage()
 
                     <SwiperSlide style={ { height: '100%', position: 'relative' } }>
 
-                        <div className='absolute top-1/2 flex -translate-y-1/2 cursor-move flex-col items-center justify-center gap-[16px]'>
+                        <div className='absolute top-1/2 left-1/2 flex w-full -translate-x-1/2 -translate-y-1/2 cursor-move flex-col items-center justify-center gap-[16px]'>
 
-                            <img className='px-[16px]' src={ SlideIcon1 } />
+                            <img className='max-h-[240px] px-[16px]' src={ SlideIcon1 } />
 
                             <div className='text-center text-[18px] text-base-text'>
 
@@ -85,7 +85,7 @@ export default function SplashPage()
 
                             </div>
 
-                            <div className='mx-[16px] text-center text-[14px] leading-[20px] text-base-text/75'>
+                            <div className='mx-[16px] max-w-[380px] text-center text-[14px] leading-[20px] text-base-text/75'>
 
                                 {
                                     T('Splash.Slide1Text')
@@ -99,9 +99,9 @@ export default function SplashPage()
 
                     <SwiperSlide style={ { height: '100%', position: 'relative' } }>
 
-                        <div className='absolute top-1/2 flex -translate-y-1/2 cursor-move flex-col items-center justify-center gap-[16px]'>
+                        <div className='absolute top-1/2 left-1/2 flex w-full -translate-x-1/2 -translate-y-1/2 cursor-move flex-col items-center justify-center gap-[16px]'>
 
-                            <img className='px-[16px]' src={ SlideIcon2 } />
+                            <img className='max-h-[240px] px-[16px]' src={ SlideIcon2 } />
 
                             <div className='text-center text-[18px] text-base-text'>
 
@@ -111,7 +111,7 @@ export default function SplashPage()
 
                             </div>
 
-                            <div className='mx-[16px] text-center text-[14px] leading-[20px] text-base-text/75'>
+                            <div className='mx-[16px] max-w-[380px] text-center text-[14px] leading-[20px] text-base-text/75'>
 
                                 {
                                     T('Splash.Slide2Text')
@@ -125,9 +125,9 @@ export default function SplashPage()
 
                     <SwiperSlide style={ { height: '100%', position: 'relative' } }>
 
-                        <div className='absolute top-1/2 flex -translate-y-1/2 cursor-move flex-col items-center justify-center gap-[16px]'>
+                        <div className='absolute top-1/2 left-1/2 flex w-full -translate-x-1/2 -translate-y-1/2 cursor-move flex-col items-center justify-center gap-[16px]'>
 
-                            <img className='px-[16px]' src={ SlideIcon3 } />
+                            <img className='max-h-[240px] px-[16px]' src={ SlideIcon3 } />
 
                             <div className='text-center text-[18px] text-base-text'>
 
@@ -137,7 +137,7 @@ export default function SplashPage()
 
                             </div>
 
-                            <div className='mx-[16px] text-center text-[14px] leading-[20px] text-base-text/75'>
+                            <div className='mx-[16px] max-w-[380px] text-center text-[14px] leading-[20px] text-base-text/75'>
 
                                 {
                                     T('Splash.Slide3Text')
@@ -154,15 +154,15 @@ export default function SplashPage()
                 <div className='my-[8px] flex h-[16px] items-center justify-center gap-2'>
 
                     <button
-                        className={ `size-[8px] cursor-pointer rounded-[2px] outline-base-outline ${ ActiveIndex === 0 ? 'bg-primary/75' : 'bg-base-secondary' }` }
+                        className={ `size-[8px] cursor-pointer rounded-[2px] outline-base-outline ${ ActiveIndex === 0 ? 'bg-primary/75' : 'bg-base-secondary hover:bg-primary/25' }` }
                         onClick={ () => SwiperRef.current?.slideTo(0) } />
 
                     <button
-                        className={ `size-[8px] cursor-pointer rounded-[2px] outline-base-outline ${ ActiveIndex === 1 ? 'bg-primary/75' : 'bg-base-secondary' }` }
+                        className={ `size-[8px] cursor-pointer rounded-[2px] outline-base-outline ${ ActiveIndex === 1 ? 'bg-primary/75' : 'bg-base-secondary hover:bg-primary/25' }` }
                         onClick={ () => SwiperRef.current?.slideTo(1) } />
 
                     <button
-                        className={ `size-[8px] cursor-pointer rounded-[2px] outline-base-outline ${ ActiveIndex === 2 ? 'bg-primary/75' : 'bg-base-secondary' }` }
+                        className={ `size-[8px] cursor-pointer rounded-[2px] outline-base-outline ${ ActiveIndex === 2 ? 'bg-primary/75' : 'bg-base-secondary hover:bg-primary/25' }` }
                         onClick={ () => SwiperRef.current?.slideTo(2) } />
 
                 </div>
@@ -180,7 +180,7 @@ export default function SplashPage()
             </button>
 
             <button
-                className='mx-[16px] my-[8px] flex h-[48px] cursor-pointer items-center justify-center rounded-[8px] border border-base-border text-[14px] text-base-text/75 outline-base-outline duration-200 hover:bg-base-secondary hover:text-base-text'
+                className='mx-[16px] my-[8px] flex h-[48px] cursor-pointer items-center justify-center rounded-[8px] border border-base-border text-[14px] text-base-text/75 outline-base-outline duration-200 hover:bg-base-hover hover:text-base-text'
                 onClick={ () => { Context.OpenModal(MenuModal); } }>
 
                 {
